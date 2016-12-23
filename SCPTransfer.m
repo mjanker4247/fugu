@@ -5,6 +5,7 @@
 
 #import "SCPTransfer.h"
 #import "SCPController.h"
+#import "NSString(SSHAdditions).h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -175,7 +176,7 @@ int		scpconnecting = 0;
     execargs[ 4 ] = ( scpType == 0 ? userathost : localfile );
     execargs[ 5 ] = NULL;
     
-    if ( scppid = forkpty( &masterfd, ttyname, NULL, NULL )) {
+    if ( scppid == forkpty( &masterfd, ttyname, NULL, NULL )) {
         if ( fcntl( masterfd, F_SETFL, O_NONBLOCK ) < 0 ) {	/* prevent master from blocking */
         }
         

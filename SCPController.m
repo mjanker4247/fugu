@@ -28,7 +28,7 @@ extern char		**environ;
 
 @implementation SCPController
 
-static int		SCPTYPE = 0;
+static long		SCPTYPE = 0;
 
 + ( SCPController * )sharedInstance
 {
@@ -237,7 +237,7 @@ static int		SCPTYPE = 0;
     }
     
     if ( ! [ self firstPasswordPrompt ] && [ self gotPasswordFromKeychain ] ) {
-        int	rc;
+        NSInteger	rc;
         
         rc = NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
                 NSLocalizedString( @"The password in the keychain was rejected "
@@ -268,7 +268,7 @@ static int		SCPTYPE = 0;
 
 - ( void )write: ( char * )buf
 {
-    int		wr;
+    NSInteger		wr;
     
     if (( wr = write( masterfd, buf, strlen( buf ))) != strlen( buf )) goto WRITE_ERR;
     if (( wr = write( masterfd, "\n", strlen( "\n" ))) != strlen( "\n" )) goto WRITE_ERR;
@@ -313,7 +313,7 @@ WRITE_ERR:
 
 - ( void )sessionError: ( NSString * )err
 {
-    NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ), err,
+    NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ), @"%@", err,
                     NSLocalizedString( @"OK", @"OK" ), @"", @"" );
 }
 
@@ -485,7 +485,7 @@ WRITE_ERR:
 
 - ( IBAction )cancelSCP: ( id )sender
 {
-    int			rc;
+    NSInteger			rc;
     
     rc = NSRunAlertPanel( @"Cancel SCP:",
             NSLocalizedString( @"Are you sure you want to cancel this copy?",

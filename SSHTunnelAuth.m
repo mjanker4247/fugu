@@ -5,6 +5,7 @@
 
 #import "SSHTunnelAuth.h"
 #import "SSHTunnel.h"
+#import "NSString(SSHAdditions).h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -102,7 +103,7 @@ int		mfd = 0;
     execargs[ 5 ] = "-v";
     execargs[ 6 ] = NULL;
 
-    if ( sshpid = forkpty( &mfd, ttyname, NULL, NULL )) {
+    if ( sshpid == forkpty( &mfd, ttyname, NULL, NULL )) {
         if ( fcntl( mfd, F_SETFL, O_NONBLOCK ) < 0 ) {	/* prevent master from blocking */
         }
         

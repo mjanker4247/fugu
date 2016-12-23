@@ -54,12 +54,12 @@
     OSErr		err;
     FSRef		ref;
     
-    err = FSpMakeFSRef( fsspec, &ref );
-	
-    if ( err != noErr ) {
-	NSLog( @"FSpMakeFSRef failed: error %d", err );
-	return( nil );
-    }
+//    err = FSpMakeFSRef( fsspec, &ref );
+//	
+//    if ( err != noErr ) {
+//	NSLog( @"FSpMakeFSRef failed: error %d", err );
+//	return( nil );
+//    }
     
     return( [ self stringWithFSRef: &ref ] );
 }

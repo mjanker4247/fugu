@@ -1,5 +1,4 @@
 #include <ApplicationServices/ApplicationServices.h>
-#include <Carbon/Carbon.h>
 #include "ODBEditorSuite.h"
 
 int	aesend( char *path, OSType eventType, char *sendertoken );

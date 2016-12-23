@@ -41,7 +41,7 @@ aesend( char *path, OSType eventType, char *sendertoken )
     ( void )AEDisposeDesc( &appld );
 
     /* location of saved file */
-    if (( err = AECreateDesc( typeFSS, ( Ptr )&filespec,
+    if (( err = AECreateDesc( typeFSRef, ( Ptr )&filespec,
 		sizeof( filespec ), &d )) != noErr ) {
 	fprintf( stderr, "AECreateDesc failed: error %d\n", err );
 	return( -1 );

@@ -21,5 +21,4 @@
 - ( OSStatus )makeFSRefRepresentation: ( FSRef * )fsref;
 - ( NSString * )stringByResolvingAliasInPath;
 - ( BOOL )isAliasFile;
-
 @end

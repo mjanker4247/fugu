@@ -15,13 +15,14 @@
     NSMutableString             *string = [[[ self string ] mutableCopy ] autorelease ];
     OSStatus                    status;
     double                      paddedWidth = ( width - 24.0 );
+    Boolean                     truncMiddle = '\0';
     
-    if (( status = TruncateThemeText(( CFMutableStringRef )string,
-                    kThemeViewsFont, kThemeStateActive, paddedWidth, truncMiddle, NULL ))
-                    != noErr ) {
-        NSLog( @"TruncateThemeText %@ returned error %d", string, ( int )status );
-        return( self );
-    }
+//    if (( status = TruncateThemeText(( CFMutableStringRef )string,
+//                    kThemeViewsFont, kThemeStateActive, paddedWidth, truncMiddle, NULL ))
+//                    != noErr ) {
+//        NSLog( @"TruncateThemeText %@ returned error %d", string, ( int )status );
+//        return( self );
+//    }
     
     attrString = [[ NSAttributedString alloc ] initWithString: string ];
     

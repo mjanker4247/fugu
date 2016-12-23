@@ -319,7 +319,7 @@ int		master = 0;
     /* Do we need to add other chars here (>, /, @, =)? 	*/
     if ( tac > 0 ) {
 	p = targv[ ( tac - 1 ) ];
-	len = strlen( p );
+	len = (int) strlen( p );
 	if ( len > 1 && *targv[ 0 ] == '-' && p[ len - 1 ] == '*' ) {
             p[ len - 1 ] = '\0';
         }
@@ -351,7 +351,7 @@ int		master = 0;
         /* server at the root directory.				*/
         if ( isdigit( *targv[ 0 ] ) && strchr( targv[ 4 ], ':' ) != NULL ) {
             fncolumn = 5;
-        } else if ( *targv[ 0 ] == 'd' || *targv[ 0 ] == '-'
+        } else if ( ( *targv[ 0 ] == 'd' || *targv[ 0 ] == '-' )
                     && tac >= 9 ) {
             /* might also be OpenSSH on Cygwin, which doesn't display	*/
             /* a '.' or './' at the root directory. if so, handle it.	*/
@@ -428,7 +428,7 @@ int		master = 0;
             
             nameAsRawBytes = [ NSData dataWithBytes: filename length: strlen( filename ) ];
             name = [ NSString stringWithBytesOfUnknownEncoding: filename
-                                                    length: strlen( filename ) ];
+                                                    length: (int) strlen( filename ) ];
             free( filename );
         } else {
             if ( strcmp( ".", targv[ fncolumn ] ) == 0
@@ -439,7 +439,7 @@ int		master = 0;
             nameAsRawBytes = [ NSData dataWithBytes: targv[ fncolumn ]
                                 length: strlen( targv[ fncolumn ] ) ];
             name = [ NSString stringWithBytesOfUnknownEncoding: targv[ fncolumn ]
-                                            length: strlen( targv[ fncolumn ] ) ];
+                                            length: (int) strlen( targv[ fncolumn ] ) ];
         }
 
         if (( datecolumn - 1 ) == 0 ) {		/* dealing with a VShell server, probably. */
@@ -649,8 +649,8 @@ DOT_OR_DOTDOT:
                         NSDictionary	*dict = [[ controller downloadQ ] objectAtIndex: 0 ];
                         NSString        *transferName = nil;
                         char		*p = " ";
-			char		remote[ MAXPATHLEN ] = { 0 };
-			int		len;
+                        char		remote[ MAXPATHLEN ] = { 0 };
+                        NSUInteger		len;
                         
                         if ( [[ NSUserDefaults standardUserDefaults ]
                                         boolForKey: @"RetainFileTimestamp" ] ) {
@@ -672,7 +672,7 @@ DOT_OR_DOTDOT:
 
                         transferName = [ NSString stringWithBytesOfUnknownEncoding:
                                                 ( char * )[[ dict objectForKey: @"rpath" ] bytes ]
-                                                length: [( NSData * )[ dict objectForKey: @"rpath" ] length ]];
+                                                length: (int) [( NSData * )[ dict objectForKey: @"rpath" ] length ]];
                         [ self setCurrentTransferName: [ transferName lastPathComponent ]];
                         [ controller showDownloadProgressWithMessage:
                                 ( char * )[[ transferName lastPathComponent ] UTF8String ]];
@@ -765,7 +765,7 @@ DOT_OR_DOTDOT:
                 
                 [ controller setRemotePathPopUp:
                     [ NSString stringWithBytesOfUnknownEncoding: p 
-                                            length: strlen( p ) ]];
+                                            length: (int) strlen( p ) ]];
                 free( tmp );
             }
             
@@ -851,7 +851,7 @@ DOT_OR_DOTDOT:
              * if that's the case, flag it, and append the rest of the 
              * text after the next read from the server. Yar!
              */
-            len = strlen( buf );
+            len = (int) strlen( buf );
             /* XXX should be modified to handle arbitrary chunks of line */
             if ( strncmp( "sftp>", buf, strlen( "sftp>" )) != 0 &&
                     buf[ len - 1 ] != '\n' ) {
@@ -883,7 +883,7 @@ DOT_OR_DOTDOT:
             }
             
             [ controller addToLog: [ NSString stringWithBytesOfUnknownEncoding: buf
-                                                length: strlen( buf ) ]];
+                                                length: (int) strlen( buf ) ]];
             if ( strstr( buf, "sftp>" ) != NULL ) {
                 memset( buf, '\0', strlen( buf ));
                 [ controller finishedCommand ];

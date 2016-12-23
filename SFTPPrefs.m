@@ -486,15 +486,15 @@ static NSMutableArray	*knownHosts = nil;
 
 - ( IBAction )setPostEditBehaviour: ( id )sender
 {
-    int			row = [ prefPostEditMatrix selectedRow ];
+    NSInteger			row = [ prefPostEditMatrix selectedRow ];
     
-    [[ NSUserDefaults standardUserDefaults ] setObject: [ NSNumber numberWithInt: row ]
+    [[ NSUserDefaults standardUserDefaults ] setObject: [ NSNumber numberWithLong: row ]
                                                 forKey: @"PostEditBehaviour" ];
 }
 
 - ( IBAction )setSortingBehaviour: ( id )sender
 {
-    int			row = [ prefSortingMatrix selectedRow ];
+    NSInteger			row = [ prefSortingMatrix selectedRow ];
     
     [[ NSUserDefaults standardUserDefaults ] setBool: ( BOOL )row
                                                 forKey: @"ASCIIOrderSorting" ];
@@ -508,11 +508,11 @@ static NSMutableArray	*knownHosts = nil;
 
 - ( IBAction )deleteKnownHost: ( id )sender
 {
-    int			row = [ prefKnownHostsTable selectedRow ];
+    NSInteger			row = [ prefKnownHostsTable selectedRow ];
     
     if ( row < 0 ) {
-	NSLog( @"Attempted to delete invalid row." );
-	return;
+        NSLog( @"Attempted to delete invalid row." );
+        return;
     }
     
     [ knownHosts removeObjectAtIndex: row ];
@@ -586,9 +586,9 @@ static NSMutableArray	*knownHosts = nil;
     for ( i = 0; i < [ knownHosts count ]; i++ ) {
 	NSDictionary	*dict = [ knownHosts objectAtIndex: i ];
 	
-	fprintf( fp, "%s %s %s\n", ( char * )[[ dict objectForKey: @"hostid" ] cString ],
-				( char * )[[ dict objectForKey: @"keytype" ] cString ],
-				( char * )[[ dict objectForKey: @"key" ] cString ] );
+	fprintf( fp, "%s %s %s\n", ( char * )[[ dict objectForKey: @"hostid" ] cStringUsingEncoding:typeUTF8Text ],
+				( char * )[[ dict objectForKey: @"keytype" ] cStringUsingEncoding:typeUTF8Text ],
+				( char * )[[ dict objectForKey: @"key" ] cStringUsingEncoding:typeUTF8Text ] );
     }
     
     ( void )fclose( fp );

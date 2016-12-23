@@ -233,7 +233,7 @@ permcmp( id ob1, id ob2, void *context )
     [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
 	    andSelector: @selector( testHandleEvent:replyEvent: )
 	    forEventClass: kODBEditorSuite andEventID: kAEClosedFile ];
-#endif notdef
+#endif /* notdef */
                                             
     return (( self = [ super init ] ) ? self : nil );
 }
@@ -275,7 +275,7 @@ permcmp( id ob1, id ob2, void *context )
 		NSLocalizedString( @"Edit with Text Editor", @"Edit with Text Editor" ) ] ) {
 	id		browser = nil;
 	NSArray		*items = nil;
-	int		row;
+	NSInteger		row;
 	id		item = nil;
         NSString	*type = nil;
 	
@@ -689,10 +689,10 @@ permcmp( id ob1, id ob2, void *context )
 {
     NSUserDefaults	*defaults;
     NSString		*hdir, *identifier;
-    NSArray		*columnArray;
+    NSArray         *columnArray;
     SFTPItemCell	*cell;
-    NSFont              *logFont = nil;
-    int			i, count;
+    NSFont          *logFont = nil;
+    NSUInteger      i, count;
 
     /* get images for display */
     dirImage = [[[ NSWorkspace sharedWorkspace ] iconForFileType: @"'fldr'" ] retain ];
@@ -1386,7 +1386,7 @@ NSLog( @"setting home directory" );
 
 - ( void )writeCommand: ( void * )cmd
 {
-    int		wr;
+    long		wr;
     
     if (( wr = write( master, cmd, strlen( cmd ))) != strlen( cmd )) goto WRITE_ERR;
     if (( wr = write( master, "\n", strlen( "\n" ))) != strlen( "\n" )) goto WRITE_ERR;
@@ -3268,17 +3268,17 @@ NSLog( @"setting springloaded root" );
 - ( IBAction )addToFavorites:( id )sender
 {
     if ( [ remoteHost stringValue ] ) {
-        NSUserDefaults		*defaults;
-        NSMutableArray		*favarray;
+        NSUserDefaults	*defaults;
+        NSMutableArray	*favarray;
         NSArray			*tmp;
-        NSDictionary		*dict;
+        NSDictionary	*dict;
         NSString		*host = [ remoteHost stringValue ];
         NSString		*user = [ userName stringValue ];
         NSString		*port = [ portField stringValue ];
         NSString		*dir = [ loginDirField stringValue ];
-        NSString                *opts = [ advAdditionalOptionsField stringValue ];
-        int                     ssh1 = [ advForceSSH1Switch state ];
-        int                     compress = [ advEnableCompressionSwitch state ];
+        NSString        *opts = [ advAdditionalOptionsField stringValue ];
+        NSInteger       ssh1 = [ advForceSSH1Switch state ];
+        NSInteger       compress = [ advEnableCompressionSwitch state ];
         
         if ( ! user ) user = @"";
         if ( ! port ) port = @"";
@@ -3292,8 +3292,8 @@ NSLog( @"setting springloaded root" );
                     port, @"port",
                     dir, @"dir",
                     opts, @"options",
-                    [ NSNumber numberWithInt: ssh1 ], @"ssh1",
-                    [ NSNumber numberWithInt: compress ], @"compress", nil ];
+                    [ NSNumber numberWithLong: ssh1 ], @"ssh1",
+                    [ NSNumber numberWithLong: compress ], @"compress", nil ];
                         
         defaults = [ NSUserDefaults standardUserDefaults ];
         tmp = [ defaults objectForKey: @"Favorites" ];
@@ -3313,7 +3313,7 @@ NSLog( @"setting springloaded root" );
 {
     id			fobj;
     NSArray		*favarray;
-    int			i = ( [ popUpFavs indexOfSelectedItem ] - 1 );
+    NSInteger   i = ( [ popUpFavs indexOfSelectedItem ] - 1 );
     
     if ( i < 0 ) return;
     favarray = [[ NSUserDefaults standardUserDefaults ] objectForKey: @"Favorites" ];
@@ -3342,7 +3342,7 @@ NSLog( @"setting springloaded root" );
 {
     NSArray             *items = ( dotflag ? localDirContents : dotlessLDir );
     NSString            *name = nil;
-    int			row = [ localBrowser selectedRow ];
+    NSInteger			row = [ localBrowser selectedRow ];
     
     if ( row < 0 ) {
         return;
@@ -3362,7 +3362,7 @@ NSLog( @"setting springloaded root" );
 {
     NSArray             *items = ( dotflag ? remoteDirContents : dotlessRDir );
     NSString            *name = nil;
-    int			row = [ remoteBrowser selectedRow ];
+    NSInteger			row = [ remoteBrowser selectedRow ];
     
     if ( row < 0 ) {
         return;
@@ -3396,9 +3396,9 @@ NSLog( @"setting springloaded root" );
 
 - ( IBAction )previewLocalItem: ( id )sender
 {
-    int			row = [ localBrowser selectedRow ];
+    NSInteger   row = [ localBrowser selectedRow ];
     NSArray		*items = ( dotflag ? localDirContents : dotlessLDir );
-    NSString		*filepath, *extension = nil;
+    NSString    *filepath, *extension = nil;
     NSSet		*validExtensions = [ NSSet validImageExtensions ];
     
     if ( row < 0 ) {
@@ -3418,12 +3418,12 @@ NSLog( @"setting springloaded root" );
 
 - ( IBAction )previewRemoteItem: ( id )sender
 {
-    int			row = [ remoteBrowser selectedRow ];
+    NSInteger   row = [ remoteBrowser selectedRow ];
     NSArray		*items = ( dotflag ? remoteDirContents : dotlessRDir );
     NSSet		*validExtensions = [ NSSet validImageExtensions ];
-    NSString		*extension = nil;
-    NSString		*filepath = nil, *filename = nil, *tmppath = nil;
-    NSData              *rawdata = nil;
+    NSString    *extension = nil;
+    NSString    *filepath = nil, *filename = nil, *tmppath = nil;
+    NSData      *rawdata = nil;
     NSArray		*previews = [ self cachedPreviews ];
     
     if ( row < 0 ) {
@@ -3492,7 +3492,7 @@ NSLog( @"setting springloaded root" );
         return;
     }
     
-    if (( row = [ table selectedRow ] ) < 0 ) {
+    if (( row == [ table selectedRow ] ) < 0 ) {
         NSBeep();
         return;
     }
@@ -3863,7 +3863,7 @@ LaunchFailed:
     
     indtype = [ fssDesc descriptorType ];
     NSLog( @"indtype: %s", &indtype );
-    fssDesc = [ fssDesc coerceToDescriptorType: typeFSS ];
+    fssDesc = [ fssDesc coerceToDescriptorType: typeFSRef ];
     
     if ( fssDesc == nil ) {
         NSBeep();
@@ -3894,10 +3894,10 @@ LaunchFailed:
     
     indtype = [ fssDesc descriptorType ];
     
-    if ( indtype != typeFSS ) {
-        fssDesc = [ fssDesc coerceToDescriptorType: typeFSS ];
+    if ( indtype != typeFSRef ) {
+        fssDesc = [ fssDesc coerceToDescriptorType: typeFSRef ];
         if ( fssDesc == nil ) {
-            NSLog( @"Couldn't coerce descriptor to typeFSS" );
+            NSLog( @"Couldn't coerce descriptor to typeFSRef" );
             return;
         }
     }
@@ -5255,7 +5255,7 @@ INVALID_CONNECTION_SETTINGS:
 #ifdef notdef
         NSRect		imageLocation = [ remoteBrowser frameOfCellAtColumn: 0
                                             row: [[ rows objectAtIndex: 0 ] intValue ]];
-#endif notdef
+#endif /* notdef */
         
         if ( !dotflag ) {
             dsrc = [ dotlessRDir copy ];
@@ -5276,7 +5276,7 @@ INVALID_CONNECTION_SETTINGS:
 		    fromRect: imageLocation source: remoteBrowser slideBack: YES
                     event: [[ remoteBrowser window ] currentEvent ]];
         return( NO );
-#endif notdef
+#endif /* notdef */
     }
     
     [ dsrc release ];

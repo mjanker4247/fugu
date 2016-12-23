@@ -8,5 +8,4 @@
 @interface NSAttributedString(Ellipsis)
 
 - ( NSAttributedString * )ellipsisAbbreviatedStringForWidth: ( double )width;
-
 @end

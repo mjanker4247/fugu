@@ -10,12 +10,12 @@
 
 - ( void )runErrorPanel: ( NSString * )theError
 {
-    NSRunAlertPanel( @"Error", theError, @"OK", @"", @"" );
+    NSRunAlertPanel( @"Error", @"%@", theError, @"OK", @"", @"" );
 }
 
 - ( void )fatalErrorPanel: ( NSString * )fatalError
 {
-    NSRunAlertPanel( @"Fatal Error", fatalError, @"Quit", @"", @"" );
+    NSRunAlertPanel( @"Fatal Error", @"%@", fatalError, @"Quit", @"", @"" );
     exit( 2 );
 }
 
