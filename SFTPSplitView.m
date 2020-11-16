@@ -7,7 +7,7 @@
 
 @implementation SFTPSplitView
 
-- ( float )dividerThickness
+- ( double )dividerThickness
 {
     return( 20.0 );
 }

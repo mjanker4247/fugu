@@ -33,14 +33,14 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Active SSH Tunnel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="11" userLabel="tunnelwindow">
             <windowStyleMask key="styleMask" titled="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="650" y="732" width="390" height="50"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="10">
-                <rect key="frame" x="1" y="9" width="390" height="50"/>
+                <rect key="frame" x="0.0" y="0.0" width="390" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button autoresizesSubviews="NO" verticalHuggingPriority="750" id="21">
@@ -78,7 +78,7 @@
             <rect key="contentRect" x="243" y="374" width="410" height="186"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1440" height="878"/>
             <view key="contentView" autoresizesSubviews="NO" id="28">
-                <rect key="frame" x="1" y="1" width="410" height="186"/>
+                <rect key="frame" x="0.0" y="0.0" width="410" height="186"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
         </window>

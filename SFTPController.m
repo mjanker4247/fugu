@@ -4722,17 +4722,26 @@ INVALID_CONNECTION_SETTINGS:
 }
 
 /* splitview delegate methods */
-- ( float )splitView: ( NSSplitView * )splitview constrainMaxCoordinate: ( float )proposedMax
+- ( float )splitView: ( NSSplitView * )splitview constrainMaxCoordinate: ( float )proposedPosition
             ofSubviewAt: ( int )offset
 {
-    return(( proposedMax - 175 ));
+    return(( proposedPosition + 175 ));
+}
+//
+//- ( float )splitView: ( NSSplitView * )splitview constrainMinCoordinate: ( float )proposedPosition
+//            ofSubviewAt: ( int )offset
+//{
+//    return((  175 ));
+//}
+
+- (BOOL)splitView:(NSSplitView *)splitView shouldAdjustSizeOfSubview:(NSView *)subview
+{
+    if ( subview.bounds.size.width<=175 ) {
+        return NO;
+    }
+    return YES;
 }
 
-- ( float )splitView: ( NSSplitView * )splitview constrainMinCoordinate: ( float )proposedMax
-            ofSubviewAt: ( int )offset
-{
-    return(( proposedMax + 175 ));
-}
 
 /* tabview delegate methods */
 - ( BOOL )tabView: ( NSTabView * )tabView shouldSelectTabViewItem: ( NSTabViewItem * )tabViewItem
