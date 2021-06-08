@@ -5,14 +5,14 @@
 
 #import "SFTPImageView.h"
 
-@implementation NSImageCell(DraggableExtensions)
-
-- ( NSImage * )scaledImage
-{
-    return( _scaledImage );
-}
-
-@end
+//@implementation NSImageCell(DraggableExtensions)
+//
+//- ( NSImage * )scaledImage
+//{
+//    return( _scaledImage );
+//}
+//
+//@end
 
 
 
