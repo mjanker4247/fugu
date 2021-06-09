@@ -74,7 +74,7 @@ static NSMutableString	*typeAheadString = nil;
 static char		*lsform;
 static float		ssh_version;
 
-    int
+    NSComparisonResult
 namecmp( id ob1, id ob2, void *context )
 {
     unsigned		*sorttype;
@@ -86,7 +86,7 @@ namecmp( id ob1, id ob2, void *context )
                 options: *sorttype ] );
 }
 
-    int
+NSComparisonResult
 datecmp( id ob1, id ob2, void *context )
 {
     NSComparisonResult	result = NSOrderedSame;
@@ -108,7 +108,7 @@ datecmp( id ob1, id ob2, void *context )
     return( result );
 }
 
-    int
+NSComparisonResult
 sizecmp( id ob1, id ob2, void *context )
 {
     NSComparisonResult	result = NSOrderedSame;
@@ -130,7 +130,7 @@ sizecmp( id ob1, id ob2, void *context )
     return( result );
 }
 
-    int
+NSComparisonResult
 ownercmp( id ob1, id ob2, void *context )
 {
     return( [[ ob1 objectForKey: @"owner" ]
@@ -138,7 +138,7 @@ ownercmp( id ob1, id ob2, void *context )
                 options: NSLiteralSearch ] );
 }
 
-    int
+NSComparisonResult
 groupcmp( id ob1, id ob2, void *context )
 {
     return( [[ ob1 objectForKey: @"group" ]
@@ -146,7 +146,7 @@ groupcmp( id ob1, id ob2, void *context )
                 options: NSLiteralSearch ] );
 }
 
-    int
+NSComparisonResult
 permcmp( id ob1, id ob2, void *context )
 {
     return( [[ ob1 objectForKey: @"perm" ]
@@ -154,7 +154,7 @@ permcmp( id ob1, id ob2, void *context )
                 options: NSLiteralSearch ] );
 }
 
-    int
+NSComparisonResult
 ( *sortFunctionForIdentifier( id identifier ))( id, id, void * )
 {
     if ( [ identifier isEqualToString: @"namecolumn" ] ) {
@@ -957,7 +957,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( IBAction )toggleModDateColumn: ( id )sender;
 {
-    int			state = [ sender state ];
+    NSURLSessionTaskState			state = [ sender state ];
     
     if ( state == NSOnState ) {
         [ sender setState: NSOffState ];
@@ -984,7 +984,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( IBAction )toggleModeColumn: ( id )sender
 {
-    int			state = [ sender state ];
+    NSURLSessionTaskState			state = [ sender state ];
     
     if ( state == NSOnState ) {
         [ sender setState: NSOffState ];
@@ -1011,7 +1011,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( IBAction )toggleOwnerColumn: ( id )sender
 {
-    int			state = [ sender state ];
+    NSURLSessionTaskState			state = [ sender state ];
     
     if ( state == NSOnState ) {
         [ sender setState: NSOffState ];
@@ -1038,7 +1038,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( IBAction )toggleSizeColumn: ( id )sender
 {
-    int			state = [ sender state ];
+    NSURLSessionTaskState			state = [ sender state ];
     
     if ( state == NSOnState ) {
         [ sender setState: NSOffState ];
@@ -1065,7 +1065,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( IBAction )cancelConnection: ( id )sender
 {
-    int			rc;
+    NSInteger			rc;
     
     if ( [ uploadQueue count ] ) {
 	rc = NSRunAlertPanel( NSLocalizedString( @"Warning: Upload queue not empty.",
@@ -1204,7 +1204,7 @@ permcmp( id ob1, id ob2, void *context )
 - ( void )loadRemoteBrowserWithItems: ( NSArray * )items
 {
     int			sorting;
-    int			selectedrow = [ remoteBrowser selectedRow ];
+    NSInteger			selectedrow = [ remoteBrowser selectedRow ];
     BOOL		asciisort = [[ NSUserDefaults standardUserDefaults ]
                                             boolForKey: @"ASCIIOrderSorting" ];
 
@@ -1251,7 +1251,7 @@ permcmp( id ob1, id ob2, void *context )
 
 - ( void )setRemotePathPopUp: ( NSString * )pwd
 {
-    int			i;
+    unsigned long			i;
     NSMutableArray	*rPathComponents = [[ NSMutableArray alloc ] init ];
     NSArray		*tmp = [[ pwd componentsSeparatedByString: @"/" ] copy ];
     NSImage		*slashImage;
@@ -1507,7 +1507,7 @@ WRITE_ERR:
 
 - ( void )localBrowserReloadForPath: ( NSString * )path
 {
-    int			i, sorting, sortdirection = 0;
+    NSInteger			i, sorting, sortdirection = 0;
     NSArray		*bits;
     NSString		*fullpath, *componentpath, *identifier;
     NSMutableArray	*tmp, *lpath;
@@ -1671,7 +1671,7 @@ WRITE_ERR:
 
 - ( IBAction )localBrowserDoubleClick: ( id )browser
 {
-    int			row = [ localBrowser clickedRow ];
+    NSInteger			row = [ localBrowser clickedRow ];
     NSDictionary	*dict;
     NSString		*type, *path;
     
@@ -1748,7 +1748,7 @@ WRITE_ERR:
         d = [ ( dotflag ? remoteDirContents : dotlessRDir ) objectAtIndex: [ nobj intValue ]];
         
         if ( [[ d objectForKey: @"type" ] isEqualToString: @"directory" ] ) {
-            int			rc;
+            NSInteger			rc;
 
             rc = NSRunAlertPanel( NSLocalizedString( @"Warning: OpenSSH's sftp client "
                                                     @"cannot yet download directories.",
@@ -1778,7 +1778,7 @@ WRITE_ERR:
 
 - ( IBAction )remoteBrowserDoubleClick: ( id )browser
 {
-    int			rcrow = [ remoteBrowser clickedRow ];
+    NSInteger			rcrow = [ remoteBrowser clickedRow ];
     NSDictionary	*remoteItem;
     int			type;
     
@@ -2052,7 +2052,7 @@ WRITE_ERR:
 
 - ( IBAction )deleteLocalFile: ( id )sender
 {
-    int				i = 0, rc, optag, row = [ localBrowser selectedRow ];
+    NSInteger				i = 0, rc, optag, row = [ localBrowser selectedRow ];
     unsigned long int		numberoflines = [ localBrowser numberOfSelectedRows ];
     unsigned long int		selectedlines[ numberoflines ];
     NSMutableArray		*items, *source;
@@ -2129,7 +2129,7 @@ WRITE_ERR:
 
 - ( IBAction )deleteRemoteFile: ( id )sender
 {
-    int				rc, i, row = [ remoteBrowser selectedRow ];
+    NSInteger				rc, i, row = [ remoteBrowser selectedRow ];
     NSMutableDictionary		*dict;
     NSEnumerator		*en;
     NSMutableArray		*items;
@@ -2206,7 +2206,7 @@ WRITE_ERR:
 
 - ( void )deleteFirstItemFromRemoveQueue
 {
-    int		count = [ removeQueue count ];
+    NSInteger		count = [ removeQueue count ];
     
     if ( ! count ) return;
 
@@ -2656,7 +2656,7 @@ CHMOD_ERROR:
 - ( IBAction )cdFromLPathPopUp: ( id )sender
 {
     NSString	*path, *component;
-    int		index, i = 0;
+    NSInteger		index, i = 0;
     
     path = [ NSString stringWithString: localDirPath ];
     component = [ lPathPopUp titleOfSelectedItem ];
@@ -2686,7 +2686,7 @@ CHMOD_ERROR:
 - ( IBAction )cdFromRPathPopUp: ( id )sender
 {
     NSString	*path, *component, *dircmd;
-    int		index, i;
+    NSInteger		index, i;
     
     if ( ! connected ) return;
     
@@ -2724,7 +2724,7 @@ CHMOD_ERROR:
 - ( void )performSpringLoadedActionInTable: ( NSTableView * )table
 {
     NSPoint         location = [ NSEvent mouseLocation ];
-    int             row;
+    NSInteger             row;
     NSString        *path = nil;
     NSMutableArray  *contents;
     
@@ -2869,7 +2869,7 @@ NSLog( @"setting springloaded root" );
     int                 isdir = 0;
     
     if ( [ directoryPath length ] > sizeof( dirpath )) {
-        NSLog( @"%@: too long\n" );
+        NSLog( @"%@: too long\n" , directoryPath);
         return;
     }
     strcpy( dirpath, [ directoryPath UTF8String ] );
@@ -3568,7 +3568,7 @@ NSLog( @"setting springloaded root" );
 {
     UMFileLauncher	*launcher;
     id			dsrc;
-    int			row = [ localBrowser selectedRow ];
+    NSUInteger			row = [ localBrowser selectedRow ];
     
     if ( row < 0 ) {
         return;
@@ -3602,7 +3602,7 @@ NSLog( @"setting springloaded root" );
 {
     FSRef		editorref;
     OSType		creator = 'R*ch';
-    unsigned int	row = [ localBrowser selectedRow ];
+    NSUInteger	row = [ localBrowser selectedRow ];
     NSString		*filepath = [[ ( dotflag ? localDirContents : dotlessLDir )
                                         objectAtIndex: row ] objectForKey: @"name" ];
     NSString		*editorpath;
@@ -3643,7 +3643,7 @@ NSLog( @"setting springloaded root" );
 
 - ( IBAction )openRemoteFileInEditor: ( id )sender
 {
-    int			row = [ remoteBrowser selectedRow ];
+    NSUInteger			row = [ remoteBrowser selectedRow ];
     NSDictionary	*item = [ ( dotflag ? remoteDirContents : dotlessRDir ) objectAtIndex: row ];
     NSData              *data = [ item objectForKey: @"NameAsRawBytes" ];
     NSString		*filename = [ item objectForKey: @"name" ], *tmppath = nil;
@@ -4331,7 +4331,7 @@ INVALID_CONNECTION_SETTINGS:
             column: ( int )column
 {
     NSMutableArray	*items;
-    int			row = [ table editedRow ];
+    NSUInteger			row = [ table editedRow ];
     
     if ( row < 0 ) {
         NSBeep();
@@ -4407,7 +4407,7 @@ INVALID_CONNECTION_SETTINGS:
         }
         return( YES );
     } else if ( key == NSF8FunctionKey ) {
-        int		row = [ table selectedRow ];
+        NSUInteger		row = [ table selectedRow ];
         NSMenu		*menu = nil;
         NSEvent		*e = nil;
         NSRect		rect; 
@@ -4753,7 +4753,7 @@ INVALID_CONNECTION_SETTINGS:
     NSArray		    *promisedNames = nil;
     NSAutoreleasePool	    *pool;
     NSString		    *name;
-    id			    plist;
+    id			    plist = nil;
     int			    i;
     
     if ( ! [ plists isKindOfClass: [ NSArray class ]] ) {
@@ -4815,7 +4815,7 @@ INVALID_CONNECTION_SETTINGS:
 - ( void )tableViewSelectionDidChange: ( NSNotification * )aNotification
 {
     id 				tv = [ aNotification object ];
-    int				numselected;
+    NSUInteger				numselected;
     
     if ( ! [ tv isKindOfClass: [ SFTPTableView class ]] ) {
         return;
@@ -4923,7 +4923,7 @@ INVALID_CONNECTION_SETTINGS:
 }
             
 
-- ( int )numberOfRowsInTableView: ( NSTableView * )aTableView
+- ( NSUInteger )numberOfRowsInTableView: ( NSTableView * )aTableView
 {
     NSMutableArray	*items = nil;
     
@@ -5406,7 +5406,7 @@ INVALID_CONNECTION_SETTINGS:
 /* download files/directories with scp */
 - ( IBAction )scp: ( id )sender
 {
-    int			row;
+    NSUInteger			row;
     id			item;
     
     if ( [ sender isKindOfClass: [ NSMenuItem class ]] ) {
