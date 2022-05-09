@@ -8,5 +8,5 @@
 #define SFTP_LS_EXTENDED_LONG_FORM  2
 #define SFTP_VERSION_UNSUPPORTED    0xff
 
-int	sshversion();
+int	sshversion(void);
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <deployment version="101000" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,7 +21,7 @@
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" autoresizesSubviews="NO" id="2">
                 <rect key="frame" x="0.0" y="0.0" width="839" height="595"/>
-                <autoresizingMask key="autoresizingMask"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                 <subviews>
                     <progressIndicator autoresizesSubviews="NO" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="522">
                         <rect key="frame" x="19" y="20" width="46" height="12"/>
@@ -49,7 +49,7 @@
                                 </view>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
-                            <box autoresizesSubviews="NO" fixedFrame="YES" boxType="secondary" borderType="none" title="Box" titlePosition="noTitle" id="872">
+                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" id="872">
                                 <rect key="frame" x="400" y="-2" width="402" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                 <view key="contentView" id="Ywb-mm-Ruw">
@@ -675,7 +675,7 @@ Gw
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" usesFontPanel="YES" usesRuler="YES" quoteSubstitution="YES" dashSubstitution="YES" textReplacement="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1883">
-                                    <rect key="frame" x="0.0" y="-66" width="292" height="280"/>
+                                    <rect key="frame" x="0.0" y="-132" width="292" height="280"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1924,7 +1924,7 @@ Gw
             </connections>
         </window>
         <customView autoresizesSubviews="NO" id="874" userLabel="remoteView">
-            <rect key="frame" x="0.0" y="0.0" width="216" height="345"/>
+            <rect key="frame" x="0.0" y="0.0" width="262" height="373"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1221">
@@ -1936,31 +1936,15 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <popUpButton autoresizesSubviews="NO" toolTip="Pfad zum aktuellen Ordner." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="885">
-                    <rect key="frame" x="28" y="319" width="162" height="26"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
-                    <popUpButtonCell key="cell" type="push" title=" " bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="887" id="1803">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="menu"/>
-                        <menu key="menu" title="OtherViews" id="884">
-                            <items>
-                                <menuItem title=" " state="on" id="887"/>
-                            </items>
-                        </menu>
-                    </popUpButtonCell>
-                    <connections>
-                        <action selector="cdFromRPathPopUp:" target="209" id="994"/>
-                    </connections>
-                </popUpButton>
                 <scrollView fixedFrame="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="888" customClass="SFTPScrollView">
-                    <rect key="frame" x="0.0" y="22" width="216" height="293"/>
+                    <rect key="frame" x="-1" y="0.0" width="263" height="306"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="c3P-S5-hI8">
-                        <rect key="frame" x="1" y="1" width="214" height="291"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                        <rect key="frame" x="1" y="1" width="261" height="304"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" headerView="1892" floatsGroupRows="NO" id="889" customClass="SFTPTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="566" height="268"/>
+                                <rect key="frame" x="0.0" y="0.0" width="566" height="281"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2047,14 +2031,14 @@ Gw
                     </clipView>
                     <edgeInsets key="contentInsets" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
                     <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1891">
-                        <rect key="frame" x="1" y="276" width="214" height="16"/>
+                        <rect key="frame" x="1" y="289" width="261" height="16"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="1893">
-                        <rect key="frame" x="199" y="24" width="16" height="268"/>
+                        <rect key="frame" x="246" y="24" width="16" height="281"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
-                    <tableHeaderView key="headerView" id="1892">
+                    <tableHeaderView key="headerView" wantsLayer="YES" id="1892">
                         <rect key="frame" x="0.0" y="0.0" width="566" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
@@ -2063,17 +2047,34 @@ Gw
                     </connections>
                 </scrollView>
                 <button autoresizesSubviews="NO" toolTip="In den übergeordneten Ordner auf dem Server verschieben." horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1216">
-                    <rect key="frame" x="189" y="316" width="30" height="30"/>
+                    <rect key="frame" x="207" y="326" width="42" height="32"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="round" bezelStyle="circular" image="uparrow" imagePosition="only" alignment="left" borderStyle="border" id="1804">
+                    <buttonCell key="cell" type="push" bezelStyle="rounded" image="uparrow" imagePosition="only" alignment="center" borderStyle="border" id="1804">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="label"/>
+                        <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
                         <action selector="remoteCdDotDot:" target="209" id="1218"/>
                     </connections>
                 </button>
+                <popUpButton autoresizesSubviews="NO" toolTip="Pfad zum aktuellen Ordner." verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="885" customClass="AMPathPopUpButton">
+                    <rect key="frame" x="8" y="328" width="202" height="26"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                    <popUpButtonCell key="cell" type="push" title=" " bezelStyle="rounded" alignment="left" lineBreakMode="clipping" state="on" borderStyle="borderAndBezel" inset="2" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="887" id="1803">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="menu"/>
+                        <menu key="menu" title="OtherViews" id="884">
+                            <items>
+                                <menuItem title=" " state="on" id="887"/>
+                            </items>
+                        </menu>
+                    </popUpButtonCell>
+                    <connections>
+                        <action selector="cdFromRPathPopUp:" target="209" id="994"/>
+                    </connections>
+                </popUpButton>
             </subviews>
+            <point key="canvasLocation" x="-715" y="511.5"/>
         </customView>
         <customView autoresizesSubviews="NO" id="895" userLabel="localView">
             <rect key="frame" x="0.0" y="0.0" width="216" height="345"/>
@@ -2114,7 +2115,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" emptySelection="NO" headerView="1895" floatsGroupRows="NO" id="892" customClass="SFTPTableView">
-                                <rect key="frame" x="0.0" y="0.0" width="568" height="268"/>
+                                <rect key="frame" x="0.0" y="0.0" width="568.5" height="268"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -2209,7 +2210,7 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                     <tableHeaderView key="headerView" wantsLayer="YES" id="1895">
-                        <rect key="frame" x="0.0" y="0.0" width="568" height="23"/>
+                        <rect key="frame" x="0.0" y="0.0" width="568.5" height="23"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </tableHeaderView>
                     <connections>
@@ -2331,11 +2332,11 @@ Gw
             </items>
         </menu>
         <customView autoresizesSubviews="NO" id="1426" userLabel="loginView">
-            <rect key="frame" x="0.0" y="0.0" width="325" height="474"/>
+            <rect key="frame" x="0.0" y="0.0" width="344" height="474"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <popUpButton autoresizesSubviews="NO" toolTip="SFTP-Server Lesezeichen" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="231">
-                    <rect key="frame" x="271" y="323" width="57" height="26"/>
+                    <rect key="frame" x="271" y="341" width="57" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="235" id="1811">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2351,7 +2352,7 @@ Gw
                     </connections>
                 </popUpButton>
                 <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="242">
-                    <rect key="frame" x="0.0" y="298" width="104" height="17"/>
+                    <rect key="frame" x="0.0" y="316" width="104" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="1813">
                         <font key="font" metaFont="system"/>
@@ -2362,7 +2363,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <textField autoresizesSubviews="NO" toolTip="Ihr Benutzername auf dem SFTP-Server" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="221">
-                    <rect key="frame" x="109" y="296" width="216" height="22"/>
+                    <rect key="frame" x="110" y="315" width="215" height="21"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="1809">
                         <font key="font" metaFont="system"/>
@@ -2374,7 +2375,7 @@ Gw
                     </connections>
                 </textField>
                 <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1003">
-                    <rect key="frame" x="0.0" y="268" width="104" height="17"/>
+                    <rect key="frame" x="0.0" y="286" width="104" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Port:" id="1817">
                         <font key="font" metaFont="system"/>
@@ -2383,7 +2384,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <textField autoresizesSubviews="NO" toolTip="Optional. Der Initialordner der nach dem Einloggen angezeigt werden soll." verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="978">
-                    <rect key="frame" x="109" y="238" width="216" height="22"/>
+                    <rect key="frame" x="110" y="254" width="215" height="22"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="1814">
                         <font key="font" metaFont="system"/>
@@ -2392,7 +2393,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <textField autoresizesSubviews="NO" toolTip="Optional. Der Port an welchem der SFTP-Server läuft." verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1002">
-                    <rect key="frame" x="109" y="266" width="216" height="22"/>
+                    <rect key="frame" x="110" y="284" width="215" height="22"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="left" drawsBackground="YES" id="1816">
                         <font key="font" metaFont="system"/>
@@ -2404,7 +2405,7 @@ Gw
                     </connections>
                 </textField>
                 <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="234">
-                    <rect key="frame" x="0.0" y="355" width="104" height="17"/>
+                    <rect key="frame" x="12" y="375" width="92" height="16"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" title="Verbinden mit:" id="1812">
                         <font key="font" metaFont="system"/>
@@ -2413,7 +2414,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="979">
-                    <rect key="frame" x="0.0" y="240" width="104" height="17"/>
+                    <rect key="frame" x="0.0" y="256" width="104" height="17"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                     <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="right" id="1815">
                         <font key="font" metaFont="system"/>
@@ -2424,7 +2425,7 @@ Gw
                     </textFieldCell>
                 </textField>
                 <comboBox autoresizesSubviews="NO" toolTip="Der Name des SFTP-Servers" verticalHuggingPriority="750" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="228">
-                    <rect key="frame" x="109" y="351" width="219" height="26"/>
+                    <rect key="frame" x="110" y="371" width="218" height="26"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" borderStyle="bezel" alignment="left" drawsBackground="YES" completes="NO" numberOfVisibleItems="5" id="1810">
                         <font key="font" metaFont="system"/>
@@ -2435,28 +2436,8 @@ Gw
                         <outlet property="nextKeyView" destination="221" id="278"/>
                     </connections>
                 </comboBox>
-                <button autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1475">
-                    <rect key="frame" x="12" y="213" width="16" height="16"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
-                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="righttriangle" imagePosition="only" alignment="center" id="1818">
-                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="label"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="toggleAdvConnectionView:" target="209" id="1489"/>
-                    </connections>
-                </button>
-                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1476">
-                    <rect key="frame" x="29" y="213" width="299" height="17"/>
-                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Erweiterte SFTP-Optionen" id="1819">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
                 <popUpButton autoresizesSubviews="NO" toolTip="Rendezvous-SSH-Server" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1492">
-                    <rect key="frame" x="212" y="323" width="57" height="26"/>
+                    <rect key="frame" x="212" y="341" width="57" height="26"/>
                     <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                     <popUpButtonCell key="cell" type="push" bezelStyle="rounded" alignment="left" lineBreakMode="clipping" borderStyle="borderAndBezel" inset="2" pullsDown="YES" arrowPosition="arrowAtCenter" preferredEdge="maxY" selectedItem="1494" id="1820">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2471,15 +2452,15 @@ Gw
                         <action selector="selectRendezvousServer:" target="209" id="1499"/>
                     </connections>
                 </popUpButton>
-                <box autoresizesSubviews="NO" fixedFrame="YES" boxType="oldStyle" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1500">
-                    <rect key="frame" x="82" y="0.0" width="243" height="207"/>
+                <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1500">
+                    <rect key="frame" x="79" y="-4" width="249" height="213"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <view key="contentView" id="cqe-wK-ghl">
-                        <rect key="frame" x="0.0" y="0.0" width="243" height="207"/>
+                        <rect key="frame" x="0.0" y="0.0" width="249" height="213"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button autoresizesSubviews="NO" toolTip="Diese Informationen zur Lesezeichenliste hinzufügen" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="250">
-                                <rect key="frame" x="-6" y="69" width="255" height="32"/>
+                                <rect key="frame" x="-6" y="69" width="261" height="32"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <buttonCell key="cell" type="push" title="Zu Lesezeichen hinzufügen" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1867">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2491,17 +2472,17 @@ Gw
                                     <action selector="addToFavorites:" target="209" id="251"/>
                                 </connections>
                             </button>
-                            <box autoresizesSubviews="NO" fixedFrame="YES" boxType="oldStyle" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1505">
-                                <rect key="frame" x="0.0" y="113" width="243" height="94"/>
+                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1505">
+                                <rect key="frame" x="-3" y="109" width="255" height="106"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <view key="contentView" id="ktd-Ji-JZx">
-                                    <rect key="frame" x="0.0" y="0.0" width="243" height="94"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="255" height="106"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <button autoresizesSubviews="NO" toolTip="Verbindungsaufbau mit dem SFTP-Server starten" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="239">
-                                <rect key="frame" x="119" y="36" width="130" height="32"/>
+                                <rect key="frame" x="121" y="36" width="134" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxY="YES"/>
                                 <buttonCell key="cell" type="push" title="Verbinden" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="1868">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -2518,8 +2499,28 @@ DQ
                     </view>
                     <font key="titleFont" metaFont="system"/>
                 </box>
+                <button autoresizesSubviews="NO" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1475">
+                    <rect key="frame" x="11" y="222" width="16" height="16"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
+                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="righttriangle" imagePosition="only" alignment="center" id="1818">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="label"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="toggleAdvConnectionView:" target="209" id="1489"/>
+                    </connections>
+                </button>
+                <textField autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" allowsCharacterPickerTouchBarItem="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1476">
+                    <rect key="frame" x="27" y="222" width="299" height="17"/>
+                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                    <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="left" title="Erweiterte SFTP-Optionen" id="1819">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
-            <point key="canvasLocation" x="796.5" y="1207"/>
+            <point key="canvasLocation" x="768" y="1207"/>
         </customView>
         <customView autoresizesSubviews="NO" id="1437" userLabel="connect">
             <rect key="frame" x="0.0" y="0.0" width="325" height="474"/>
@@ -2680,11 +2681,11 @@ DQ
                 <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <box autoresizesSubviews="NO" fixedFrame="YES" boxType="oldStyle" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1540">
-                        <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
+                    <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1540">
+                        <rect key="frame" x="-3" y="-4" width="366" height="366"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <view key="contentView" id="CJL-ZY-NgT">
-                            <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
+                            <rect key="frame" x="0.0" y="0.0" width="366" height="366"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         </view>
                         <font key="titleFont" metaFont="system"/>
