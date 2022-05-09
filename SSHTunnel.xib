@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="18122" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="20037" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="18122"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="20037"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -71,7 +71,7 @@
                     </popUpButton>
                 </subviews>
             </view>
-            <point key="canvasLocation" x="139" y="208"/>
+            <point key="canvasLocation" x="-132" y="-196"/>
         </window>
         <window title="SSH Tunnel Creation" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="36" userLabel="tunnelsheet" customClass="NSPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
@@ -82,7 +82,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="410" height="186"/>
                 <autoresizingMask key="autoresizingMask"/>
             </view>
-            <point key="canvasLocation" x="139" y="276"/>
+            <point key="canvasLocation" x="648" y="53"/>
         </window>
         <customView autoresizesSubviews="NO" id="61" userLabel="unknownhost">
             <rect key="frame" x="0.0" y="0.0" width="410" height="186"/>
@@ -141,7 +141,7 @@ DQ
                     </textFieldCell>
                 </textField>
             </subviews>
-            <point key="canvasLocation" x="139" y="255"/>
+            <point key="canvasLocation" x="392" y="-220"/>
         </customView>
         <customView autoresizesSubviews="NO" id="69" userLabel="sshtunnel">
             <rect key="frame" x="0.0" y="0.0" width="410" height="186"/>
@@ -304,7 +304,7 @@ DQ
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="139" y="146"/>
+            <point key="canvasLocation" x="-430" y="-16"/>
         </customView>
         <customView autoresizesSubviews="NO" id="107" userLabel="passprompt">
             <rect key="frame" x="0.0" y="0.0" width="410" height="186"/>
@@ -386,7 +386,7 @@ DQ
                     </connections>
                 </button>
             </subviews>
-            <point key="canvasLocation" x="139" y="255"/>
+            <point key="canvasLocation" x="86" y="74"/>
         </customView>
     </objects>
 </document>

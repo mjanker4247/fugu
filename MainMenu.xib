@@ -41,19 +41,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" id="912">
-                                <rect key="frame" x="-3" y="-2" width="408" height="548"/>
+                                <rect key="frame" x="-3" y="-2" width="411" height="548"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES"/>
                                 <view key="contentView" id="70v-wC-Hoc">
-                                    <rect key="frame" x="0.0" y="0.0" width="408" height="548"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="411" height="548"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <font key="titleFont" metaFont="system"/>
                             </box>
                             <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" id="872">
-                                <rect key="frame" x="400" y="-2" width="402" height="548"/>
+                                <rect key="frame" x="403" y="-2" width="399" height="548"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" heightSizable="YES"/>
                                 <view key="contentView" id="Ywb-mm-Ruw">
-                                    <rect key="frame" x="0.0" y="0.0" width="402" height="548"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="399" height="548"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <font key="titleFont" metaFont="system"/>
@@ -672,10 +672,10 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <clipView key="contentView" drawsBackground="NO" id="lWL-0I-fGm">
                             <rect key="frame" x="1" y="1" width="292" height="132"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <autoresizingMask key="autoresizingMask"/>
                             <subviews>
                                 <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" baseWritingDirection="leftToRight" usesFontPanel="YES" usesRuler="YES" quoteSubstitution="YES" dashSubstitution="YES" textReplacement="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1883">
-                                    <rect key="frame" x="0.0" y="-132" width="292" height="280"/>
+                                    <rect key="frame" x="0.0" y="-154" width="292" height="280"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -825,7 +825,7 @@ DQ
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="Unh-f9-o75">
                         <rect key="frame" x="1" y="1" width="248" height="218"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="1889" floatsGroupRows="NO" id="593">
                                 <rect key="frame" x="0.0" y="0.0" width="248" height="195"/>
@@ -1941,7 +1941,7 @@ Gw
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="c3P-S5-hI8">
                         <rect key="frame" x="1" y="1" width="261" height="304"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" headerView="1892" floatsGroupRows="NO" id="889" customClass="SFTPTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="566" height="281"/>
@@ -2112,7 +2112,7 @@ Gw
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                     <clipView key="contentView" id="gZ5-Lt-59u">
                         <rect key="frame" x="1" y="1" width="214" height="291"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" emptySelection="NO" headerView="1895" floatsGroupRows="NO" id="892" customClass="SFTPTableView">
                                 <rect key="frame" x="0.0" y="0.0" width="568.5" height="268"/>
@@ -2675,10 +2675,10 @@ DQ
         <window title="Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1528" userLabel="imagepreviewpanel" customClass="SFTPImagePreviewPanel">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES" nonactivatingPanel="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="677" y="336" width="360" height="360"/>
+            <rect key="contentRect" x="677" y="336" width="360" height="382"/>
             <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
             <view key="contentView" autoresizesSubviews="NO" id="1529">
-                <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
+                <rect key="frame" x="0.0" y="0.0" width="360" height="382"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <box autoresizesSubviews="NO" fixedFrame="YES" borderType="none" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="1540">
@@ -2695,7 +2695,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="209" id="1533"/>
             </connections>
-            <point key="canvasLocation" x="139" y="578"/>
+            <point key="canvasLocation" x="554" y="490"/>
         </window>
         <customView autoresizesSubviews="NO" id="1539" userLabel="imagePreview">
             <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
