@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "CF9D59883D26AEB061BC50B13B1B197849D39D48",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "AFADF01AFBA46DFD7A5AFD980110E89E8E63AACD" : 9223372036854775807,
+    "CF9D59883D26AEB061BC50B13B1B197849D39D48" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "8850D7B9-EAEF-4466-B659-31D533EDD48D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "AFADF01AFBA46DFD7A5AFD980110E89E8E63AACD" : "KeychainAccess\/",
+    "CF9D59883D26AEB061BC50B13B1B197849D39D48" : "fugu\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Fugu",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Fugu.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/kishikawakatsumi\/KeychainAccess",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "AFADF01AFBA46DFD7A5AFD980110E89E8E63AACD"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mjanker4247\/fugu.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "CF9D59883D26AEB061BC50B13B1B197849D39D48"
+    }
+  ]
+}
