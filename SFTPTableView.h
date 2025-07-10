@@ -15,8 +15,8 @@
 @interface SFTPTableView : NSTableView
 {
 @private
-    int		    rightClickedRow;
-    int		    _sftpDragPhase;
+    NSInteger	    rightClickedRow;
+    NSInteger	    _sftpDragPhase;
     NSTimer	    *springLoadedTimer;
     NSImage	    *_sftpOriginalDragImage;
     NSArray	    *_sftpOriginalPboardTypes;
@@ -25,12 +25,12 @@
 }
 
 - ( void )keyDown: ( NSEvent * )theEvent;
-- ( int )rightClickedRow;
+- ( NSInteger )rightClickedRow;
 
 - ( NSPoint )originOfSelectedCell;
 
 - ( void )addTableColumnWithIdentifier: ( id )identifier
-            columnTitle: ( NSString * )title width: ( float )width;
+            columnTitle: ( NSString * )title width: ( CGFloat )width;
 	    
 - ( BOOL )dragPromisedFiles;
 - ( void )setDragPromisedFiles: ( BOOL )promised;
@@ -39,7 +39,7 @@
 
 /* to assist column creation in delegate */
 NSString 	*ColumnTitleFromIdentifier( NSString *identifier );
-float		WidthForColumnWithIdentifier( NSString *identifier );
+CGFloat		WidthForColumnWithIdentifier( NSString *identifier );
 
 
 /* additional delegate methods */

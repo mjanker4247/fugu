@@ -52,14 +52,14 @@
     NSConnection		*connectionToTServer;
     NSString			*scpFileName;
     SCPTransfer			*scp;
-    double			bytescopied, scpFileSize;
+    CGFloat			bytescopied, scpFileSize;
     
     BOOL			_firstPasswordPrompt;
     BOOL			_gotPasswordFromKeychain;
     
     id				_scpDelegate;
     pid_t			scppid;
-    int				masterfd;
+    NSInteger			masterfd;
 }
 
 - ( void )setServer: ( id )serverObject;
@@ -77,7 +77,7 @@
 - ( IBAction )chooseLocalFile: ( id )sender;
 
 - ( void )getSecureCopyWindowForFile: ( NSString * )filename
-            scpType: ( int )scpType copyToPath: ( NSString * )destPath
+            scpType: ( NSInteger )scpType copyToPath: ( NSString * )destPath
             fromHost: ( NSString * )rhost userName: ( NSString * )user
             delegate: ( id )delegate;
 - ( void )getContinueQueryWithString: ( NSString * )string;
@@ -95,14 +95,14 @@
             updateWithPercentDone: ( char * )pc
             eta: ( char * )eta
             bytesCopied: ( char * )bytes;
-- ( void )secureCopyFinishedWithStatus: ( int )status;
+- ( void )secureCopyFinishedWithStatus: ( NSInteger )status;
 /* on completion, SCPController class calls delegate method -(void)scpFinished */
 
 - ( void )clearLog;
 - ( void )addToLog: ( NSString * )buf;
 
 - ( void )setSCPPID: ( pid_t )pid;
-- ( void )setMasterFD: ( int )fd;
+- ( void )setMasterFD: ( NSInteger )fd;
 
 - ( id )delegate;
 - ( void )setDelegate: ( id )delegate;

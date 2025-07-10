@@ -11,10 +11,10 @@
 
 - ( oneway void )scpConnect: ( char * )userathost toPort: ( char * )portnumber
                     forItem: ( char * )localfile
-                    scpType: ( int )scpType
+                    scpType: ( NSInteger )scpType
                     fromController: ( SCPController * )controller;
 
-- ( int )closeMasterFD;
+- ( NSInteger )closeMasterFD;
 
 @end
 
@@ -22,7 +22,7 @@
 {
 @private
     pid_t		scppid;
-    int			masterfd;
+    NSInteger		masterfd;
 }
 
 + ( void )connectWithPorts: ( NSArray * )ports;

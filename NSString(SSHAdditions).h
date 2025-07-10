@@ -9,7 +9,7 @@
 
 + ( NSDictionary * )unknownHostInfoFromString: ( NSString * )string;
 + ( NSString * )pathFromBaseDir: ( NSString * )base fullPath: ( NSString * )fullpath;
-+ ( NSString * )clockStringFromInteger: ( int )integer;
++ ( NSString * )clockStringFromInteger: ( NSInteger )integer;
 + ( NSString * )pathForExecutable: ( NSString * )executable;
 - ( NSString * )octalRepresentation;
 - ( char )objectTypeFromOctalRepresentation: ( NSString * )octalRep;

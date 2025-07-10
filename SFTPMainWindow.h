@@ -13,6 +13,6 @@
 
 }
 
-- ( int )setTitleToLocalHostName;
+- ( NSInteger )setTitleToLocalHostName;
 
 @end

@@ -192,7 +192,7 @@
     BOOL			firstPasswordPrompt;
     BOOL			gotPasswordFromKeychain;
     
-    int				dotflag;
+    NSInteger			dotflag;
 
     NSConnection		*connectionToTServer;
     SFTPTServer			*tServer;
@@ -247,11 +247,11 @@
 }
 
 - ( void )showUploadProgress;
-- ( void )updateUploadProgress: ( int )endflag;
+- ( void )updateUploadProgress: ( NSInteger )endflag;
 - ( void )removeFirstItemFromUploadQ;
 - ( NSMutableArray * )uploadQ;
 - ( void )prepareDirUpload: ( NSString * )dir;
-- ( void )updateUploadProgressBarWithValue: ( double )value
+- ( void )updateUploadProgressBarWithValue: ( CGFloat )value
 	    amountTransfered: ( NSString * )amount
 	    transferRate: ( NSString * )rate
 	    ETA: ( NSString * )eta;
@@ -288,7 +288,7 @@
 - ( IBAction )sftpConnect: ( id )sender;
 
 - ( void )showDownloadProgressWithMessage: ( char * )msg;
-- ( void )updateDownloadProgressBarWithValue: ( double )value
+- ( void )updateDownloadProgressBarWithValue: ( CGFloat )value
 	    amountTransfered: ( NSString * )amount
 	    transferRate: ( NSString * )rate
 	    ETA: ( NSString * )eta;
@@ -394,7 +394,7 @@
 
 - ( IBAction )showPrefs: ( id )sender;
 
-- ( int )matchingIndexForString: ( NSString * )string inTable: ( SFTPTableView * )table;
+- ( NSInteger )matchingIndexForString: ( NSString * )string inTable: ( SFTPTableView * )table;
                 
 - ( IBAction )checkForUpdates: ( id )sender;
 
