@@ -29,6 +29,8 @@
 	<string>fugu.icns</string>
 	<key>CFBundleIdentifier</key>
 	<string>edu.umich.fugu</string>
+	<key>LSMinimumSystemVersion</key>
+	<string>10.9</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
