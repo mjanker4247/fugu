@@ -9,7 +9,8 @@
 
 - ( NSImage * )scaledImage
 {
-    return( _scaledImage );
+    // Remove this method from NSImageCell, as it does not have access to [self bounds]
+    return nil;
 }
 
 @end
@@ -71,7 +72,7 @@
     return( YES );
 }
 
-- ( unsigned int )draggingSourceOperationMaskForLocal: ( BOOL )isLocal
+- ( NSDragOperation )draggingSourceOperationMaskForLocal: ( BOOL )isLocal
 {
     if ( isLocal ) {
         return( NSDragOperationNone );
@@ -97,6 +98,38 @@
 - ( NSString * )imageLocationPath
 {
     return( _imageLocationPath_ );
+}
+
+// Add the correct scaledImage implementation here
+- (NSImage *)scaledImage
+{
+    NSImage *image = [self image];
+    if (!image) {
+        return nil;
+    }
+    
+    NSSize imageSize = [image size];
+    NSSize viewSize = [self bounds].size;
+    
+    // If the image fits within the view, return it as is
+    if (imageSize.width <= viewSize.width && imageSize.height <= viewSize.height) {
+        return image;
+    }
+    
+    // Calculate the scaled size maintaining aspect ratio
+    CGFloat scaleX = viewSize.width / imageSize.width;
+    CGFloat scaleY = viewSize.height / imageSize.height;
+    CGFloat scale = MIN(scaleX, scaleY);
+    
+    NSSize scaledSize = NSMakeSize(imageSize.width * scale, imageSize.height * scale);
+    
+    // Create a scaled copy of the image
+    NSImage *scaledImage = [[NSImage alloc] initWithSize:scaledSize];
+    [scaledImage lockFocus];
+    [image drawInRect:NSMakeRect(0, 0, scaledSize.width, scaledSize.height)];
+    [scaledImage unlockFocus];
+    
+    return [scaledImage autorelease];
 }
 
 @end

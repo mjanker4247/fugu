@@ -6,6 +6,7 @@
 #import "SFTPMainWindow.h"
 #import "SFTPTServer.h"
 #import "SFTPController.h"
+#import "SFTPControllerXPC.h"
 #import "SFTPNode.h"
 #import "SFTPErrorHandler.h"
 #import "SFTPItemCell.h"
@@ -176,32 +177,15 @@ permcmp( id ob1, id ob2, void *context )
 
 @implementation SFTPController
 
-- ( void )establishDOConnection
-{
-    NSPort		*recPort;
-    NSPort		*sendPort;
-    NSArray		*portArray;
-    
-    /* prepare distributed objects for sftp task thread, but don't establish connection yet */
-    recPort = [ NSPort port ];
-    sendPort = [ NSPort port ];
-    connectionToTServer = [[ NSConnection alloc ] initWithReceivePort: recPort
-                                                sendPort: sendPort ];
-    [ connectionToTServer setRootObject: self ];
-    tServer = nil;
-    portArray = [ NSArray arrayWithObjects: sendPort, recPort, nil ];
-    
-    [ NSThread detachNewThreadSelector: @selector( connectWithPorts: )
-                                        toTarget: [ SFTPTServer class ]
-                                        withObject: portArray ];
-}
+// Distributed Objects method removed - replaced with XPC architecture
 
 - ( id )init
 {
     uploadQueue = [[ NSMutableArray alloc ] init ];
     downloadQueue = [[ NSMutableArray alloc ] init ];
  
-    [ self establishDOConnection ];
+    // Initialize XPC controller instead of Distributed Objects
+    self.xpcController = [[SFTPControllerXPC alloc] init];
     [ NSApp setDelegate: self ];
     
     /* watch for important notifications */
@@ -238,13 +222,7 @@ permcmp( id ob1, id ob2, void *context )
     return (( self = [ super init ] ) ? self : nil );
 }
 
-- ( void )setServer: ( id )serverObject
-{
-    [ serverObject setProtocolForProxy: @protocol( SFTPTServerInterface ) ];
-    [ serverObject retain ];
-    
-    tServer = ( SFTPTServer <SFTPTServerInterface> * )serverObject;
-}
+// setServer method removed - XPC handles server connections automatically
 
 - ( BOOL )validateMenuItem: ( NSMenuItem * )anItem
 {
@@ -1357,7 +1335,18 @@ NSLog( @"setting home directory" );
     [ self setBusyStatusWithMessage:
             NSLocalizedString( @"Requesting file listing from server....",
                                 @"Requesting file listing from server...." ) ];
-    [ self writeCommand: lsform ];
+    
+    // Use XPC service instead of direct command
+    [self.xpcController getDirectoryListingWithCompletion:^(NSArray *listing, NSString *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error) {
+                [self sessionError:error];
+            } else {
+                [self loadRemoteBrowserWithItems:listing];
+            }
+            [self finishedCommand];
+        });
+    }];
 }
 
 - ( void )setBusyStatusWithMessage: ( NSString * )message
@@ -1438,7 +1427,12 @@ WRITE_ERR:
     }
     
     if ( connected ) {
-        [ self writeCommand: "quit" ];
+        // Use XPC service to disconnect
+        [self.xpcController disconnectSFTPWithCompletion:^{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self cleanUp];
+            });
+        }];
     }
     
     if ( [ self cachedPreviews ] != nil ) {
@@ -1906,7 +1900,21 @@ WRITE_ERR:
         skip = 0;
     }
 
-    [ self writeCommand: " " ];
+    // Use XPC service for upload
+    for (NSDictionary *uploadItem in uploadQueue) {
+        NSString *localPath = [uploadItem objectForKey:@"fullpath"];
+        NSString *remotePath = [uploadItem objectForKey:@"pathfrombase"];
+        
+        [self.xpcController uploadFile:localPath 
+                            remotePath:remotePath 
+                            completion:^(BOOL success, NSString *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!success) {
+                    [self sessionError:error];
+                }
+            });
+        }];
+    }
 }
 
 - ( void )downloadFiles: ( NSArray * )rpaths toDirectory: ( NSString * )lpath
@@ -1961,7 +1969,22 @@ WRITE_ERR:
         skip = 0;
     }
     
-    [ self writeCommand: " " ];
+    // Use XPC service for download
+    for (NSDictionary *downloadItem in downloadQueue) {
+        NSData *rawData = [downloadItem objectForKey:@"rpath"];
+        NSString *localPath = [downloadItem objectForKey:@"lpath"];
+        NSString *remotePath = [[NSString alloc] initWithData:rawData encoding:NSUTF8StringEncoding];
+        
+        [self.xpcController downloadFile:remotePath 
+                              localPath:localPath 
+                             completion:^(BOOL success, NSString *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (!success) {
+                    [self sessionError:error];
+                }
+            });
+        }];
+    }
 }
 
 - ( void )showDownloadProgressWithMessage: ( char * )msg
@@ -4304,7 +4327,24 @@ LaunchFailed:
     remoteDirContents = [[ NSMutableArray alloc ] init ];
     dotlessRDir	= [[ NSMutableArray alloc ] init ];
     remoteDirPath = [[ NSString alloc ] init ];
-    [ tServer connectToServerWithParams: params fromController: self ];
+    // Use XPC service for connection
+    NSString *host = [userParameters objectForKey:@"rhost"];
+    NSString *username = [userParameters objectForKey:@"user"];
+    NSString *portStr = portString.length > 0 ? portString : @"22";
+    
+    [self.xpcController connectToServer:host 
+                               username:username 
+                                   port:portStr 
+                             completion:^(BOOL success, NSString *error) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (success) {
+                [self showConnectingInterface:nil];
+            } else {
+                [self connectionError:error];
+                [connectButton setEnabled:YES];
+            }
+        });
+    }];
     [ self showConnectingInterface: nil ];
     
     recent = [ remoteHost objectValues ];

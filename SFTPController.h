@@ -28,6 +28,7 @@
 
 @class 		SFTPTServer;
 @class		SCPController;
+@class		SFTPControllerXPC;
 
 @interface 	SFTPController : NSObject
 {
@@ -194,9 +195,8 @@
     
     NSInteger			dotflag;
 
-    // Replaced NSConnection with XPC - see SFTPControllerXPC.h/m
-    // NSConnection		*connectionToTServer;
-    // SFTPTServer			*tServer;
+    // XPC Service Integration
+    SFTPControllerXPC	*xpcController;
     
     SFTPPrefs			*prefs;
     

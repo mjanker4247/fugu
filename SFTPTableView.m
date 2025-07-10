@@ -333,7 +333,7 @@
     }
 }
 
-- ( int )rightClickedRow
+- ( NSInteger )rightClickedRow
 {
     return( rightClickedRow );
 }
@@ -358,7 +358,7 @@
 }
 
 - ( void )addTableColumnWithIdentifier: ( id )identifier
-            columnTitle: ( NSString * )title width: ( float )width
+            columnTitle: ( NSString * )title width: ( CGFloat )width
 {
     NSTableColumn	*column = nil;
     
@@ -401,10 +401,10 @@ ColumnTitleFromIdentifier( NSString *identifier )
     return( title );
 }
 
-    float
+    CGFloat
 WidthForColumnWithIdentifier( NSString *identifier )
 {
-    float		width = 50.0; /* arbitrary non-zero width */
+    CGFloat		width = 50.0; /* arbitrary non-zero width */
     
     if ( [ identifier isEqualToString: @"datecolumn" ] ) {
         width = DATE_COLUMN_WIDTH;
