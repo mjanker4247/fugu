@@ -586,9 +586,9 @@ static NSMutableArray	*knownHosts = nil;
     for ( i = 0; i < [ knownHosts count ]; i++ ) {
 	NSDictionary	*dict = [ knownHosts objectAtIndex: i ];
 	
-	fprintf( fp, "%s %s %s\n", ( char * )[[ dict objectForKey: @"hostid" ] cString ],
-				( char * )[[ dict objectForKey: @"keytype" ] cString ],
-				( char * )[[ dict objectForKey: @"key" ] cString ] );
+	                fprintf( fp, "%s %s %s\n", ( char * )[[ dict objectForKey: @"hostid" ] UTF8String ],
+                            ( char * )[[ dict objectForKey: @"keytype" ] UTF8String ],
+                            ( char * )[[ dict objectForKey: @"key" ] UTF8String ] );
     }
     
     ( void )fclose( fp );
