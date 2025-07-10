@@ -194,8 +194,9 @@
     
     NSInteger			dotflag;
 
-    NSConnection		*connectionToTServer;
-    SFTPTServer			*tServer;
+    // Replaced NSConnection with XPC - see SFTPControllerXPC.h/m
+    // NSConnection		*connectionToTServer;
+    // SFTPTServer			*tServer;
     
     SFTPPrefs			*prefs;
     
