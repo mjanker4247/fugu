@@ -1,7 +1,11 @@
-#include <ApplicationServices/ApplicationServices.h>
-#include <Carbon/Carbon.h>
-#include "ODBEditorSuite.h"
+/*
+ * Copyright (c) 2003 Regents of The University of Michigan.
+ * All Rights Reserved.  See COPYRIGHT.
+ */
 
-int	aesend( char *path, OSType eventType, char *sendertoken );
-void	odb_close( char *path );
-void	odb_save( char *path, char *sendertoken );
+#import <Foundation/Foundation.h>
+
+// Modern file notification methods
+int notifyFileModified(NSString *path, NSString *senderToken);
+void notifyFileSaved(NSString *path, NSString *senderToken);
+void notifyFileClosed(NSString *path);

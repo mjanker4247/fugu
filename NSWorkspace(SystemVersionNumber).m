@@ -7,13 +7,14 @@
 
 @implementation NSWorkspace(SystemVersionNumber)
 
-+ ( SInt32 )systemVersion
++ (NSOperatingSystemVersion)systemVersion
 {
-    SInt32		version;
-    
-    Gestalt( gestaltSystemVersion, &version );
-    
-    return( version );
+    return [[NSProcessInfo processInfo] operatingSystemVersion];
+}
+
++ (NSInteger)majorSystemVersion
+{
+    return [[NSProcessInfo processInfo] operatingSystemVersion].majorVersion;
 }
 
 @end

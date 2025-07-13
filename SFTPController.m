@@ -26,12 +26,6 @@
 #import "NSWorkspace(LaunchServices).h"
 #import "NSWorkspace(SystemVersionNumber).h"
 
-#include <ApplicationServices/ApplicationServices.h>
-#include <Carbon/Carbon.h>
-#include <CoreFoundation/CoreFoundation.h>
-
-#include "ODBEditorSuite.h"
-
 #include <sys/types.h>
 #include <sys/file.h>
 #include <sys/param.h>
@@ -3600,43 +3594,32 @@ NSLog( @"setting springloaded root" );
 
 - ( IBAction )openLocalFileInEditor: ( id )sender
 {
-    FSRef		editorref;
-    OSType		creator = 'R*ch';
     unsigned int	row = [ localBrowser selectedRow ];
     NSString		*filepath = [[ ( dotflag ? localDirContents : dotlessLDir )
                                         objectAtIndex: row ] objectForKey: @"name" ];
-    NSString		*editorpath;
     NSString		*editor = [[ NSUserDefaults standardUserDefaults ] objectForKey: @"ODBTextEditor" ];
+    NSURL		*editorURL = nil;
     
     if ( editor == nil ) {
 	editor = @"BBEdit.app";
     }
     
     if ( [[ NSWorkspace sharedWorkspace ]
-		launchServicesFindApplication: ( CFStringRef )editor
-		foundAppRef: &editorref ] == NO ) {
-        if ( [[ NSWorkspace sharedWorkspace ]
-                launchServicesFindApplicationWithCreatorType: creator
-                foundAppRef: &editorref  ] == NO ) {
-            NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
-                    NSLocalizedString( @"Couldn't find %@ to launch %@.",
-                                        @"Couldn't find %@ to launch %@." ),
-                    NSLocalizedString( @"OK", @"OK" ), @"", @"",
-                                        editor, [ filepath lastPathComponent ] );
-            return;
-        }
-    }
-    
-    if (( editorpath = [ NSString stringWithFSRef: &editorref ] ) == nil ) {
-	NSLog( @"failed to convert FSRef to NSString" );
-	return;
+		launchServicesFindApplication: editor
+		foundAppURL: &editorURL ] == NO ) {
+        NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
+                NSLocalizedString( @"Couldn't find %@ to launch %@.",
+                                    @"Couldn't find %@ to launch %@." ),
+                NSLocalizedString( @"OK", @"OK" ), @"", @"",
+                                    editor, [ filepath lastPathComponent ] );
+        return;
     }
     
     if ( [[ NSWorkspace sharedWorkspace ] openFile: filepath
-		    withApplication: editorpath andDeactivate: YES ] == NO ) {
+		    withApplication: [ editorURL path ] andDeactivate: YES ] == NO ) {
 	NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
 		@"Couldn't open %@ in %@", NSLocalizedString( @"OK", @"OK" ),
-		@"", @"", [ filepath lastPathComponent ], [ editorpath lastPathComponent ] );
+		@"", @"", [ filepath lastPathComponent ], [ [ editorURL path ] lastPathComponent ] );
 	return;
     }
 }
@@ -3683,14 +3666,9 @@ NSLog( @"setting springloaded root" );
 - ( void )ODBEditFile: ( NSString * )filepath remotePath: ( NSString * )remotePath
 {
     int                 i;
-    OSErr		err = ( OSErr )0;
-    AEKeyword		keyServerID = 'Fugu';
-    NSString		*appname = nil, *failedCall = @"";
-    NSString            *bundleID = nil, *sig = nil;
-    OSType		creator = 'R*ch', ct;
-    const char		*custompath;
-    FSRef		fileref, editorref;
-    AERecord		rec = { typeNull, NULL };
+    NSString		*appname = nil;
+    NSString            *bundleID = nil;
+    NSURL               *editorURL = nil;
     NSBundle            *bundle = [ NSBundle bundleForClass: [ self class ]];
     NSDictionary        *dict = [ NSDictionary dictionaryWithContentsOfFile:
                                     [ bundle pathForResource: @"ODBEditors" ofType: @"plist" ]];
@@ -3707,7 +3685,6 @@ NSLog( @"setting springloaded root" );
                         objectForKey: @"ODBEditorName" ] isEqualToString: appname ] ) {
             odbEditorInfo = [[ dict objectForKey: @"ODBEditors" ] objectAtIndex: i ];
             bundleID = [ odbEditorInfo objectForKey: @"ODBEditorBundleID" ];
-            sig = [ odbEditorInfo objectForKey: @"ODBEditorCreatorCode" ];
             break;
         }
     }
@@ -3720,14 +3697,6 @@ NSLog( @"setting springloaded root" );
     if ( [[ odbEditorInfo objectForKey: @"ODBEditorLaunchStyle" ] intValue ] == 1 ) {
         UMFileLauncher          *launch = [[ UMFileLauncher alloc ] init ];
         NSString                *editorPath = [ odbEditorInfo objectForKey: @"ODBEditorPath" ];
-        
-        [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
-	    andSelector: @selector( handleODBFileClosedEvent:andReplyWithEvent: )
-	    forEventClass: kODBEditorSuite andEventID: kAEClosedFile ];
-	    
-        [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
-                andSelector: @selector( handleODBFileModifiedEvent:andReplyWithEvent: )
-                forEventClass: kODBEditorSuite andEventID: kAEModifiedFile ];
                 
         if ( ! [ launch externalEditFile: filepath withCLIEditor: editorPath
                             contextInfo: ( void * )remotePath ] ) {
@@ -3737,26 +3706,13 @@ NSLog( @"setting springloaded root" );
         return;
     }
     
-    if ( sig ) {
-        ct = *( OSType * )[ sig UTF8String ];
-    } else {
-        ct = kLSUnknownCreator;
-    }
-	
-    if ( [ filepath makeFSRefRepresentation: &fileref ] != noErr ) {
-	NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
-		@"Failed to create FSRef from %@: error %d",
-		NSLocalizedString( @"OK", @"OK" ), @"", @"", filepath, err );
-	return;
-    }
-     
+    // Use modern NSWorkspace APIs to find and launch the editor
     if ( ! [[ NSWorkspace sharedWorkspace ]
-                launchServicesFindApplicationForCreatorType: ct
-                bundleID: ( CFStringRef )bundleID appName: ( CFStringRef )appname
-                foundAppRef: &editorref foundAppURL: NULL ] ) {
-        if ( [[ NSWorkspace sharedWorkspace ]
-                        launchServicesFindApplicationWithCreatorType: creator
-                        foundAppRef: &editorref  ] == NO ) {
+                launchServicesFindApplicationWithBundleID: bundleID
+                foundAppURL: &editorURL ] ) {
+        if ( ! [[ NSWorkspace sharedWorkspace ]
+                launchServicesFindApplication: appname
+                foundAppURL: &editorURL ] ) {
             NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
                         NSLocalizedString( @"Couldn't find %@ to launch %@.",
                                             @"Couldn't find %@ to launch %@." ),
@@ -3766,72 +3722,27 @@ NSLog( @"setting springloaded root" );
         }
     }
     
-    if (( err = AECreateList( NULL, 0, TRUE, &rec )) != 0 ) {
-	failedCall = @"AECreateList";
-	goto AECallErr;
+    // Use modern file opening APIs
+    NSURL *fileURL = [NSURL fileURLWithPath:filepath];
+    if (!fileURL) {
+        NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
+		@"Failed to create URL from %@", NSLocalizedString( @"OK", @"OK" ),
+		@"", @"", filepath );
+        return;
     }
     
-    if (( err = AEPutParamPtr( &rec, keyFileSender,
-			    typeType, ( Ptr )&keyServerID, sizeof( AEKeyword ))) != 0 ) {
-	failedCall = @"AEPutParamPtr";
-	goto AECallErr;
-    }
-    
-    custompath = [[ NSString stringWithFormat: @"sftp://%@@%@%@", [ userName stringValue ],
-				    [ remoteHost stringValue ], remotePath ] UTF8String ];
-				    
-    if (( err = AEPutParamPtr( &rec, keyFileCustomPath,
-			    typeChar, custompath, strlen( custompath ))) != 0 ) {
-	failedCall = @"AEPutParamPtr";
-	goto AECallErr;
-    }
-
-    if ( [ remotePath length ] >= MAXPATHLEN ) {
-	NSLog( @"%@: path exceeds MAXPATHLEN!", remotePath );
-	return;
-    }
-    
-    if (( err = AEPutParamPtr( &rec, keyFileSenderToken,
-		typeChar, [ remotePath UTF8String ], strlen( [ remotePath UTF8String ] ))) != 0 ) {
-	failedCall = @"AEPutParamPtr";
-	goto AECallErr;
-    }
-    
-    [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
-	    andSelector: @selector( handleODBFileClosedEvent:andReplyWithEvent: )
-	    forEventClass: kODBEditorSuite andEventID: kAEClosedFile ];
-	    
-    [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
-	    andSelector: @selector( handleODBFileModifiedEvent:andReplyWithEvent: )
-	    forEventClass: kODBEditorSuite andEventID: kAEModifiedFile ];
-    
-    if ( [[ NSWorkspace sharedWorkspace ] launchServicesOpenFileRef: &fileref
-					withApplicationRef: &editorref
-					passThruParams: &rec
-					launchFlags: kLSLaunchDefaults ] == NO ) {
-	goto LaunchFailed;
-    }
-    
-    /* successful */
-    if ( rec.dataHandle != NULL ) {
-	( void )AEDisposeDesc( &rec );
-    }
-    return;
-    
-AECallErr:
-    NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
-		@"%@ failed: error %d", NSLocalizedString( @"OK", @"OK" ),
-		@"", @"", failedCall, err );
-    if ( rec.dataHandle != NULL ) {
-	( void )AEDisposeDesc( &rec );
-    }
-    return;
-    
-LaunchFailed:
-    NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
+    if ( [[ NSWorkspace sharedWorkspace ] launchServicesOpenURL: fileURL
+					withApplicationURL: editorURL
+					passThruParams: nil
+					launchFlags: NSWorkspaceLaunchDefault ] == NO ) {
+        NSRunAlertPanel( NSLocalizedString( @"Error", @"Error" ),
 		@"Failed to open %@ with %@.", NSLocalizedString( @"OK", @"OK" ),
 		@"", @"", [ filepath lastPathComponent ], appname );
-    return;
+        return;
+    }
+    
+    // Store the remote path for later use
+    [self addToEditedDocuments:filepath remotePath:remotePath];
 }
 
 - ( void )testHandleEvent: ( NSAppleEventDescriptor * )inEvent

@@ -4,157 +4,90 @@
  */
 
 #import "NSString(FSRefAdditions).h"
+#import <Foundation/Foundation.h>
 
 @implementation NSString(FSRefAdditions)
-#ifdef notdef
-- ( Str255 * )pascalString
-{
-    OSErr			err;
-    CFStringRef			cfstring;
-    Str255			pstring;
-    const char			*cstring;
-    
-    if ( self == nil || [ self isEqualToString: @"" ] ) {
-	return( NULL );
-    }
-    
-    cstring = [ self UTF8String ];
-    
-    if (( cfstring = CFStringCreateWithCString( NULL, cstring,
-		CFStringGetSystemEncoding())) == NULL ) {
-	NSLog( @"CFStringCreateFromCString failed." );
-	return( NULL );
-    }
-    
-    if (( *pstring = CFStringGetPascalString( cfstring, pstring,
-		sizeof( cfstring ), CFStringGetSystemEncoding())) == NULL ) {
-	NSLog( @"CFStringGetPascalString failed." );
-	return( NULL );
-    }
-    
-    return( &pstring );
-}
-#endif /* notdef */
 
-+ ( NSString * )stringWithFSRef: ( FSRef * )fsref
++ (NSString *)stringWithURL:(NSURL *)url
 {
-    CFURLRef		cfurl;
-    
-    if (( cfurl = CFURLCreateFromFSRef( kCFAllocatorDefault, fsref )) == NULL ) {
-	NSLog( @"CFURLCreateFromFSRef failed." );
-	return( nil );
+    if (!url) {
+        NSLog(@"stringWithURL: url is nil");
+        return nil;
     }
-    [ ( NSURL * )cfurl autorelease ];
-
-    return( [ ( NSURL * )cfurl path ] );
+    
+    return [url path];
 }
 
-+ ( NSString * )stringWithFSSpec: ( FSSpec * )fsspec
++ (NSString *)stringWithAliasData:(NSData *)aliasData
 {
-    OSErr		err;
-    FSRef		ref;
-    
-    err = FSpMakeFSRef( fsspec, &ref );
-	
-    if ( err != noErr ) {
-	NSLog( @"FSpMakeFSRef failed: error %d", err );
-	return( nil );
+    if (!aliasData) {
+        NSLog(@"stringWithAliasData: aliasData is nil");
+        return nil;
     }
     
-    return( [ self stringWithFSRef: &ref ] );
+    // Use modern bookmark resolution
+    NSURL *resolvedURL = nil;
+    NSError *error = nil;
+    BOOL stale = NO;
+    
+    resolvedURL = [NSURL URLByResolvingBookmarkData:aliasData
+                                           options:NSURLBookmarkResolutionWithSecurityScope
+                                     relativeToURL:nil
+                               bookmarkDataIsStale:&stale
+                                             error:&error];
+    
+    if (!resolvedURL) {
+        NSLog(@"Failed to resolve alias data: %@", error);
+        return nil;
+    }
+    
+    return [resolvedURL path];
 }
 
-+ ( NSString * )stringWithAlias: ( AliasHandle )alias
+- (NSURL *)URLRepresentation
 {
-    OSErr		err;
-    FSRef		ref;
-    NSString		*string = nil;
-    CFURLRef		cfurl;
-    Boolean		changed;
-    
-    if (( err = FSResolveAlias( NULL, alias, &ref, &changed )) != noErr ) {
-	NSLog( @"FSResolveAlias failed: error %d", err );
-	return( nil );
-    }
-    
-    if (( cfurl = CFURLCreateFromFSRef( kCFAllocatorDefault, &ref )) == NULL ) {
-	NSLog( @"CFURLCreateFromFSRef failed." );
-	return( nil );
-    }
-    
-    string = [[ ( NSURL * )cfurl path ] copy ];
-    [ ( NSURL * )cfurl autorelease ];
-
-    return( [ string autorelease ] );
+    return [NSURL fileURLWithPath:self];
 }
 
-- ( OSStatus )makeFSRefRepresentation: ( FSRef * )ref
+- (NSString *)stringByResolvingAliasInPath
 {
-    OSStatus		status;
-    
-    status = FSPathMakeRef(( UInt8 * )[ self fileSystemRepresentation ], ref, NULL );
-    
-    if ( status != noErr ) {
-	NSLog( @"FSPathMakeRef failed: error %d", status );
+    NSURL *url = [NSURL fileURLWithPath:self];
+    if (!url) {
+        return self;
     }
     
-    return( status );
+    // Check if it's an alias
+    NSNumber *isAlias = nil;
+    NSError *error = nil;
+    
+    if ([url getResourceValue:&isAlias forKey:NSURLIsAliasFileKey error:&error]) {
+        if ([isAlias boolValue]) {
+            // Resolve the alias
+            NSURL *resolvedURL = nil;
+            if ([url getResourceValue:&resolvedURL forKey:NSURLOriginalURLKey error:&error]) {
+                return [resolvedURL path];
+            }
+        }
+    }
+    
+    return self;
 }
 
-- ( OSStatus )makeFSSpec: ( FSSpec * )spec
+- (BOOL)isAliasFile
 {
-    FSRef		ref;
-    OSStatus		status;
-    
-    if (( status = [ self makeFSRefRepresentation: &ref ] ) != noErr ) {
-        return( status );
+    NSURL *url = [NSURL fileURLWithPath:self];
+    if (!url) {
+        return NO;
     }
     
-    if (( status = FSGetCatalogInfo( &ref, kFSCatInfoNone,
-                        NULL, NULL, spec, NULL )) != noErr ) {
-        return( status );
+    NSNumber *isAlias = nil;
+    NSError *error = nil;
+    
+    if ([url getResourceValue:&isAlias forKey:NSURLIsAliasFileKey error:&error]) {
+        return [isAlias boolValue];
     }
     
-    return( status );
-}
-
-- ( NSString * )stringByResolvingAliasInPath
-{
-    Boolean		isDir, isAlias;
-    FSRef		ref;
-    OSStatus		status;
-    
-    if ( [ self makeFSRefRepresentation: &ref ] != noErr ) {
-	return( self );
-    }
-    
-    if (( status = FSResolveAliasFile( &ref, TRUE, &isDir, &isAlias )) != noErr ) {
-	NSLog( @"FSResolveAliasFile returned error %d", status );
-	return( self );
-    }
-    
-    if ( isAlias ) {
-	return( [ NSString stringWithFSRef: &ref ] );
-    }
-    
-    return( self );
-}
-
-- ( BOOL )isAliasFile
-{
-    FSRef		ref;
-    Boolean		isDir, isAlias;
-    OSErr		err;
-    
-    if ( [ self makeFSRefRepresentation: &ref ] != noErr ) {
-        return( NO );
-    }
-    
-    if (( err = FSIsAliasFile( &ref, &isAlias, &isDir )) != noErr ) {
-        return( NO );
-    }
-    
-    return(( BOOL )isAlias );
+    return NO;
 }
 
 @end

@@ -4,30 +4,26 @@
  */
 
 #import <Cocoa/Cocoa.h>
-#include <ApplicationServices/ApplicationServices.h>
-#include <Carbon/Carbon.h>
-#include <CoreFoundation/CoreFoundation.h>
 
 @interface NSWorkspace(LaunchServices)
 
-- ( BOOL )launchServicesOpenFileRef: ( FSRef * )fileref
-	    withApplicationRef: ( FSRef * )appref
-	    passThruParams: ( AERecord * )params
-	    launchFlags: ( LSLaunchFlags )flags;
-	    
-- ( BOOL )launchServicesFindApplicationForCreatorType: ( OSType )creator
-	bundleID: ( CFStringRef )bundleID
-	appName: ( CFStringRef )appName
-	foundAppRef: ( FSRef * )foundRef
-	foundAppURL: ( CFURLRef * )appURL;
-	
-- ( BOOL )launchServicesFindApplication: ( CFStringRef )appName
-	foundAppRef: ( FSRef * )foundRef;
+- (BOOL)launchServicesOpenURL:(NSURL *)fileURL
+         withApplicationURL:(NSURL *)appURL
+         passThruParams:(NSDictionary *)params
+         launchFlags:(NSWorkspaceLaunchOptions)flags;
+         
+- (BOOL)launchServicesFindApplicationForCreatorType:(NSString *)creator
+    bundleID:(NSString *)bundleID
+    appName:(NSString *)appName
+    foundAppURL:(NSURL **)appURL;
+    
+- (BOOL)launchServicesFindApplication:(NSString *)appName
+    foundAppURL:(NSURL **)appURL;
         
-- ( BOOL )launchServicesFindApplicationWithCreatorType: ( OSType )creator
-        foundAppRef: ( FSRef * )foundRef;
+- (BOOL)launchServicesFindApplicationWithCreatorType:(NSString *)creator
+    foundAppURL:(NSURL **)appURL;
         
-- ( BOOL )launchServicesFindApplicationWithBundleID: ( CFStringRef )bundleID
-        foundAppURL: ( CFURLRef * )foundURL;
+- (BOOL)launchServicesFindApplicationWithBundleID:(NSString *)bundleID
+    foundAppURL:(NSURL **)appURL;
 
 @end
