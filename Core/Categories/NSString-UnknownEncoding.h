@@ -7,7 +7,9 @@
 
 @interface NSString(UnknownEncoding)
 
+NS_ASSUME_NONNULL_BEGIN
 + ( NSString * )stringWithBytesOfUnknownEncoding: ( char * )bytes
                 length: ( unsigned )len;
 
+NS_ASSUME_NONNULL_END
 @end

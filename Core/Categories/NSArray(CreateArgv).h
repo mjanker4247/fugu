@@ -6,5 +6,7 @@
 #import <Foundation/Foundation.h>
 
 @interface NSArray(CreateArgv)
-- ( int )createArgv: ( char *** )argv;
+NS_ASSUME_NONNULL_BEGIN
+- ( int )createArgv: ( char * _Nullable * _Nullable * _Nonnull )argv;
+NS_ASSUME_NONNULL_END
 @end

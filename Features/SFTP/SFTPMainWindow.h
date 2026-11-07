@@ -12,7 +12,9 @@
 @interface SFTPMainWindow : NSWindow {
 
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( int )setTitleToLocalHostName;
 
+NS_ASSUME_NONNULL_END
 @end

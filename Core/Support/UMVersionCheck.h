@@ -10,8 +10,10 @@
 @interface UMVersionCheck : NSObject
 {
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( NSDictionary * )retrieveVersionDictionary;
 - ( void )checkForUpdates;
 
+NS_ASSUME_NONNULL_END
 @end

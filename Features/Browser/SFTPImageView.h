@@ -10,6 +10,7 @@
 @private
     NSString		*_imageLocationPath_;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )mouseDown: ( NSEvent * )theEvent;
 - ( BOOL )needsPanelToBecomeKey;
@@ -18,4 +19,5 @@
 - ( void )setImageLocationPath: ( NSString * )path;
 - ( NSString * )imageLocationPath;
 
+NS_ASSUME_NONNULL_END
 @end

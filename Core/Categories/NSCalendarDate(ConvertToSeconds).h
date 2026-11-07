@@ -7,6 +7,8 @@
 
 @interface NSDate(ConvertToSeconds)
 
+NS_ASSUME_NONNULL_BEGIN
 + ( off_t )secondsFromFormattedDateString: ( NSString * )dString;
 
+NS_ASSUME_NONNULL_END
 @end

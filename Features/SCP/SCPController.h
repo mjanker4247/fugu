@@ -13,39 +13,39 @@
 
 @interface SCPController : NSObject
 {
-    IBOutlet NSTextField 	*destPathField;
-    IBOutlet NSTextField 	*destPortField;
-    IBOutlet NSComboBox 	*destServerField;
-    IBOutlet NSTextField	*destUserNameField;
-    IBOutlet UMTextField 	*localFileField;
-    IBOutlet UMDragDropImageView 	*localFileImageView;
-    IBOutlet NSPopUpButton	*recentCopiesList;
-    IBOutlet NSSegmentedControl	*copyType;
+    IBOutlet NSTextField 	*_Nullable destPathField;
+    IBOutlet NSTextField 	*_Nullable destPortField;
+    IBOutlet NSComboBox 	*_Nullable destServerField;
+    IBOutlet NSTextField	*_Nullable destUserNameField;
+    IBOutlet UMTextField 	*_Nullable localFileField;
+    IBOutlet UMDragDropImageView 	*_Nullable localFileImageView;
+    IBOutlet NSPopUpButton	*_Nullable recentCopiesList;
+    IBOutlet NSSegmentedControl	*_Nullable copyType;
     
-    IBOutlet NSTextField 	*passPromptField;
-    IBOutlet NSView 		*passpromptView;
-    IBOutlet NSTextField 	*passwordField;
-    IBOutlet NSTextField	*passErrorField;
-    IBOutlet NSButton		*addToKeychainSwitch;
+    IBOutlet NSTextField 	*_Nullable passPromptField;
+    IBOutlet NSView 		*_Nullable passpromptView;
+    IBOutlet NSTextField 	*_Nullable passwordField;
+    IBOutlet NSTextField	*_Nullable passErrorField;
+    IBOutlet NSButton		*_Nullable addToKeychainSwitch;
     
-    IBOutlet NSProgressIndicator *progBar;
-    IBOutlet NSTextField	*percentDoneField;
-    IBOutlet NSTextField	*etaField;
-    IBOutlet NSTextField	*bytesCopiedField;
-    IBOutlet NSTextField 	*connectProgMsg;
-    IBOutlet NSView 		*connectProgView;
+    IBOutlet NSProgressIndicator *_Nullable progBar;
+    IBOutlet NSTextField	*_Nullable percentDoneField;
+    IBOutlet NSTextField	*_Nullable etaField;
+    IBOutlet NSTextField	*_Nullable bytesCopiedField;
+    IBOutlet NSTextField 	*_Nullable connectProgMsg;
+    IBOutlet NSView 		*_Nullable connectProgView;
     
-    IBOutlet NSView		*unknownHostView;
-    IBOutlet NSTextField	*unknownHostMsgField;
-    IBOutlet NSTextField	*unknownHostKeyField;
+    IBOutlet NSView		*_Nullable unknownHostView;
+    IBOutlet NSTextField	*_Nullable unknownHostMsgField;
+    IBOutlet NSTextField	*_Nullable unknownHostKeyField;
     
-    IBOutlet NSPanel 		*scpSheet;
-    IBOutlet NSWindow 		*scpWindow;
+    IBOutlet NSPanel 		*_Nullable scpSheet;
+    IBOutlet NSWindow 		*_Nullable scpWindow;
     
-    IBOutlet NSWindow		*scpLogWindow;
-    IBOutlet NSTextView		*scpLogField;
+    IBOutlet NSWindow		*_Nullable scpLogWindow;
+    IBOutlet NSTextView		*_Nullable scpLogField;
     
-    IBOutlet NSProgressIndicator *authProgBar;
+    IBOutlet NSProgressIndicator *_Nullable authProgBar;
     
 @private
     NSString			*scpFileName;
@@ -59,27 +59,28 @@
     pid_t			scppid;
     int				masterfd;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )authenticateWithPrompt: ( char * )prompt;
-- ( IBAction )authenticate: ( id )sender;
+- ( IBAction )authenticate: ( id _Nullable )sender;
 - ( void )write: ( char * )buf;
 - ( void )passError;
 
 - ( void )sessionError: ( NSString * )err;
 
-- ( IBAction )beginSCP: ( id )sender;
-- ( IBAction )cancelSCP: ( id )sender;
-- ( IBAction )cancelSCPDialog: ( id )sender;
-- ( IBAction )chooseLocalFile: ( id )sender;
-- ( IBAction )toggleLogWindow: ( id )sender;
+- ( IBAction )beginSCP: ( id _Nullable )sender;
+- ( IBAction )cancelSCP: ( id _Nullable )sender;
+- ( IBAction )cancelSCPDialog: ( id _Nullable )sender;
+- ( IBAction )chooseLocalFile: ( id _Nullable )sender;
+- ( IBAction )toggleLogWindow: ( id _Nullable )sender;
 
 - ( void )getSecureCopyWindowForFile: ( NSString * )filename
             scpType: ( int )scpType copyToPath: ( NSString * )destPath
             fromHost: ( NSString * )rhost userName: ( NSString * )user
             delegate: ( id )delegate;
 - ( void )getContinueQueryWithString: ( NSString * )string;
-- ( IBAction )acceptHost: ( id )sender;
-- ( IBAction )refuseHost: ( id )sender;
+- ( IBAction )acceptHost: ( id _Nullable )sender;
+- ( IBAction )refuseHost: ( id _Nullable )sender;
 
 - ( BOOL )firstPasswordPrompt;
 - ( void )setFirstPasswordPrompt: ( BOOL )fp;
@@ -104,9 +105,12 @@
 - ( id )delegate;
 - ( void )setDelegate: ( id )delegate;
 
+NS_ASSUME_NONNULL_END
 @end
 
 /* delegate methods */
 @interface NSObject(SCPControllerDelegate)
+NS_ASSUME_NONNULL_BEGIN
 - ( void )scpFinished;
+NS_ASSUME_NONNULL_END
 @end

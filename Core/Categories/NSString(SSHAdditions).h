@@ -7,6 +7,7 @@
 
 @interface NSString(SSHAdditions)
 
+NS_ASSUME_NONNULL_BEGIN
 + ( NSDictionary * )unknownHostInfoFromString: ( NSString * )string;
 + ( NSString * )pathFromBaseDir: ( NSString * )base fullPath: ( NSString * )fullpath;
 + ( NSString * )clockStringFromInteger: ( int )integer;
@@ -22,4 +23,5 @@
 - ( NSString * )descriptiveSizeString;
 - ( NSString * )escapedPathString;
 
+NS_ASSUME_NONNULL_END
 @end

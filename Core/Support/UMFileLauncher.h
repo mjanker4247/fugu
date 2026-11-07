@@ -13,10 +13,12 @@
 @interface UMFileLauncher : NSObject {
 
 }
+NS_ASSUME_NONNULL_BEGIN
 
-- ( BOOL )openFile: ( NSString * )file withApplication: ( NSString * )app;
+- ( BOOL )openFile: ( NSString * )file withApplication: ( NSString * _Nullable )app;
 - ( BOOL )externalEditFile: ( NSString * )path
             withCLIEditor: ( NSString * )editor
             contextInfo: ( void * )contextInfo;
 
+NS_ASSUME_NONNULL_END
 @end

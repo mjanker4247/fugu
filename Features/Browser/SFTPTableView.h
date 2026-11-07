@@ -23,6 +23,7 @@
     NSMutableArray  *_sftpOriginalPboardPlists;
     BOOL	    _sftpDragPromisedFiles;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )keyDown: ( NSEvent * )theEvent;
 - ( NSInteger )rightClickedRow;
@@ -35,16 +36,20 @@
 - ( BOOL )dragPromisedFiles;
 - ( void )setDragPromisedFiles: ( BOOL )promised;
 
+NS_ASSUME_NONNULL_END
 @end
 
 /* to assist column creation in delegate */
+NS_ASSUME_NONNULL_BEGIN
 NSString 	*ColumnTitleFromIdentifier( NSString *identifier );
 float		WidthForColumnWithIdentifier( NSString *identifier );
+NS_ASSUME_NONNULL_END
 
 
 /* additional delegate methods */
 @interface NSObject(SFTPTableViewEventDelegate)
 
+NS_ASSUME_NONNULL_BEGIN
 - ( BOOL )handleEvent: ( NSEvent * )theEvent fromTable: ( SFTPTableView * )table;
 - ( BOOL )handleChangedText: ( NSString * )newstring forTable: ( SFTPTableView * )table
             column: ( NSInteger )column;
@@ -54,11 +59,14 @@ float		WidthForColumnWithIdentifier( NSString *identifier );
 - ( void )performSpringLoadedActionInTable: ( SFTPTableView * )table;
 - ( void )springLoadedActionCancelledInTable: ( SFTPTableView * )table;
 
+NS_ASSUME_NONNULL_END
 @end
 
 /* additional dataSource methods */
 @interface NSObject(SFTPTableViewDataSource)
+NS_ASSUME_NONNULL_BEGIN
 - ( NSArray * )promisedNamesFromPlists: ( id )plist;
 - ( BOOL )handleDroppedPromisedFiles: ( NSArray * )promisedFiles
 	    destination: ( NSString * )dropDestination;
+NS_ASSUME_NONNULL_END
 @end

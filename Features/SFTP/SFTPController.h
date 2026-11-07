@@ -32,156 +32,156 @@
 @interface 	SFTPController : NSObject <NSApplicationDelegate, NSToolbarDelegate, NSTableViewDataSource, NSTableViewDelegate, NSTabViewDelegate, NSMenuItemValidation, NSToolbarItemValidation>
 {
     /* console panel outlets */
-    IBOutlet NSPanel			*logPanel;
-    IBOutlet NSTextView			*logField;
-    IBOutlet NSButton			*commandButton;
-    IBOutlet NSTextField 		*manualComField;
+    IBOutlet NSPanel			*_Nullable logPanel;
+    IBOutlet NSTextView			*_Nullable logField;
+    IBOutlet NSButton			*_Nullable commandButton;
+    IBOutlet NSTextField 		*_Nullable manualComField;
     
     /* new dir panel outlets */
-    IBOutlet NSPanel			*newDirPanel;
-    IBOutlet NSTextField		*newDirNameField;
-    IBOutlet NSButton			*newDirCreateButton;
-    IBOutlet NSButton			*localDirCreateButton;
-    IBOutlet NSButton			*remoteDirCreateButton;
+    IBOutlet NSPanel			*_Nullable newDirPanel;
+    IBOutlet NSTextField		*_Nullable newDirNameField;
+    IBOutlet NSButton			*_Nullable newDirCreateButton;
+    IBOutlet NSButton			*_Nullable localDirCreateButton;
+    IBOutlet NSButton			*_Nullable remoteDirCreateButton;
     
     /* go to dir panel outlets */
-    IBOutlet NSPanel			*gotoDirPanel;
-    IBOutlet NSComboBox			*gotoDirNameField;
-    IBOutlet NSButton			*gotoButton;
-    IBOutlet NSButton			*localGotoButton;
-    IBOutlet NSButton			*remoteGotoButton;
+    IBOutlet NSPanel			*_Nullable gotoDirPanel;
+    IBOutlet NSComboBox			*_Nullable gotoDirNameField;
+    IBOutlet NSButton			*_Nullable gotoButton;
+    IBOutlet NSButton			*_Nullable localGotoButton;
+    IBOutlet NSButton			*_Nullable remoteGotoButton;
     
     /* upload progress panel outlets */
-    IBOutlet NSPanel			*uploadProgPanel;
-    IBOutlet NSTextField		*uploadProgName;
-    IBOutlet NSTextField		*uploadProgItemsLeft;
-    IBOutlet NSTextField		*uploadTimeField;
-    IBOutlet NSProgressIndicator	*uploadProgBar;
-    IBOutlet NSTextField		*uploadProgInfo;
+    IBOutlet NSPanel			*_Nullable uploadProgPanel;
+    IBOutlet NSTextField		*_Nullable uploadProgName;
+    IBOutlet NSTextField		*_Nullable uploadProgItemsLeft;
+    IBOutlet NSTextField		*_Nullable uploadTimeField;
+    IBOutlet NSProgressIndicator	*_Nullable uploadProgBar;
+    IBOutlet NSTextField		*_Nullable uploadProgInfo;
     
     /* download progress panel outlets */
-    IBOutlet NSPanel			*downloadSheet;
-    IBOutlet NSTextField		*downloadTextField;
-    IBOutlet NSTextField		*downloadTimeField;
-    IBOutlet NSProgressIndicator	*downloadProgBar;
-    IBOutlet NSTextField		*downloadProgInfo;
-    IBOutlet NSTextField		*downloadProgPercentDone;
+    IBOutlet NSPanel			*_Nullable downloadSheet;
+    IBOutlet NSTextField		*_Nullable downloadTextField;
+    IBOutlet NSTextField		*_Nullable downloadTimeField;
+    IBOutlet NSProgressIndicator	*_Nullable downloadProgBar;
+    IBOutlet NSTextField		*_Nullable downloadProgInfo;
+    IBOutlet NSTextField		*_Nullable downloadProgPercentDone;
     
     /* preview panel outlets */
-    IBOutlet SFTPImagePreviewPanel	*imagePreviewPanel;
-    IBOutlet NSBox			*imagePreviewBox;
-    IBOutlet NSView			*imagePreviewView;
-    IBOutlet SFTPImageView		*imagePreview;
-    IBOutlet NSTextField		*imagePreviewTextField;
+    IBOutlet SFTPImagePreviewPanel	*_Nullable imagePreviewPanel;
+    IBOutlet NSBox			*_Nullable imagePreviewBox;
+    IBOutlet NSView			*_Nullable imagePreviewView;
+    IBOutlet SFTPImageView		*_Nullable imagePreview;
+    IBOutlet NSTextField		*_Nullable imagePreviewTextField;
     
     /* info panel outlets */
-    IBOutlet NSPanel			*infoPanel;
-    IBOutlet NSTabView			*infoTabView;
+    IBOutlet NSPanel			*_Nullable infoPanel;
+    IBOutlet NSTabView			*_Nullable infoTabView;
         // local info fields
-    IBOutlet NSImageView		*largeIcon;
-    IBOutlet NSTextField		*modDateField;
-    IBOutlet NSTextField	 	*groupField;
-    IBOutlet NSTextField 		*ownerField;
-    IBOutlet NSTextField 		*sizeField;
-    IBOutlet NSTextField 		*typeField;
-    IBOutlet NSTextField 		*permField;
-    IBOutlet NSTextField 		*infoPathField;
-    IBOutlet NSTextField		*whereField;
-    IBOutlet NSButton 			*loReadSwitch;
-    IBOutlet NSButton 			*loWriteSwitch;
-    IBOutlet NSButton 			*loExecSwitch;
-    IBOutlet NSButton 			*lgReadSwitch;
-    IBOutlet NSButton 			*lgWriteSwitch;
-    IBOutlet NSButton 			*lgExecSwitch;
-    IBOutlet NSButton 			*laReadSwitch;
-    IBOutlet NSButton 			*laWriteSwitch;
-    IBOutlet NSButton 			*laExecSwitch;
+    IBOutlet NSImageView		*_Nullable largeIcon;
+    IBOutlet NSTextField		*_Nullable modDateField;
+    IBOutlet NSTextField	 	*_Nullable groupField;
+    IBOutlet NSTextField 		*_Nullable ownerField;
+    IBOutlet NSTextField 		*_Nullable sizeField;
+    IBOutlet NSTextField 		*_Nullable typeField;
+    IBOutlet NSTextField 		*_Nullable permField;
+    IBOutlet NSTextField 		*_Nullable infoPathField;
+    IBOutlet NSTextField		*_Nullable whereField;
+    IBOutlet NSButton 			*_Nullable loReadSwitch;
+    IBOutlet NSButton 			*_Nullable loWriteSwitch;
+    IBOutlet NSButton 			*_Nullable loExecSwitch;
+    IBOutlet NSButton 			*_Nullable lgReadSwitch;
+    IBOutlet NSButton 			*_Nullable lgWriteSwitch;
+    IBOutlet NSButton 			*_Nullable lgExecSwitch;
+    IBOutlet NSButton 			*_Nullable laReadSwitch;
+    IBOutlet NSButton 			*_Nullable laWriteSwitch;
+    IBOutlet NSButton 			*_Nullable laExecSwitch;
         // remote info fields
-    IBOutlet NSImageView		*rIcon;
-    IBOutlet NSTextField		*rModDateField;
-    IBOutlet NSTextField	 	*rGroupField;
-    IBOutlet NSTextField 		*rOwnerField;
-    IBOutlet NSTextField 		*rSizeField;
-    IBOutlet NSTextField 		*rTypeField;
-    IBOutlet NSTextField 		*rPermField;
-    IBOutlet NSTextField 		*rInfoPathField;
-    IBOutlet NSTextField		*rWhereField;
-    IBOutlet NSButton			*roReadSwitch;
-    IBOutlet NSButton			*roWriteSwitch;
-    IBOutlet NSButton			*roExecSwitch;
-    IBOutlet NSButton			*rgReadSwitch;
-    IBOutlet NSButton			*rgWriteSwitch;
-    IBOutlet NSButton			*rgExecSwitch;
-    IBOutlet NSButton			*raReadSwitch;
-    IBOutlet NSButton			*raWriteSwitch;
-    IBOutlet NSButton			*raExecSwitch;
+    IBOutlet NSImageView		*_Nullable rIcon;
+    IBOutlet NSTextField		*_Nullable rModDateField;
+    IBOutlet NSTextField	 	*_Nullable rGroupField;
+    IBOutlet NSTextField 		*_Nullable rOwnerField;
+    IBOutlet NSTextField 		*_Nullable rSizeField;
+    IBOutlet NSTextField 		*_Nullable rTypeField;
+    IBOutlet NSTextField 		*_Nullable rPermField;
+    IBOutlet NSTextField 		*_Nullable rInfoPathField;
+    IBOutlet NSTextField		*_Nullable rWhereField;
+    IBOutlet NSButton			*_Nullable roReadSwitch;
+    IBOutlet NSButton			*_Nullable roWriteSwitch;
+    IBOutlet NSButton			*_Nullable roExecSwitch;
+    IBOutlet NSButton			*_Nullable rgReadSwitch;
+    IBOutlet NSButton			*_Nullable rgWriteSwitch;
+    IBOutlet NSButton			*_Nullable rgExecSwitch;
+    IBOutlet NSButton			*_Nullable raReadSwitch;
+    IBOutlet NSButton			*_Nullable raWriteSwitch;
+    IBOutlet NSButton			*_Nullable raExecSwitch;
     
     /* main ui elements */
     //IBOutlet NSTextField		*remoteDirPath;
-    IBOutlet NSProgressIndicator	*remoteProgBar;
-    IBOutlet NSTextField		*remoteMsgField;
-    IBOutlet NSBox			*localBox;
-    IBOutlet NSBox			*remoteBox;
+    IBOutlet NSProgressIndicator	*_Nullable remoteProgBar;
+    IBOutlet NSTextField		*_Nullable remoteMsgField;
+    IBOutlet NSBox			*_Nullable localBox;
+    IBOutlet NSBox			*_Nullable remoteBox;
     
     /* local and remote views */
-    IBOutlet NSView			*localView;
-    IBOutlet NSView			*remoteView;
-    IBOutlet NSPopUpButton		*rPathPopUp;
-    IBOutlet NSPopUpButton		*lPathPopUp;
-    IBOutlet NSTextField		*remoteColumnFooter;
-    IBOutlet SFTPTableView 		*localBrowser;
-    IBOutlet NSMenu			*localTableMenu;
-    IBOutlet SFTPTableView	 	*remoteBrowser;
-    IBOutlet NSMenu			*remoteTableMenu;
+    IBOutlet NSView			*_Nullable localView;
+    IBOutlet NSView			*_Nullable remoteView;
+    IBOutlet NSPopUpButton		*_Nullable rPathPopUp;
+    IBOutlet NSPopUpButton		*_Nullable lPathPopUp;
+    IBOutlet NSTextField		*_Nullable remoteColumnFooter;
+    IBOutlet SFTPTableView 		*_Nullable localBrowser;
+    IBOutlet NSMenu			*_Nullable localTableMenu;
+    IBOutlet SFTPTableView	 	*_Nullable remoteBrowser;
+    IBOutlet NSMenu			*_Nullable remoteTableMenu;
     
-    IBOutlet id hostKeyUnauth;
-    IBOutlet id unauthHostInfo;
-    IBOutlet id	dotMenuItem;
-    IBOutlet id infoMenuItem;
-    IBOutlet id addToFavButton;
-    IBOutlet id verifyConnectSheet;
+    IBOutlet id _Nullable hostKeyUnauth;
+    IBOutlet id _Nullable unauthHostInfo;
+    IBOutlet id _Nullable dotMenuItem;
+    IBOutlet id _Nullable infoMenuItem;
+    IBOutlet id _Nullable addToFavButton;
+    IBOutlet id _Nullable verifyConnectSheet;
     
     /* connecting view outlets */
-    IBOutlet NSView			*connectingView;
-    IBOutlet NSProgressIndicator	*connectingProgress;
-    IBOutlet NSTextField		*connectingToField;
+    IBOutlet NSView			*_Nullable connectingView;
+    IBOutlet NSProgressIndicator	*_Nullable connectingProgress;
+    IBOutlet NSTextField		*_Nullable connectingToField;
     
-    IBOutlet SFTPMainWindow		*mainWindow;
+    IBOutlet SFTPMainWindow		*_Nullable mainWindow;
     
     /* password prompt outlets */
-    IBOutlet NSTextField 		*passErrorField;
-    IBOutlet NSView	 		*passView;
-    IBOutlet NSTextField		*passWord;
-    IBOutlet NSTextField		*passHeader;
-    IBOutlet NSProgressIndicator	*authProgBar;
-    IBOutlet NSButton			*passAuthButton;
-    IBOutlet NSButton			*passCancelButton;
-    IBOutlet NSButton			*addToKeychainSwitch;
+    IBOutlet NSTextField 		*_Nullable passErrorField;
+    IBOutlet NSView	 		*_Nullable passView;
+    IBOutlet NSTextField		*_Nullable passWord;
+    IBOutlet NSTextField		*_Nullable passHeader;
+    IBOutlet NSProgressIndicator	*_Nullable authProgBar;
+    IBOutlet NSButton			*_Nullable passAuthButton;
+    IBOutlet NSButton			*_Nullable passCancelButton;
+    IBOutlet NSButton			*_Nullable addToKeychainSwitch;
     
     /* login view outlets */
-    IBOutlet NSView			*loginView;
-    IBOutlet NSPopUpButton 		*popUpFavs;
-    IBOutlet id remoteHost;
-    IBOutlet id dotSwitch;
-    IBOutlet id userName;
-    IBOutlet NSTextField 		*portField;
-    IBOutlet NSTextField		*loginDirField;
-    IBOutlet NSButton			*connectButton;
-    IBOutlet NSPopUpButton		*rendezvousPopUp;
+    IBOutlet NSView			*_Nullable loginView;
+    IBOutlet NSPopUpButton 		*_Nullable popUpFavs;
+    IBOutlet id _Nullable remoteHost;
+    IBOutlet id _Nullable dotSwitch;
+    IBOutlet id _Nullable userName;
+    IBOutlet NSTextField 		*_Nullable portField;
+    IBOutlet NSTextField		*_Nullable loginDirField;
+    IBOutlet NSButton			*_Nullable connectButton;
+    IBOutlet NSPopUpButton		*_Nullable rendezvousPopUp;
     
     /* advanced connection outlets */
-    IBOutlet NSView			*advConnectionView;
-    IBOutlet NSBox			*advConnectionBox;
-    IBOutlet NSTextField		*advAdditionalOptionsField;
-    IBOutlet NSButton			*advForceSSH1Switch;
-    IBOutlet NSButton			*advEnableCompressionSwitch;
+    IBOutlet NSView			*_Nullable advConnectionView;
+    IBOutlet NSBox			*_Nullable advConnectionBox;
+    IBOutlet NSTextField		*_Nullable advAdditionalOptionsField;
+    IBOutlet NSButton			*_Nullable advForceSSH1Switch;
+    IBOutlet NSButton			*_Nullable advEnableCompressionSwitch;
     
     /* view information menu items */
-    IBOutlet NSMenuItem			*viewGroupMenuItem;
-    IBOutlet NSMenuItem			*viewModDateMenuItem;
-    IBOutlet NSMenuItem			*viewModeMenuItem;
-    IBOutlet NSMenuItem			*viewOwnerMenuItem;
-    IBOutlet NSMenuItem			*viewSizeMenuItem;
+    IBOutlet NSMenuItem			*_Nullable viewGroupMenuItem;
+    IBOutlet NSMenuItem			*_Nullable viewModDateMenuItem;
+    IBOutlet NSMenuItem			*_Nullable viewModeMenuItem;
+    IBOutlet NSMenuItem			*_Nullable viewOwnerMenuItem;
+    IBOutlet NSMenuItem			*_Nullable viewSizeMenuItem;
     
 @private
     /*
@@ -244,6 +244,7 @@
     /* command queue */
     NSMutableArray              *_sftpCommandQueue;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )showUploadProgress;
 - ( void )updateUploadProgress: ( int )endflag;
@@ -258,33 +259,33 @@
 - ( void )removeFirstItemFromDownloadQ;
 - ( NSMutableArray * )downloadQ;
 
-- ( IBAction )sendPassword: ( id )sender;
+- ( IBAction )sendPassword: ( id _Nullable )sender;
 - ( void )addPasswordToKeychain;
 - ( BOOL )retrievePasswordFromKeychain;
 - ( BOOL )firstPasswordPrompt;
 - ( void )setFirstPasswordPrompt: ( BOOL )first;
 - ( void )setGotPasswordFromKeychain: ( BOOL )rp;
 - ( BOOL )gotPasswordFromKeychain;
-- ( IBAction )cancelConnection: ( id )sender;
-- ( IBAction )continueConnecting: ( id )sender;
+- ( IBAction )cancelConnection: ( id _Nullable )sender;
+- ( IBAction )continueConnecting: ( id _Nullable )sender;
 - ( void )connectionError: ( NSString * )errmsg;
 - ( void )sessionError: ( NSString * )errmsg;
-- ( IBAction )toggleDots: ( id )sender;
+- ( IBAction )toggleDots: ( id _Nullable )sender;
 
-- ( IBAction )toggleAdvConnectionView: ( id )sender;
+- ( IBAction )toggleAdvConnectionView: ( id _Nullable )sender;
 
-- ( void )showConnectingInterface: ( id )sender;
+- ( void )showConnectingInterface: ( id _Nullable )sender;
 
-- ( IBAction )toggleGoToButtons: ( id )sender;
-- ( IBAction )getGotoDirPanel: ( id )sender;
-- ( IBAction )gotoLocalDirectory: ( id )sender;
-- ( IBAction )gotoRemoteDirectory: ( id )sender;
-- ( IBAction )dismissGotoDirPanel: ( id )sender;
+- ( IBAction )toggleGoToButtons: ( id _Nullable )sender;
+- ( IBAction )getGotoDirPanel: ( id _Nullable )sender;
+- ( IBAction )gotoLocalDirectory: ( id _Nullable )sender;
+- ( IBAction )gotoRemoteDirectory: ( id _Nullable )sender;
+- ( IBAction )dismissGotoDirPanel: ( id _Nullable )sender;
 
-- ( IBAction )selectFromFavorites: ( id )sender;
-- ( IBAction )addToFavorites: ( id )sender;
+- ( IBAction )selectFromFavorites: ( id _Nullable )sender;
+- ( IBAction )addToFavorites: ( id _Nullable )sender;
 
-- ( IBAction )sftpConnect: ( id )sender;
+- ( IBAction )sftpConnect: ( id _Nullable )sender;
 
 - ( void )showDownloadProgressWithMessage: ( char * )msg;
 - ( void )updateDownloadProgressBarWithValue: ( double )value
@@ -293,14 +294,14 @@
 	    ETA: ( NSString * )eta;
 - ( void )finishedDownload;
 
-- ( IBAction )showItemFromHelpMenu: ( id )sender;
+- ( IBAction )showItemFromHelpMenu: ( id _Nullable )sender;
 
 /* interaction related methods */
 - ( void )uploadFiles: ( NSArray * )lfiles toDirectory: ( NSString * )rpath;
 - ( void )downloadFiles: ( NSArray * )rpaths toDirectory: ( NSString * )lpath;
-- ( IBAction )createNewDirectory: ( id )sender;
-- ( IBAction )toggleDirCreationButtons: ( id )sender;
-- ( IBAction )dismissNewDirPanel: ( id )sender;
+- ( IBAction )createNewDirectory: ( id _Nullable )sender;
+- ( IBAction )toggleDirCreationButtons: ( id _Nullable )sender;
+- ( IBAction )dismissNewDirPanel: ( id _Nullable )sender;
 
 /* spring-loaded folders */
 - ( void )performSpringLoadedActionInTable: ( NSTableView * )table;
@@ -313,50 +314,50 @@
 - ( id )nextSFTPCommandFromQueue;
 
 /* methods related to deleting items */
-- ( IBAction )delete: ( id )sender;
-- ( IBAction )deleteLocalFile: ( id )sender;
-- ( IBAction )deleteRemoteFile: ( id )sender;
+- ( IBAction )delete: ( id _Nullable )sender;
+- ( IBAction )deleteLocalFile: ( id _Nullable )sender;
+- ( IBAction )deleteRemoteFile: ( id _Nullable )sender;
 - ( void )deleteFirstItemFromRemoveQueue;
 - ( NSMutableArray * )removeQ;
 
-- ( IBAction )focusOnLocalPane: ( id )sender;
-- ( IBAction )focusOnRemotePane: ( id )sender;
+- ( IBAction )focusOnLocalPane: ( id _Nullable )sender;
+- ( IBAction )focusOnRemotePane: ( id _Nullable )sender;
 
-- ( IBAction )localBrowserSingleClick: ( id )browser;
-- ( IBAction )localBrowserDoubleClick: ( id )browser;
-- ( IBAction )uploadButtonClick: ( id )sender;
-- ( IBAction )remoteBrowserSingleClick: ( id )browser;
-- ( IBAction )remoteBrowserDoubleClick: ( id )browser;
-- ( IBAction )downloadButtonClick: ( id )sender;
-- ( IBAction )cdRemoteHome: ( id )sender;
-- ( IBAction )cdLocalHome: ( id )sender;
-- ( IBAction )remoteCdDotDot: ( id )sender;
-- ( IBAction )localCdDotDot: ( id )sender;
-- ( IBAction )cdFromLPathPopUp: ( id )sender;
-- ( IBAction )cdFromRPathPopUp: ( id )sender;
-- ( IBAction )refreshBrowsers: ( id )sender;
+- ( IBAction )localBrowserSingleClick: ( id _Nullable )browser;
+- ( IBAction )localBrowserDoubleClick: ( id _Nullable )browser;
+- ( IBAction )uploadButtonClick: ( id _Nullable )sender;
+- ( IBAction )remoteBrowserSingleClick: ( id _Nullable )browser;
+- ( IBAction )remoteBrowserDoubleClick: ( id _Nullable )browser;
+- ( IBAction )downloadButtonClick: ( id _Nullable )sender;
+- ( IBAction )cdRemoteHome: ( id _Nullable )sender;
+- ( IBAction )cdLocalHome: ( id _Nullable )sender;
+- ( IBAction )remoteCdDotDot: ( id _Nullable )sender;
+- ( IBAction )localCdDotDot: ( id _Nullable )sender;
+- ( IBAction )cdFromLPathPopUp: ( id _Nullable )sender;
+- ( IBAction )cdFromRPathPopUp: ( id _Nullable )sender;
+- ( IBAction )refreshBrowsers: ( id _Nullable )sender;
 
 - ( void )changeToRemoteDirectory: ( NSString * )remotePath;
-- ( void )changeDirectory: ( id )sender;
-- ( void )dotdot: ( id )sender;
+- ( void )changeDirectory: ( id _Nullable )sender;
+- ( void )dotdot: ( id _Nullable )sender;
 
-- ( IBAction )changeROwner: ( id )sender;
-- ( IBAction )changeRGroup: ( id )sender;
-- ( IBAction )changeRemoteMode: ( id )sender;
+- ( IBAction )changeROwner: ( id _Nullable )sender;
+- ( IBAction )changeRGroup: ( id _Nullable )sender;
+- ( IBAction )changeRemoteMode: ( id _Nullable )sender;
 
-- ( IBAction )changeLOwnerAndGroup: ( id )sender;
-- ( IBAction )changeLocalMode: ( id )sender;
+- ( IBAction )changeLOwnerAndGroup: ( id _Nullable )sender;
+- ( IBAction )changeLocalMode: ( id _Nullable )sender;
 
-- ( IBAction )renameLocalItem: ( id )sender;
-- ( IBAction )renameRemoteItem: ( id )sender;
+- ( IBAction )renameLocalItem: ( id _Nullable )sender;
+- ( IBAction )renameRemoteItem: ( id _Nullable )sender;
 
 - ( void )getListing;
 - ( void )setBusyStatusWithMessage: ( NSString * )message;
 - ( void )finishedCommand;
 - ( void )writeCommand: ( void * )cmd;
-- ( IBAction )sendManualCommand: ( id )sender;
+- ( IBAction )sendManualCommand: ( id _Nullable )sender;
 
-- ( IBAction )showLogPanel: ( id )sender;
+- ( IBAction )showLogPanel: ( id _Nullable )sender;
 - ( void )clearLog;
 - ( void )addToLog: ( NSString * )text;
 - ( void )updateHostList;
@@ -364,23 +365,23 @@
 
 - ( void )passError;
 - ( void )setConnectedWindowTitle;
-- ( IBAction )disconnect: ( id )sender;
+- ( IBAction )disconnect: ( id _Nullable )sender;
 - ( void )cleanUp;
 - ( id )init;
 //- ( void )mouseDown: ( NSEvent * )theEvent;
 
 - ( void )localBrowserReloadForPath: ( NSString * )path;
 
-- ( IBAction )toggleGroupColumn: ( id )sender;
-- ( IBAction )toggleModDateColumn: ( id )sender;
-- ( IBAction )toggleModeColumn: ( id )sender;
-- ( IBAction )toggleOwnerColumn: ( id )sender;
-- ( IBAction )toggleSizeColumn: ( id )sender;
+- ( IBAction )toggleGroupColumn: ( id _Nullable )sender;
+- ( IBAction )toggleModDateColumn: ( id _Nullable )sender;
+- ( IBAction )toggleModeColumn: ( id _Nullable )sender;
+- ( IBAction )toggleOwnerColumn: ( id _Nullable )sender;
+- ( IBAction )toggleSizeColumn: ( id _Nullable )sender;
 
 - ( void )setRemotePathPopUp: ( NSString * )pwd;
 - ( void )showRemoteFiles;
 - ( void )loadRemoteBrowserWithItems: ( NSArray * )items;
-- ( IBAction )getInfo: ( id )sender;
+- ( IBAction )getInfo: ( id _Nullable )sender;
 - ( void )remoteCheckSetup: ( NSString * )permissions;
 - ( void )localCheckSetup: ( NSString * )octalmode;
 - ( void )getContinueQueryForUnknownHost: ( NSDictionary * )hostInfo;
@@ -388,27 +389,27 @@
 - ( void )enableFavButton: ( NSNotification * )aNotification;
 - ( void )awakeFromNib;
 
-- ( IBAction )showPrefs: ( id )sender;
+- ( IBAction )showPrefs: ( id _Nullable )sender;
 
 - ( int )matchingIndexForString: ( NSString * )string inTable: ( SFTPTableView * )table;
                 
-- ( IBAction )checkForUpdates: ( id )sender;
+- ( IBAction )checkForUpdates: ( id _Nullable )sender;
 
-- ( void )scanForSSHServers: ( id )sender;
-- ( IBAction )selectRendezvousServer: ( id )sender;
+- ( void )scanForSSHServers: ( id _Nullable )sender;
+- ( IBAction )selectRendezvousServer: ( id _Nullable )sender;
 
-- ( IBAction )previewItem: ( id )sender;
-- ( IBAction )previewLocalItem: ( id )sender;
-- ( IBAction )previewRemoteItem: ( id )sender;
-- ( void )setPreviewedImage: ( NSString * )imagepath;
+- ( IBAction )previewItem: ( id _Nullable )sender;
+- ( IBAction )previewLocalItem: ( id _Nullable )sender;
+- ( IBAction )previewRemoteItem: ( id _Nullable )sender;
+- ( void )setPreviewedImage: ( NSString * _Nullable )imagepath;
 - ( NSString * )previewedImage;
 - ( void )displayPreview;
 - ( void )addToCachedPreviews: ( NSDictionary *)cachedData;
 - ( NSArray * )cachedPreviews;
 
-- ( IBAction )editFile: ( id )sender;
-- ( IBAction )openLocalFileInEditor: ( id )sender;
-- ( IBAction )openRemoteFileInEditor: ( id )sender;
+- ( IBAction )editFile: ( id _Nullable )sender;
+- ( IBAction )openLocalFileInEditor: ( id _Nullable )sender;
+- ( IBAction )openRemoteFileInEditor: ( id _Nullable )sender;
 - ( void )ODBEditFile: ( NSString * )filepath remotePath: ( NSString * )remotepath;
 
 - ( NSArray * )editedDocuments;
@@ -416,13 +417,14 @@
 - ( void )removeFromEditedDocuments: ( NSString * )docpath;
 
 /* other ssh related tools */
-- ( IBAction )newSSHTunnel: ( id )sender;
-- ( IBAction )secureCopy: ( id )sender;
-- ( IBAction )scp: ( id )sender;
+- ( IBAction )newSSHTunnel: ( id _Nullable )sender;
+- ( IBAction )secureCopy: ( id _Nullable )sender;
+- ( IBAction )scp: ( id _Nullable )sender;
 - ( void )scpLocalItem: ( NSString * )item toHost: ( NSString * )rhost
         userName: ( NSString * )user;
 - ( void )scpRemoteItem: ( NSString * )rdir fromHost: ( NSString * )rhost
         toLocalPath: ( NSString * )ldir userName: ( NSString * )user;
 - ( void )scpFinished; /* SCPController delegate method */
 
+NS_ASSUME_NONNULL_END
 @end

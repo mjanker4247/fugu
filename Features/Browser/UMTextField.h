@@ -9,13 +9,17 @@
 {
     id	    _umTextFieldDelegate;
 }
+NS_ASSUME_NONNULL_BEGIN
 
-- ( void )setDelegate: ( id )delegate;
+- ( void )setDelegate: ( id _Nullable )delegate;
 - ( id )delegate;
 
+NS_ASSUME_NONNULL_END
 @end
 
 /* delegate methods */
 @interface NSObject(UMTextField)
+NS_ASSUME_NONNULL_BEGIN
 - ( void )umTextFieldContentsChanged: ( NSDictionary * )changeDictionary;
+NS_ASSUME_NONNULL_END
 @end

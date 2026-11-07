@@ -7,8 +7,10 @@
 
 @interface NSImage(IconForType)
 
+NS_ASSUME_NONNULL_BEGIN
 + ( NSImage * )iconForType: ( NSString * )extension;
 + ( NSImage * )iconForFile: ( NSString * )file;
 + ( void )cacheIconsForPath: ( NSString * )path contents: ( NSArray * )items;
 
+NS_ASSUME_NONNULL_END
 @end

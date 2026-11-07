@@ -11,57 +11,59 @@
 
 @interface SFTPPrefs : NSObject <NSToolbarDelegate, NSTableViewDelegate, NSTableViewDataSource>
 {
-    IBOutlet NSComboBox 	*prefDefaultHost;
-    IBOutlet NSTextField	*prefDefaultUser;
-    IBOutlet NSTextField	*prefDefaultLDir;
-    IBOutlet NSTextField	*prefDefaultRDir;
-    IBOutlet NSTextField	*prefDefaultPort;
-    IBOutlet SFTPPrefTableView 	*prefFavTable;
-    IBOutlet NSPanel 		*prefPanel;
-    IBOutlet NSBox		*prefViewBox;
-    IBOutlet NSView		*prefGeneralView;
-    IBOutlet NSView		*prefFavoritesView;
-    IBOutlet NSView		*prefKnownHostsView;
-    IBOutlet SFTPPrefTableView	*prefKnownHostsTable;
+    IBOutlet NSComboBox 	*_Nullable prefDefaultHost;
+    IBOutlet NSTextField	*_Nullable prefDefaultUser;
+    IBOutlet NSTextField	*_Nullable prefDefaultLDir;
+    IBOutlet NSTextField	*_Nullable prefDefaultRDir;
+    IBOutlet NSTextField	*_Nullable prefDefaultPort;
+    IBOutlet SFTPPrefTableView 	*_Nullable prefFavTable;
+    IBOutlet NSPanel 		*_Nullable prefPanel;
+    IBOutlet NSBox		*_Nullable prefViewBox;
+    IBOutlet NSView		*_Nullable prefGeneralView;
+    IBOutlet NSView		*_Nullable prefFavoritesView;
+    IBOutlet NSView		*_Nullable prefKnownHostsView;
+    IBOutlet SFTPPrefTableView	*_Nullable prefKnownHostsTable;
     
-    IBOutlet NSView		*prefFilesView;   
-    IBOutlet NSPopUpButton	*prefTextEditorPopUp;
-    IBOutlet NSSegmentedControl	*prefPostEditMatrix;
-    IBOutlet NSSegmentedControl	*prefSortingMatrix;
-	IBOutlet NSComboBox		*prefSSHPath;
+    IBOutlet NSView		*_Nullable prefFilesView;   
+    IBOutlet NSPopUpButton	*_Nullable prefTextEditorPopUp;
+    IBOutlet NSSegmentedControl	*_Nullable prefPostEditMatrix;
+    IBOutlet NSSegmentedControl	*_Nullable prefSortingMatrix;
+	IBOutlet NSComboBox		*_Nullable prefSSHPath;
     
-    IBOutlet NSView		*prefTransfersView;
-    IBOutlet NSButton		*prefRetainFileTimeSwitch;
+    IBOutlet NSView		*_Nullable prefTransfersView;
+    IBOutlet NSButton		*_Nullable prefRetainFileTimeSwitch;
 
 @private
     NSMutableArray		*favs;
 }
-- ( IBAction )addFavorite: ( id )sender;
-- ( IBAction )deleteFavorite: ( id )sender;
+NS_ASSUME_NONNULL_BEGIN
+- ( IBAction )addFavorite: ( id _Nullable )sender;
+- ( IBAction )deleteFavorite: ( id _Nullable )sender;
 
-- ( IBAction )setGeneralDefaults: ( id )sender;
-- ( IBAction )clearDefaults: ( id )sender;
+- ( IBAction )setGeneralDefaults: ( id _Nullable )sender;
+- ( IBAction )clearDefaults: ( id _Nullable )sender;
 
-- ( IBAction )deleteKnownHost: ( id )sender;
-- ( IBAction )saveKnownHosts: ( id )sender;
+- ( IBAction )deleteKnownHost: ( id _Nullable )sender;
+- ( IBAction )saveKnownHosts: ( id _Nullable )sender;
 
-- ( IBAction )setODBTextEditor: ( id )sender;
+- ( IBAction )setODBTextEditor: ( id _Nullable )sender;
 
-- ( IBAction )toggleRetainFileTime: ( id )sender;
+- ( IBAction )toggleRetainFileTime: ( id _Nullable )sender;
 
-- ( IBAction )setPostEditBehaviour: ( id )sender;
+- ( IBAction )setPostEditBehaviour: ( id _Nullable )sender;
 
-- ( IBAction )setSortingBehaviour: ( id )sender;
+- ( IBAction )setSortingBehaviour: ( id _Nullable )sender;
 
-- ( IBAction )setSSHPath: ( id )sender;
+- ( IBAction )setSSHPath: ( id _Nullable )sender;
 
 - ( void )readGeneralPrefs;
 - ( void )readFavorites;
 
-- ( void )showGeneralPreferences: ( id )sender;
+- ( void )showGeneralPreferences: ( id _Nullable )sender;
 
-- ( IBAction )chooseDefaultLocalDirectory: ( id )sender;
+- ( IBAction )chooseDefaultLocalDirectory: ( id _Nullable )sender;
 
 - ( void )showPreferencePanel;
 
+NS_ASSUME_NONNULL_END
 @end

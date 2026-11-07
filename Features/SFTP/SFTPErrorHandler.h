@@ -9,7 +9,9 @@
 @interface SFTPErrorHandler : NSObject {
 
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )runErrorPanel: ( NSString * )theError;
 - ( void )fatalErrorPanel: ( NSString * )fatalError;
+NS_ASSUME_NONNULL_END
 @end

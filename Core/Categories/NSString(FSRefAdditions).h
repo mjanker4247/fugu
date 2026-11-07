@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSString(FSRefAdditions)
+NS_ASSUME_NONNULL_BEGIN
 - ( NSString * )stringByResolvingAliasInPath;
 - ( BOOL )isAliasFile;
+NS_ASSUME_NONNULL_END
 @end

@@ -7,6 +7,8 @@
 
 @interface NSSet(ImageExtensions)
 
+NS_ASSUME_NONNULL_BEGIN
 + ( NSSet * )validImageExtensions;
 
+NS_ASSUME_NONNULL_END
 @end

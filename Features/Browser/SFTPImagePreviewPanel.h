@@ -9,7 +9,9 @@
 @interface SFTPImagePreviewPanel : NSPanel {
 
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )zoomFromRect: ( NSRect )originRect toRect: ( NSRect )destRect;
 
+NS_ASSUME_NONNULL_END
 @end

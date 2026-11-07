@@ -7,12 +7,14 @@
 
 @interface NSWorkspace(LaunchServices)
 
-- ( NSURL * )findApplicationNamed: ( NSString * )name
-                         bundleID: ( NSString * )bundleID;
+NS_ASSUME_NONNULL_BEGIN
+- ( NSURL * _Nullable )findApplicationNamed: ( NSString * _Nullable )name
+                         bundleID: ( NSString * _Nullable )bundleID;
 
 - ( void )openFileURL: ( NSURL * )fileURL
-   withApplicationURL: ( NSURL * )appURL
-            odbParams: ( NSAppleEventDescriptor * )params
-    completionHandler: ( void (^)( NSError * ) )handler;
+   withApplicationURL: ( NSURL * _Nullable )appURL
+            odbParams: ( NSAppleEventDescriptor * _Nullable )params
+    completionHandler: ( void (^ _Nullable)( NSError * _Nullable ) )handler;
 
+NS_ASSUME_NONNULL_END
 @end

@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSMutableArray(Extensions)
+NS_ASSUME_NONNULL_BEGIN
 - ( NSMutableArray * )visibleItems;
 - ( void )reverse;
+NS_ASSUME_NONNULL_END
 @end

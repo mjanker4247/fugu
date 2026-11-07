@@ -7,5 +7,7 @@
 
 @interface NSAttributedString(Ellipsis)
 
+NS_ASSUME_NONNULL_BEGIN
 - ( NSAttributedString * )ellipsisAbbreviatedStringForWidth: ( double )width;
+NS_ASSUME_NONNULL_END
 @end

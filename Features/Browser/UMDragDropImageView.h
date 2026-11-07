@@ -9,13 +9,17 @@
 {
     id		_umDragDropImageViewDelegate;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )setDelegate: ( id )delegate;
 - ( id )delegate;
 
+NS_ASSUME_NONNULL_END
 @end
 
 /* delegate methods */
 @interface NSObject(UMDragDropImageView)
+NS_ASSUME_NONNULL_BEGIN
 - ( void )dropImageViewChanged: ( NSDictionary * )changeDictionary;
+NS_ASSUME_NONNULL_END
 @end

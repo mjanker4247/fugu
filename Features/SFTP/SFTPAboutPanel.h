@@ -7,17 +7,19 @@
 
 @interface SFTPAboutPanel : NSObject
 {
-    IBOutlet NSButton		*emailButton;
-    IBOutlet NSTextView 	*creditsTextField;
-    IBOutlet NSButton 		*homepageButton;
-    IBOutlet NSImageView 	*pufferIconField;
-    IBOutlet NSButton 		*readMeButton;
+    IBOutlet NSButton		*_Nullable emailButton;
+    IBOutlet NSTextView 	*_Nullable creditsTextField;
+    IBOutlet NSButton 		*_Nullable homepageButton;
+    IBOutlet NSImageView 	*_Nullable pufferIconField;
+    IBOutlet NSButton 		*_Nullable readMeButton;
 }
+NS_ASSUME_NONNULL_BEGIN
 
-- ( IBAction )viewReadMe: ( id )sender;
-- ( IBAction )visitHomePage: ( id )sender;
-- ( IBAction )emailAuthor: ( id )sender;
+- ( IBAction )viewReadMe: ( id _Nullable )sender;
+- ( IBAction )visitHomePage: ( id _Nullable )sender;
+- ( IBAction )emailAuthor: ( id _Nullable )sender;
 
 - ( void )awakeFromNib;
 
+NS_ASSUME_NONNULL_END
 @end

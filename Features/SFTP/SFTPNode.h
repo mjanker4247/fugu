@@ -8,6 +8,7 @@
 @interface SFTPNode : NSObject {
 
 }
+NS_ASSUME_NONNULL_BEGIN
 + ( SFTPNode * )sharedInstance;
 - ( NSMutableArray * )itemsAtPath: ( NSString * )path showHiddenFiles: ( BOOL )showHidden;
 - ( BOOL )isDirectory: ( NSString * )path;
@@ -15,4 +16,5 @@
 - ( void )setUpNodeCell: ( NSString * )nodePath forCell: ( NSBrowserCell * )cell;
 - ( NSSet * )invisibles;
 - ( NSSet * )bundleExtensions;
+NS_ASSUME_NONNULL_END
 @end

@@ -6,6 +6,8 @@
 #import <Foundation/Foundation.h>
 
 @interface NSMutableDictionary(Fugu)
+NS_ASSUME_NONNULL_BEGIN
 + ( NSMutableDictionary * )favoriteDictionaryFromHostname: ( NSString * )hostname;
 - ( NSComparisonResult )cacheDateCompare: ( NSDictionary * )dict;
+NS_ASSUME_NONNULL_END
 @end

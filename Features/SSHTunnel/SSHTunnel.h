@@ -9,37 +9,37 @@
 
 @interface SSHTunnel : NSObject
 {
-    IBOutlet NSProgressIndicator *authProgBar;
-    IBOutlet NSTextField 	*authProgMsg;
-    IBOutlet NSTextField 	*passErrorField;
-    IBOutlet NSTextField 	*passPromptField;
-    IBOutlet NSButton		*addToKeychainSwitch;
-    IBOutlet NSView 		*passpromptView;
-    IBOutlet NSTextField 	*passwordField;
-    IBOutlet NSComboBox 	*remoteHostField;
-    IBOutlet NSComboBox 	*remotePortField;
-    IBOutlet NSTextField	*localPortField;
-    IBOutlet NSPanel 		*sshtunnelSheet;
-    IBOutlet NSTableView 	*sshTunnelsTable;
-    IBOutlet NSPanel 		*sshtunnelWindow;
-    IBOutlet NSView 		*tunnelCreationView;
-    IBOutlet NSComboBox		*tunnelHostField;
-    IBOutlet NSTextField 	*unknownHostKeyField;
-    IBOutlet NSTextField 	*unknownHostMsgField;
-    IBOutlet NSView 		*unknownHostView;
-    IBOutlet NSTextField 	*usernameField;
-    IBOutlet NSTextField	*tunnelPortField;
-    IBOutlet NSPopUpButton	*serviceFavoritePopUp;
+    IBOutlet NSProgressIndicator *_Nullable authProgBar;
+    IBOutlet NSTextField 	*_Nullable authProgMsg;
+    IBOutlet NSTextField 	*_Nullable passErrorField;
+    IBOutlet NSTextField 	*_Nullable passPromptField;
+    IBOutlet NSButton		*_Nullable addToKeychainSwitch;
+    IBOutlet NSView 		*_Nullable passpromptView;
+    IBOutlet NSTextField 	*_Nullable passwordField;
+    IBOutlet NSComboBox 	*_Nullable remoteHostField;
+    IBOutlet NSComboBox 	*_Nullable remotePortField;
+    IBOutlet NSTextField	*_Nullable localPortField;
+    IBOutlet NSPanel 		*_Nullable sshtunnelSheet;
+    IBOutlet NSTableView 	*_Nullable sshTunnelsTable;
+    IBOutlet NSPanel 		*_Nullable sshtunnelWindow;
+    IBOutlet NSView 		*_Nullable tunnelCreationView;
+    IBOutlet NSComboBox		*_Nullable tunnelHostField;
+    IBOutlet NSTextField 	*_Nullable unknownHostKeyField;
+    IBOutlet NSTextField 	*_Nullable unknownHostMsgField;
+    IBOutlet NSView 		*_Nullable unknownHostView;
+    IBOutlet NSTextField 	*_Nullable usernameField;
+    IBOutlet NSTextField	*_Nullable tunnelPortField;
+    IBOutlet NSPopUpButton	*_Nullable serviceFavoritePopUp;
     
     /* add service sheet */
-    IBOutlet NSPanel		*addServiceSheet;
-    IBOutlet NSTextField	*newServicePort;
-    IBOutlet NSTextField	*newServiceName;
+    IBOutlet NSPanel		*_Nullable addServiceSheet;
+    IBOutlet NSTextField	*_Nullable newServicePort;
+    IBOutlet NSTextField	*_Nullable newServiceName;
     
-    IBOutlet NSPopUpButton	*sshTunnelInfoButton;
+    IBOutlet NSPopUpButton	*_Nullable sshTunnelInfoButton;
     
-    IBOutlet NSProgressIndicator *connectProgBar;
-    IBOutlet NSTextField	*connectMsg;
+    IBOutlet NSProgressIndicator *_Nullable connectProgBar;
+    IBOutlet NSTextField	*_Nullable connectMsg;
     
 @private
     SSHTunnelAuth		*ssh;
@@ -47,6 +47,7 @@
     BOOL			_gotPasswordFromKeychain;
     pid_t			sshpid;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( void )write: ( char * )buf;
 - ( void )authenticateWithPrompt: ( char * )prompt;
@@ -62,12 +63,12 @@
 
 - ( void )displayWindow;
 
-- ( IBAction )authenticate: ( id )sender;
-- ( IBAction )acceptHost: ( id )sender;
-- ( IBAction )cancelTunnelCreation: ( id )sender;
-- ( IBAction )closeTunnel: ( id )sender;
-- ( IBAction )refuseHost: ( id )sender;
-- ( IBAction )startTunnel: ( id )sender;
+- ( IBAction )authenticate: ( id _Nullable )sender;
+- ( IBAction )acceptHost: ( id _Nullable )sender;
+- ( IBAction )cancelTunnelCreation: ( id _Nullable )sender;
+- ( IBAction )closeTunnel: ( id _Nullable )sender;
+- ( IBAction )refuseHost: ( id _Nullable )sender;
+- ( IBAction )startTunnel: ( id _Nullable )sender;
 
 - ( void )setSSHPID: ( pid_t )pid;
 
@@ -75,12 +76,13 @@
 - ( void )addTunneledHostToDefaults: ( NSString * )rHost;
 
 #ifdef notdef
-- ( IBAction )cancelServiceAdd: ( id )sender;
+- ( IBAction )cancelServiceAdd: ( id _Nullable )sender;
 - ( void )addService;
-- ( IBAction )addService: ( id )sender;
+- ( IBAction )addService: ( id _Nullable )sender;
 - ( void )reloadServiceFavorites;
 #endif /* notdef */
 
 //- ( IBAction )selectFromFavorites: ( id )sender;
 
+NS_ASSUME_NONNULL_END
 @end

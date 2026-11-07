@@ -9,6 +9,7 @@
 
 @protocol SCPTransferInterface
 
+NS_ASSUME_NONNULL_BEGIN
 - ( void )scpConnect: ( char * )userathost toPort: ( char * )portnumber
                     forItem: ( char * )localfile
                     scpType: ( int )scpType
@@ -16,6 +17,7 @@
 
 - ( int )closeMasterFD;
 
+NS_ASSUME_NONNULL_END
 @end
 
 @interface SCPTransfer : NSObject <SCPTransferInterface>
@@ -24,7 +26,9 @@
     pid_t		scppid;
     int			masterfd;
 }
+NS_ASSUME_NONNULL_BEGIN
 
 - ( id )init;
 
+NS_ASSUME_NONNULL_END
 @end
