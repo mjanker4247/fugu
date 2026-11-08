@@ -7,9 +7,9 @@
 
 #import "SFTPMainWindow.h"
 #import "SFTPPrefs.h"
-#import "SFTPTableView.h"
-#import "SFTPImagePreviewPanel.h"
-#import "SFTPImageView.h"
+@class SFTPTableView;
+@class SFTPImagePreviewPanel;
+@class SFTPImageView;
 
 @class 		SFTPTServer;
 @class		SCPController;

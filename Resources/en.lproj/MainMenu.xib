@@ -1967,7 +1967,7 @@ Gw
                         <rect key="frame" x="1" y="1" width="261" height="304"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" headerView="1892" floatsGroupRows="NO" id="889" customClass="SFTPTableView">
+                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" emptySelection="NO" headerView="1892" floatsGroupRows="NO" id="889" customClass="SFTPTableView" customModule="Fugu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="566" height="281"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -2157,7 +2157,7 @@ Gw
                         <rect key="frame" x="1" y="1" width="214" height="291"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" emptySelection="NO" headerView="1895" floatsGroupRows="NO" id="892" customClass="SFTPTableView">
+                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" emptySelection="NO" headerView="1895" floatsGroupRows="NO" id="892" customClass="SFTPTableView" customModule="Fugu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="569" height="268"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -2833,7 +2833,7 @@ DQ
             </constraints>
             <point key="canvasLocation" x="-164" y="551"/>
         </customView>
-        <window title="Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1528" userLabel="imagepreviewpanel" customClass="SFTPImagePreviewPanel">
+        <window title="Panel" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" hidesOnDeactivate="YES" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="1528" userLabel="imagepreviewpanel" customClass="SFTPImagePreviewPanel" customModule="Fugu" customModuleProvider="target">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" utility="YES" nonactivatingPanel="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="677" y="336" width="360" height="382"/>
@@ -2862,7 +2862,7 @@ DQ
             <rect key="frame" x="0.0" y="0.0" width="360" height="360"/>
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
-                <imageView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1530" customClass="SFTPImageView">
+                <imageView autoresizesSubviews="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1530" customClass="SFTPImageView" customModule="Fugu" customModuleProvider="target">
                     <rect key="frame" x="17" y="39" width="326" height="304"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" imageFrameStyle="grayBezel" id="1833"/>
                 </imageView>

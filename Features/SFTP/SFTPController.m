@@ -8,7 +8,6 @@
 #import "SFTPController.h"
 #import "SFTPNode.h"
 #import "SFTPErrorHandler.h"
-#import "SFTPItemCell.h"
 #import "SCPController.h"
 #import "SSHTunnel.h"
 #import "UMFileLauncher.h"
@@ -772,7 +771,7 @@ NSComparisonResult
       identifier = [ o objectForKey: @"identifier" ];
     }
     
-    title = ColumnTitleFromIdentifier( identifier );
+    title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     width = [[[ columnArray objectAtIndex: i ]
               objectForKey: @"width" ] floatValue ];
     
@@ -908,7 +907,7 @@ NSComparisonResult
      [ remoteBrowser tableColumnWithIdentifier: @"groupcolumn" ]];
   } else {
     NSString	*identifier = @"groupcolumn";
-    NSString	*title = ColumnTitleFromIdentifier( identifier );
+    NSString	*title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     
     [ localBrowser addTableColumnWithIdentifier: identifier
                                     columnTitle: title width: [ FuguColumnWidth group ] ];
@@ -935,7 +934,7 @@ NSComparisonResult
      [ remoteBrowser tableColumnWithIdentifier: @"datecolumn" ]];
   } else {
     NSString	*identifier = @"datecolumn";
-    NSString	*title = ColumnTitleFromIdentifier( identifier );
+    NSString	*title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     
     [ localBrowser addTableColumnWithIdentifier: identifier
                                     columnTitle: title width: [ FuguColumnWidth date ] ];
@@ -962,7 +961,7 @@ NSComparisonResult
      [ remoteBrowser tableColumnWithIdentifier: @"permcolumn" ]];
   } else {
     NSString	*identifier = @"permcolumn";
-    NSString	*title = ColumnTitleFromIdentifier( identifier );
+    NSString	*title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     
     [ localBrowser addTableColumnWithIdentifier: identifier
                                     columnTitle: title width: [ FuguColumnWidth mode ] ];
@@ -989,7 +988,7 @@ NSComparisonResult
      [ remoteBrowser tableColumnWithIdentifier: @"ownercolumn" ]];
   } else {
     NSString	*identifier = @"ownercolumn";
-    NSString	*title = ColumnTitleFromIdentifier( identifier );
+    NSString	*title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     
     [ localBrowser addTableColumnWithIdentifier: identifier
                                     columnTitle: title width: [ FuguColumnWidth owner ] ];
@@ -1016,7 +1015,7 @@ NSComparisonResult
      [ remoteBrowser tableColumnWithIdentifier: @"sizecolumn" ]];
   } else {
     NSString	*identifier = @"sizecolumn";
-    NSString	*title = ColumnTitleFromIdentifier( identifier );
+    NSString	*title = [ SFTPTableView columnTitleFromIdentifier: identifier ];
     
     [ localBrowser addTableColumnWithIdentifier: identifier
                                     columnTitle: title width: [ FuguColumnWidth size ] ];
