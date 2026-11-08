@@ -6,7 +6,7 @@
 #import <Cocoa/Cocoa.h>
 
 #import "SFTPMainWindow.h"
-#import "SFTPPrefs.h"
+@class SFTPPrefs;
 @class SFTPTableView;
 @class SFTPImagePreviewPanel;
 @class SFTPImageView;

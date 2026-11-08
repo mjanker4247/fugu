@@ -6,7 +6,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="SFTPPrefs">
+        <customObject id="-2" userLabel="File's Owner" customClass="SFTPPrefs" customModule="Fugu" customModuleProvider="target">
             <connections>
                 <outlet property="prefDefaultHost" destination="91" id="153"/>
                 <outlet property="prefDefaultLDir" destination="125" id="155"/>
@@ -271,7 +271,7 @@
                         <rect key="frame" x="1" y="1" width="638" height="295"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="331" floatsGroupRows="NO" id="23" customClass="SFTPPrefTableView">
+                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="331" floatsGroupRows="NO" id="23" customClass="SFTPPrefTableView" customModule="Fugu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="895" height="267"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>
@@ -429,7 +429,7 @@
                         <rect key="frame" x="1" y="1" width="638" height="316"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="334" floatsGroupRows="NO" id="177" customClass="SFTPPrefTableView">
+                            <tableView autoresizesSubviews="NO" verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="334" floatsGroupRows="NO" id="177" customClass="SFTPPrefTableView" customModule="Fugu" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="638" height="288"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <size key="intercellSpacing" width="3" height="2"/>

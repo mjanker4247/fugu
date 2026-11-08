@@ -2,6 +2,7 @@
 
 ## Done
 
+- Step 5b preferences compiled on 8 Nov 2026, branch `migrate/step-05b-preferences`. `SFTPPrefs` and `SFTPPrefTableView` are Swift. `Prefs.xib` uses module `Fugu`. Known-host lines still split with `acav_parse` and are written back as UTF-8. Development `** BUILD SUCCEEDED **`. The panel was not opened.
 - Step 5a browser classes compiled on 8 Nov 2026, branch `migrate/step-05a-browser-views`. Split, scroll, table, cell, image view, and image preview panel are Swift. `MainMenu.xib` uses module `Fugu` for those classes. Three legacy drag selectors stay in `Features/Browser/SFTPTableViewDrag.m`. Development `** BUILD SUCCEEDED **`. The panes, rename, preview, and drag were not run in the app.
 - VAN and PLAN for the Xcode 27 project upgrade, 8 Nov 2026. Level 3. Disk facts, corrected during planning: `LastUpgradeCheck` is `2640`, not `2720`. All six configurations set deployment to `12.0`. `RECOMMENDED_MACOSX_DEPLOYMENT_TARGET` is `14.0`. `objectVersion` stays 54.
 - Baseline Development build on Xcode 27.2 succeeded on 8 Nov 2026. The log says explicit modules are enabled but the compiler was not recognized, because `CC` is `/usr/bin/gcc`.

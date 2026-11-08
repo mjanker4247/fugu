@@ -299,7 +299,7 @@ Impact: medium. Second slice implemented 8 Nov 2026 on `migrate/step-04-services
 Impact: medium-high. One screen per sub-branch, each built on the Mac.
 
 - [ ] `migrate/step-05a-browser-views` — table, split, scroll, cell, image preview. Those classes are Swift. `SFTPTableViewDrag.m` keeps the three drag selectors Swift marks unavailable. Development build succeeded 8 Nov 2026. Browser smoke is still open. `SFTPPrefTableView`, `UMTextField`, and `UMDragDropImageView` stay with later screens.
-- [ ] `migrate/step-05b-preferences` — `SFTPPrefs` and `Prefs.xib`.
+- [ ] `migrate/step-05b-preferences` — `SFTPPrefs` and `Prefs.xib`. Both are Swift, including `SFTPPrefTableView`. Development build succeeded 8 Nov 2026. Preferences smoke is still open.
 - [ ] `migrate/step-05c-scp` — `SCP.xib`.
 - [ ] `migrate/step-05d-tunnel` — `SSHTunnel.xib`.
 - [ ] `migrate/step-05e-main-window` — `SFTPController` and `MainMenu.xib` last.

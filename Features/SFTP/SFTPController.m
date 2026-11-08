@@ -190,7 +190,7 @@ NSComparisonResult
   
   [[ NSNotificationCenter defaultCenter ] addObserver: self
                                              selector: @selector( reloadDefaults )
-                                                 name: SFTPPrefsChangedNotification
+                                                 name: [ SFTPPrefs changedNotification ]
                                                object: nil ];
   
   
