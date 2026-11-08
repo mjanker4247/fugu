@@ -94,19 +94,19 @@
         NSRect			imageFrame;
 
         imageSize = [ image size ];
+        if ( imageSize.width > 16.0 ) imageSize.width = 16.0;
+        if ( imageSize.height > 16.0 ) imageSize.height = 16.0;
+        if ( imageSize.width < 1.0 || imageSize.height < 1.0 ) {
+            imageSize = NSMakeSize( 16.0, 16.0 );
+        }
         NSDivideRect( cellFrame, &imageFrame, &cellFrame, ( imageSize.width + 1 ), NSMinXEdge );
         imageFrame.origin.x += 1;
         imageFrame.size = imageSize;
+        imageFrame.origin.y += ceil(( cellFrame.size.height - imageFrame.size.height ) / 2.0 );
 
-
-        if ( [ controlView isFlipped ] ) {
-            imageFrame.origin.y += ceil(( cellFrame.size.height + imageFrame.size.height ) / 2 );
-        } else {
-            imageFrame.origin.y += ceil(( cellFrame.size.height - imageFrame.size.height ) / 2 );
-        }
-
-        [ image drawAtPoint: imageFrame.origin fromRect: NSZeroRect
-                  operation: NSCompositingOperationSourceOver fraction: 1.0 ];
+        [ image drawInRect: imageFrame fromRect: NSZeroRect
+                 operation: NSCompositingOperationSourceOver fraction: 1.0
+            respectFlipped: YES hints: nil ];
     }
     [ super drawWithFrame: cellFrame inView: controlView ];
 }

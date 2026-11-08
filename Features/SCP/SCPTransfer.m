@@ -6,6 +6,7 @@
 #import "SCPTransfer.h"
 #import "SCPController.h"
 #import "NSString(SSHAdditions).h"
+#import "Fugu-Swift.h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -169,7 +170,7 @@ int		scpconnecting = 0;
     execargs[ 4 ] = ( scpType == 0 ? userathost : localfile );
     execargs[ 5 ] = NULL;
     
-    if ( scppid == forkpty( &masterfd, ttyname, NULL, NULL )) {
+    if ( scppid == [ FuguSSHProcess forkWithMaster: &masterfd ttyName: ttyname ] ) {
         if ( fcntl( masterfd, F_SETFL, O_NONBLOCK ) < 0 ) {	/* prevent master from blocking */
         }
         
@@ -201,7 +202,7 @@ int		scpconnecting = 0;
             }
             
             if ( FD_ISSET( masterfd, &readmask )) {
-                if ( fgets(( char * )buf, MAXPATHLEN, mfp ) == NULL ) break;
+                if ( [ FuguSSHProcess readLine: ( char * )buf size: MAXPATHLEN fromStream: mfp ] == NO ) break;
 
                 if (( strstr(( char * )buf, "Password:" ) != NULL
                         || strstr(( char * )buf, "password:" ) != NULL
@@ -235,7 +236,7 @@ int		scpconnecting = 0;
                         dispatch_async( dispatch_get_main_queue(), ^{
                             [ controller addToLog: _log ];
                         });
-                        fgets(( char * )buf, MAXPATHLEN, mfp ); /* get rest of message */
+                        [ FuguSSHProcess readLine: ( char * )buf size: MAXPATHLEN fromStream: mfp ]; /* get rest of message */
                         NSString *_query = [ NSString stringWithFormat: @"%s%s",
                                                 unknownmsg, ( char * )buf ];
                         dispatch_async( dispatch_get_main_queue(), ^{
@@ -277,7 +278,7 @@ int		scpconnecting = 0;
             }
         }
 
-        scppid = wait( &status );
+        scppid = [ FuguSSHProcess waitWithStatus: &status ];
 
         ( void )close( masterfd );
         {

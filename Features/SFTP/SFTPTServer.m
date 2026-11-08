@@ -7,7 +7,7 @@
 #import "SFTPController.h"
 #import	"SFTPNode.h"
 #import "NSArray(CreateArgv).h"
-#import "NSString-UnknownEncoding.h"
+#import "Fugu-Swift.h"
 #import "NSString(SSHAdditions).h"
 
 #include <errno.h>
@@ -174,47 +174,105 @@ int		master = 0;
     return( isPrompt );
 }
 
+static NSString *
+ProgressTokenContaining( const char *line, const char *marker )
+{
+    const char		*hit, *start, *end;
+
+    hit = strstr( line, marker );
+    if ( hit == NULL ) {
+	return( nil );
+    }
+    start = hit;
+    while ( start > line && start[ -1 ] != ' ' && start[ -1 ] != '\t' &&
+		start[ -1 ] != '\r' && start[ -1 ] != '\n' ) {
+	start--;
+    }
+    end = hit + strlen( marker );
+    while ( *end != '\0' && *end != ' ' && *end != '\t' &&
+		*end != '\r' && *end != '\n' ) {
+	end++;
+    }
+    if ( end <= start ) {
+	return( nil );
+    }
+    return( [[ NSString alloc ] initWithBytes: start
+			length: ( NSUInteger )( end - start )
+			encoding: NSISOLatin1StringEncoding ] );
+}
+
+static NSString *
+ProgressETA( const char *line )
+{
+    const char		*eta, *start, *end;
+    NSString		*time;
+
+    if ( strstr( line, "stalled" ) != NULL ) {
+	return( @"stalled" );
+    }
+    eta = strstr( line, "ETA" );
+    if ( eta == NULL ) {
+	return( nil );
+    }
+    end = eta;
+    while ( end > line && ( end[ -1 ] == ' ' || end[ -1 ] == '\t' )) {
+	end--;
+    }
+    start = end;
+    while ( start > line && start[ -1 ] != ' ' && start[ -1 ] != '\t' &&
+		start[ -1 ] != '\r' && start[ -1 ] != '\n' ) {
+	start--;
+    }
+    if ( start == end ) {
+	return( nil );
+    }
+    time = [[ NSString alloc ] initWithBytes: start
+			length: ( NSUInteger )( end - start )
+			encoding: NSISOLatin1StringEncoding ];
+    if ( time == nil || [ time length ] == 0 ) {
+	return( nil );
+    }
+    return( [ NSString stringWithFormat: @"%@ ETA", time ] );
+}
+
+static double
+ProgressPercent( const char *line, BOOL *found )
+{
+    const char		*pct, *start;
+
+    *found = NO;
+    pct = strrchr( line, '%' );
+    if ( pct == NULL ) {
+	return( 0 );
+    }
+    start = pct;
+    while ( start > line && (( start[ -1 ] >= '0' && start[ -1 ] <= '9' ) ||
+		start[ -1 ] == '.' )) {
+	start--;
+    }
+    if ( start == pct ) {
+	return( 0 );
+    }
+    *found = YES;
+    return( strtod( start, NULL ));
+}
+
 - ( void )parseTransferProgressString: ( char * )string isUploading: ( BOOL )uploading
 	forController: ( id )controller
 {
-    int			tac, i, pc_index = -1;
-    char		*tmp, **tav, *p;
-    char		*t_rate, *t_amount, *t_eta;
-    
-    if (( tmp = strdup( string )) == NULL ) {
-	perror( "strdup" );
-	exit( 2 );
+    BOOL		foundPercent = NO;
+    double		_pval = ProgressPercent( string, &foundPercent );
+    NSString		*_prate = ProgressTokenContaining( string, "/s" );
+    NSString		*_peta = ProgressETA( string );
+    NSString		*_pamount = @"";
+
+    if ( !foundPercent ) {
+	_pval = -1;
     }
-    
-    if (( tac = argcargv( tmp, &tav )) < 5 ) {
-	/* not a transfer progress line we're interested in */
-	free( tmp );
+
+    if ( !foundPercent && _prate == nil && _peta == nil ) {
 	return;
     }
-    
-    for ( i = ( tac - 1 ); i >= 0; i-- ) {
-	if (( p = strrchr( tav[ i ], '%' )) != NULL ) {
-	    /* found the %-done field */
-	    pc_index = i;
-	    *p = '\0';
-	    break;
-	}
-    }
-    
-    t_amount = tav[ pc_index + 1 ];
-    t_rate = tav[ pc_index + 2 ];
-    
-    if ( pc_index == ( tac - 5 )) {
-	t_eta = tav[ pc_index + 3 ];
-    } else {
-	t_eta = "--:--";
-    }
-    
-    double    _pval    = strtod( tav[ pc_index ], NULL );
-    NSString *_pamount = [ NSString stringWithUTF8String: t_amount ];
-    NSString *_prate   = [ NSString stringWithUTF8String: t_rate ];
-    NSString *_peta    = [ NSString stringWithFormat: @"%s ETA", t_eta ];
-    free( tmp );
 
     if ( uploading ) {
 	dispatch_async( dispatch_get_main_queue(), ^{
@@ -244,12 +302,17 @@ int		master = 0;
     return( atprompt );
 }
 
+- ( void )commandWillBeSent
+{
+    atprompt = 0;
+}
+
 - ( NSString * )retrieveUnknownHostKeyFromStream: ( FILE * )stream
 {
     NSString            *key = @"";
     char                buf[ MAXPATHLEN * 2 ];
     
-    if ( fgets( buf, MAXPATHLEN * 2, stream ) == NULL ) {
+    if ( [ FuguSSHProcess readLine: buf size: ( MAXPATHLEN * 2 ) fromStream: stream ] == NO ) {
         NSLog( @"fgets: %s\n", strerror( errno ));
     } else if (( key = [ NSString stringWithUTF8String: buf ] ) == nil ) {
         key = @"";
@@ -404,7 +467,7 @@ int		master = 0;
             }
             
             nameAsRawBytes = [ NSData dataWithBytes: filename length: strlen( filename ) ];
-            name = [ NSString stringWithBytesOfUnknownEncoding: filename
+            name = [ FuguStringEncoding stringWithBytes: filename
                                                     length: (int) strlen( filename ) ];
             free( filename );
         } else {
@@ -415,7 +478,7 @@ int		master = 0;
             
             nameAsRawBytes = [ NSData dataWithBytes: targv[ fncolumn ]
                                 length: strlen( targv[ fncolumn ] ) ];
-            name = [ NSString stringWithBytesOfUnknownEncoding: targv[ fncolumn ]
+            name = [ FuguStringEncoding stringWithBytes: targv[ fncolumn ]
                                             length: (int) strlen( targv[ fncolumn ] ) ];
         }
 
@@ -510,7 +573,10 @@ DOT_OR_DOTDOT:
         });
     }
     
-    switch (( sftppid = forkpty( &master, ttyname, NULL, &win_size ))) {
+    switch (( sftppid = [ FuguSSHProcess forkWithMaster: &master
+                                                   ttyName: ttyname
+                                                windowRows: win_size.ws_row
+                                             windowColumns: win_size.ws_col ] )) {
     case 0:
         execve( execargs[ 0 ], ( char ** )execargs, environ );
         NSLog( @"Couldn't launch sftp: %s", strerror( errno ));
@@ -562,7 +628,7 @@ DOT_OR_DOTDOT:
         }
         
         if ( FD_ISSET( master, &readmask )) {
-            if ( fgets(( char * )buf, MAXPATHLEN, mf ) == NULL ) {
+            if ( [ FuguSSHProcess readLine: ( char * )buf size: MAXPATHLEN fromStream: mf ] == NO ) {
                 break;
             }
 #ifdef DEBUG
@@ -661,7 +727,7 @@ DOT_OR_DOTDOT:
                             NSLog( @"Failed to send command: %s", strerror( errno ));
                         }
 
-                        transferName = [ NSString stringWithBytesOfUnknownEncoding:
+                        transferName = [ FuguStringEncoding stringWithBytes:
                                                 ( char * )[[ dict objectForKey: @"rpath" ] bytes ]
                                                 length: (int) [( NSData * )[ dict objectForKey: @"rpath" ] length ]];
                         [ self setCurrentTransferName: [ transferName lastPathComponent ]];
@@ -701,18 +767,20 @@ DOT_OR_DOTDOT:
                 } else if ( [ self bufferContainsError: buf ] ) {
                     NSString *_err = [ NSString stringWithUTF8String: buf ];
                     dispatch_async( dispatch_get_main_queue(), ^{ [ controller connectionError: _err ]; });
-                } else if ( [ self currentTransferName ] != nil ) {
-                    if ( strstr(( char * )buf, [[ self currentTransferName ] UTF8String ] ) != NULL
-                                && strrchr(( char * )buf, '%' ) != NULL ) {
-                        if ( was_downloading ) {
-                            [ self parseTransferProgressString: ( char * )buf
-                                    isUploading: NO
-                                    forController: controller ];
-                        } else if ( was_uploading ) {
-                            [ self parseTransferProgressString: ( char * )buf
-                                    isUploading: YES
-                                    forController: controller ];
-                        }
+                } else if ( [ self currentTransferName ] != nil &&
+                            ( was_uploading || was_downloading ) &&
+                            ( strrchr(( char * )buf, '%' ) != NULL ||
+                                strstr(( char * )buf, "/s" ) != NULL ||
+                                strstr(( char * )buf, "ETA" ) != NULL ||
+                                strstr(( char * )buf, "stalled" ) != NULL )) {
+                    if ( was_downloading ) {
+                        [ self parseTransferProgressString: ( char * )buf
+                                isUploading: NO
+                                forController: controller ];
+                    } else if ( was_uploading ) {
+                        [ self parseTransferProgressString: ( char * )buf
+                                isUploading: YES
+                                forController: controller ];
                     }
                 } else if ( strstr(( char * )buf, "passphrase for key" ) != NULL ) {
                     pwsent = 0;
@@ -748,7 +816,8 @@ DOT_OR_DOTDOT:
 
             /* moved to separate if block: sometimes ls and sftp> occur in same buffer */
             if ( [ self hasDirectoryListingFormInBuffer: buf ] && connected ) {
-                NSString *_lslog = [ NSString stringWithUTF8String: ( char * )buf ];
+                NSString *_lslog = [ FuguStringEncoding stringWithBytes: ( char * )buf
+                                                    length: ( unsigned )strlen(( char * )buf ) ];
                 dispatch_async( dispatch_get_main_queue(), ^{ [ controller addToLog: _lslog ]; });
                 was_listing = 1;
                 [ self collectListingFromMaster: master fileStream: mf forController: controller ];
@@ -767,7 +836,7 @@ DOT_OR_DOTDOT:
                 
                 p = strchr( tmp, '/' );
                 
-                NSString *_rpath = [ NSString stringWithBytesOfUnknownEncoding: p
+                NSString *_rpath = [ FuguStringEncoding stringWithBytes: p
                                             length: (int) strlen( p ) ];
                 dispatch_async( dispatch_get_main_queue(), ^{ [ controller setRemotePathPopUp: _rpath ]; });
                 free( tmp );
@@ -778,7 +847,8 @@ DOT_OR_DOTDOT:
             }
             
             if ( buf[ 0 ] != '\0' ) {
-                NSString *_blog = [ NSString stringWithUTF8String: ( void * )buf ];
+                NSString *_blog = [ FuguStringEncoding stringWithBytes: ( char * )buf
+                                                   length: ( unsigned )strlen(( char * )buf ) ];
                 dispatch_async( dispatch_get_main_queue(), ^{ [ controller addToLog: _blog ]; });
                 memset( buf, '\0', strlen(( char * )buf ));
             }
@@ -787,7 +857,7 @@ DOT_OR_DOTDOT:
         if ( cancelflag ) break;
     }
     
-    sftppid = wait( &status );
+    sftppid = [ FuguSSHProcess waitWithStatus: &status ];
     
     free( execargs );
     [ self setCurrentTransferName: nil ];
@@ -795,7 +865,8 @@ DOT_OR_DOTDOT:
     ( void )close( master );
 
     {
-        NSString *_exitBuf = [ NSString stringWithUTF8String: ( void * )buf ];
+        NSString *_exitBuf = [ FuguStringEncoding stringWithBytes: ( char * )buf
+                                              length: ( unsigned )strlen(( char * )buf ) ];
         NSString *_pidMsg  = [ NSString stringWithFormat: @"\nsftp task with pid %d ended.\n", sftppid ];
         NSString *_exitMsg = nil;
         if ( WIFEXITED( status )) {
@@ -838,7 +909,7 @@ DOT_OR_DOTDOT:
         }
         
         if ( FD_ISSET( master, &readmask )) {
-            if ( fgets(( char * )buf, ( MAXPATHLEN * 2 ), stream ) == NULL ) {
+            if ( [ FuguSSHProcess readLine: ( char * )buf size: ( MAXPATHLEN * 2 ) fromStream: stream ] == NO ) {
                 return;
             }
 
@@ -892,7 +963,7 @@ DOT_OR_DOTDOT:
                 [ items addObject: object ];
             }
             
-            NSString *_clog = [ NSString stringWithBytesOfUnknownEncoding: buf
+            NSString *_clog = [ FuguStringEncoding stringWithBytes: buf
                                                 length: (int) strlen( buf ) ];
             dispatch_async( dispatch_get_main_queue(), ^{ [ controller addToLog: _clog ]; });
             if ( strstr( buf, "sftp>" ) != NULL ) {

@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 - ( void )collectListingFromMaster: ( int )master fileStream: ( FILE * )mf
             forController: ( SFTPController * )controller;
 - ( int )atSftpPrompt;
+- ( void )commandWillBeSent;
 - ( pid_t )getSftpPid;
 
 NS_ASSUME_NONNULL_END

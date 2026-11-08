@@ -11,21 +11,6 @@
 #import "SFTPImagePreviewPanel.h"
 #import "SFTPImageView.h"
 
-#define SFTPToolbarLocalHomeIdentifier 		@"lhome"
-#define SFTPToolbarNewDirIdentifier 		@"newdir"
-#define SFTPToolbarDeleteIdentifier		@"delete"
-#define SFTPToolbarConnectIdentifier		@"connect"
-#define SFTPToolbarInfoIdentifier		@"info"
-#define SFTPToolbarRemoteHomeIdentifier		@"rhome"
-#define SFTPToolbarRefreshIdentifier		@"reload"
-#define SFTPToolbarDownloadIdentifier		@"download"
-#define SFTPToolbarUploadIdentifier		@"upload"
-#define SFTPToolbarGotoIdentifier		@"gotodir"
-#define SFTPToolbarLocalHistoryIdentifier	@"lhistory"
-#define SFTPToolbarRemoteHistoryIdentifier	@"rhistory"
-#define SFTPToolbarRemoteItemPreviewIdentifier	@"preview"
-#define SFTPToolbarEditDocumentIdentifier	@"edit"
-
 @class 		SFTPTServer;
 @class		SCPController;
 
@@ -411,6 +396,7 @@ NS_ASSUME_NONNULL_BEGIN
 - ( IBAction )openLocalFileInEditor: ( id _Nullable )sender;
 - ( IBAction )openRemoteFileInEditor: ( id _Nullable )sender;
 - ( void )ODBEditFile: ( NSString * )filepath remotePath: ( NSString * )remotepath;
+- ( void )uploadSettledEditAtLocalPath: ( NSString * )localPath remotePath: ( NSString * )remotePath;
 
 - ( NSArray * )editedDocuments;
 - ( void )addToEditedDocuments: ( NSString * )docpath remotePath: ( NSString * )rpath;

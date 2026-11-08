@@ -2,27 +2,16 @@
 
 ## Current Focus
 
-Step 2 code is on `migrate/step-02-spm-and-native-replacements`. The Development build succeeded. The manual checks have not run.
+Upgrade `Fugu.xcodeproj` to a consistent Xcode 27 project. Level 3. VAN finished on 8 Nov 2026. Implementation is blocked until PLAN.
 
 ## Status
 
-`FuguTemporaryDirectory` creates `/private/tmp/Fugu` with `FileManager` and the unique child with `mkdtemp`. `SFTPController` calls it at both former `makeTemporaryDirectoryWithMode:` sites. `NSFileManager(mktemp)` is deleted.
-
-`FuguKeychain` calls `getpwdfromkeychain` and `addpwdtokeychain`. `keychain.c` still owns `SecItem`. The retrieve and add methods in `SFTPController`, `SCPController`, and `SSHTunnel` call the Swift type. The bridging header includes `keychain.h`.
+This Mac has Xcode 27.2 (27B52) and the macOS 27.2 SDK. `LastUpgradeCheck` is already `2720`, and earlier Development builds succeeded. The project file is still `objectVersion` 54 / `compatibilityVersion` Xcode 12.0. Project deployment is `11.5`. The Fugu target uses `$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)`, which this SDK sets to `27.2`. Target configs still pin `CC` to `/usr/bin/gcc` and Development still sets `ZERO_LINK = YES`.
 
 ## Next action
 
-Do not start Step 3. Still open:
+PLAN. The plan has to pick one deployment target and say whether the project format stays at Xcode 12 compatibility. Do not edit `project.pbxproj` before that.
 
-- Commit is not done. The user has not asked for one. A clean checkout of `c3bdfcc` does not build, and this branch was created from that commit.
-- SSH connect, list, upload, download.
-- Preview or edit creates a directory under `/private/tmp/Fugu`.
-- Password save and fill on the SFTP sheet.
-- Quit removes `/private/tmp/Fugu` when that directory is writable.
+## Deferred
 
-## Latest Changes
-
-- Branch: `migrate/step-02-spm-and-native-replacements`
-- Build: `xcodebuild -project Fugu.xcodeproj -scheme Fugu -configuration Development build` → BUILD SUCCEEDED in 6.7 seconds
-- `SwiftCompile`: `FuguKeychain.swift`, `FuguTemporaryDirectory.swift`, `FuguSwiftBridge.swift`
-- Warnings: existing `iconForFileType:` deprecations only
+Text editor in-app checks are still open. Step 4 still needs a live SSH session before any `Process` switch. Do not start Step 5. Upload speed and ETA stay deferred.

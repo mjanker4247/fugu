@@ -13,12 +13,7 @@
 #include <string.h>
 #include <unistd.h>
 #include "argcargv.h"
-
-#define SFTPPrefToolbarGeneralIdentifier	@"generalprefs"
-#define SFTPPrefToolbarFavoritesIdentifier	@"favoritesprefs"
-#define SFTPPrefToolbarKnownHostsIdentifier	@"knownhostprefs"
-#define SFTPPrefToolbarFilesIdentifier		@"fileeditingprefs"
-#define SFTPPrefToolbarTransfersIdentifier	@"transfersprefs"
+#import "Fugu-Swift.h"
 
 static NSMutableArray	*knownHosts = nil;
 
@@ -96,7 +91,7 @@ static NSMutableArray	*knownHosts = nil;
     NSToolbarItem *preftbarItem = [[ NSToolbarItem alloc ]
                                     initWithItemIdentifier: itemIdent ];
     
-    if ( [ itemIdent isEqualToString: SFTPPrefToolbarGeneralIdentifier ] ) {
+    if ( [ itemIdent isEqualToString: [ FuguPreferenceToolbarIdentifier general ] ] ) {
         [ preftbarItem setLabel:
                 NSLocalizedStringFromTable( @"General", @"SFTPPrefToolbar",
                                             @"General" ) ];
@@ -109,7 +104,7 @@ static NSMutableArray	*knownHosts = nil;
         [ preftbarItem setImage: [ NSImage imageNamed: @"generalprefs.png" ]];
         [ preftbarItem setAction: @selector( showGeneralPreferences: ) ];
         [ preftbarItem setTarget: self ];
-    } else if ( [ itemIdent isEqualToString: SFTPPrefToolbarFavoritesIdentifier ] ) {
+    } else if ( [ itemIdent isEqualToString: [ FuguPreferenceToolbarIdentifier favorites ] ] ) {
         [ preftbarItem setLabel:
                 NSLocalizedStringFromTable( @"Favorites", @"SFTPPrefToolbar",
                                             @"Favorites" ) ];
@@ -122,7 +117,7 @@ static NSMutableArray	*knownHosts = nil;
         [ preftbarItem setImage: [ NSImage imageNamed: @"favoritesprefs.png" ]];
         [ preftbarItem setAction: @selector( showFavorites: ) ];
         [ preftbarItem setTarget: self ];
-    } else if ( [ itemIdent isEqualToString: SFTPPrefToolbarTransfersIdentifier ] ) {
+    } else if ( [ itemIdent isEqualToString: [ FuguPreferenceToolbarIdentifier transfers ] ] ) {
 	[ preftbarItem setLabel:
                 NSLocalizedStringFromTable( @"Transfers", @"SFTPPrefToolbar",
                                             @"Transfers" ) ];
@@ -135,7 +130,7 @@ static NSMutableArray	*knownHosts = nil;
         [ preftbarItem setImage: [ NSImage imageNamed: @"transfers.png" ]];
         [ preftbarItem setAction: @selector( showTransfersPrefs: ) ];
         [ preftbarItem setTarget: self ];
-    } else if ( [ itemIdent isEqualToString: SFTPPrefToolbarFilesIdentifier ] ) {
+    } else if ( [ itemIdent isEqualToString: [ FuguPreferenceToolbarIdentifier files ] ] ) {
 	[ preftbarItem setLabel:
                 NSLocalizedStringFromTable( @"Files", @"SFTPPrefToolbar",
                                             @"Files" ) ];
@@ -148,7 +143,7 @@ static NSMutableArray	*knownHosts = nil;
         [ preftbarItem setImage: [ NSImage imageNamed: @"files.png" ]];
         [ preftbarItem setAction: @selector( showFilesPrefs: ) ];
         [ preftbarItem setTarget: self ];
-    } else if ( [ itemIdent isEqualToString: SFTPPrefToolbarKnownHostsIdentifier ] ) {
+    } else if ( [ itemIdent isEqualToString: [ FuguPreferenceToolbarIdentifier knownHosts ] ] ) {
 	[ preftbarItem setLabel:
                 NSLocalizedStringFromTable( @"Known Hosts", @"SFTPPrefToolbar",
                                             @"Known Hosts" ) ];
@@ -177,11 +172,11 @@ static NSMutableArray	*knownHosts = nil;
 - ( NSArray * )toolbarDefaultItemIdentifiers: ( NSToolbar * )toolbar
 {
     NSArray	*tmp = [ NSArray arrayWithObjects:
-                            SFTPPrefToolbarGeneralIdentifier,
-                            SFTPPrefToolbarFavoritesIdentifier,
-			    SFTPPrefToolbarTransfersIdentifier,
-			    SFTPPrefToolbarFilesIdentifier,
-			    SFTPPrefToolbarKnownHostsIdentifier, nil ];
+                            [ FuguPreferenceToolbarIdentifier general ],
+                            [ FuguPreferenceToolbarIdentifier favorites ],
+			    [ FuguPreferenceToolbarIdentifier transfers ],
+			    [ FuguPreferenceToolbarIdentifier files ],
+			    [ FuguPreferenceToolbarIdentifier knownHosts ], nil ];
                             
     return( tmp );
 }
@@ -189,11 +184,11 @@ static NSMutableArray	*knownHosts = nil;
 - ( NSArray * )toolbarAllowedItemIdentifiers: ( NSToolbar * )toolbar
 {
     NSArray	*tmp = [ NSArray arrayWithObjects:
-                            SFTPPrefToolbarGeneralIdentifier,
-                            SFTPPrefToolbarFavoritesIdentifier,
-			    SFTPPrefToolbarTransfersIdentifier,
-			    SFTPPrefToolbarFilesIdentifier,
-			    SFTPPrefToolbarKnownHostsIdentifier, nil ];
+                            [ FuguPreferenceToolbarIdentifier general ],
+                            [ FuguPreferenceToolbarIdentifier favorites ],
+			    [ FuguPreferenceToolbarIdentifier transfers ],
+			    [ FuguPreferenceToolbarIdentifier files ],
+			    [ FuguPreferenceToolbarIdentifier knownHosts ], nil ];
                             
     return( tmp );
 }
@@ -338,59 +333,47 @@ static NSMutableArray	*knownHosts = nil;
     int			row, i;
     NSRect		boxRect, newRect, windowRect;
     NSNumber		*num = nil;
-    NSString		*editor = nil;
     NSString		*sshPath = nil;
-    NSBundle            *bundle = [ NSBundle bundleForClass: [ self class ]];
-    NSDictionary        *editorPlist = nil;
     NSArray             *editorArray = nil;
+    NSString            *savedID = nil;
+    NSString            *savedName = nil;
+    NSMenuItem          *match = nil;
     
     if ( [[ prefViewBox contentView ] isEqual: prefFilesView ] ) {
         return;
     }
     
-    editorPlist = [ NSDictionary dictionaryWithContentsOfFile:
-                    [ bundle pathForResource: @"ODBEditors" ofType: @"plist" ]];
-    if ( ! editorPlist ) {
-        NSLog( @"Failed to load list of ODB editors" );
-        return;
-    }
-    editorArray = [ editorPlist objectForKey: @"ODBEditors" ];
-    
-    if (( editor = [[ NSUserDefaults standardUserDefaults ]
-			objectForKey: @"ODBTextEditor" ] ) == nil ) {
-	editor = @"BBEdit";
-    }
+    editorArray = [ FuguEditorCatalog installedEditors ];
+    savedID = [[ NSUserDefaults standardUserDefaults ] stringForKey: @"FuguPreferredEditorBundleID" ];
+    savedName = [[ NSUserDefaults standardUserDefaults ] stringForKey: @"ODBTextEditor" ];
     
     [ prefTextEditorPopUp removeAllItems ];
     
-    for ( i = 0; i < [ editorArray count ]; i++ ) {
-        NSString    *bundleID = [[ editorArray objectAtIndex: i ] objectForKey: @"ODBEditorBundleID" ];
-        NSString    *name = [[ editorArray objectAtIndex: i ] objectForKey: @"ODBEditorName" ];
-        NSImage     *odbIcon = nil;
-        NSURL       *appURL;
+    for ( i = 0; i < ( int )[ editorArray count ]; i++ ) {
+        FuguEditorRecord *editor = [ editorArray objectAtIndex: i ];
+        NSImage     *odbIcon = [[ NSWorkspace sharedWorkspace ] iconForFile: editor.path ];
         NSMenu      *popupMenu = [ prefTextEditorPopUp menu ];
-        NSMenuItem  *menuItem = nil;
+        NSMenuItem  *menuItem = [[ NSMenuItem alloc ] initWithTitle: editor.name action: NULL keyEquivalent: @"" ];
         
-        appURL = [[ NSWorkspace sharedWorkspace ] findApplicationNamed: name bundleID: bundleID ];
-        if ( appURL ) {
-            odbIcon = [[ NSWorkspace sharedWorkspace ] iconForFile: [ appURL path ]];
-        } else if ( [ bundleID isEqualToString: @"-" ] ) {
-            odbIcon = [[ NSWorkspace sharedWorkspace ] iconForFile:
-                        [[ editorArray objectAtIndex: i ] objectForKey: @"ODBEditorPath" ]];
-        } else {
-            odbIcon = [[ NSImage alloc ] initWithSize: NSMakeSize( 16.0, 16.0 ) ];
-        }
-        
-        menuItem = [[ NSMenuItem alloc ] initWithTitle: name action: NULL keyEquivalent: @"" ];
+        [ menuItem setRepresentedObject: editor.bundleIdentifier ];
         if ( odbIcon ) {
             [ odbIcon setSize: NSMakeSize( 16.0, 16.0 ) ];
             [ menuItem setImage: odbIcon ];
         }
-        
         [ popupMenu addItem: menuItem ];
+        if ( match == nil && savedID != nil && [ editor.bundleIdentifier isEqualToString: savedID ] ) {
+            match = menuItem;
+        }
     }
-    
-    [ prefTextEditorPopUp selectItemWithTitle: editor ];
+    if ( match == nil && savedName != nil ) {
+        match = [ prefTextEditorPopUp itemWithTitle: savedName ];
+    }
+    if ( match != nil ) {
+        [ prefTextEditorPopUp selectItem: match ];
+    } else if ( [ prefTextEditorPopUp numberOfItems ] > 0 ) {
+        [ prefTextEditorPopUp selectItemAtIndex: 0 ];
+        [ self setODBTextEditor: prefTextEditorPopUp ];
+    }
     
     if (( num = [[ NSUserDefaults standardUserDefaults ]
                         objectForKey: @"PostEditBehaviour" ] ) == nil ) {
@@ -635,9 +618,20 @@ static NSMutableArray	*knownHosts = nil;
 
 - ( IBAction )setODBTextEditor: ( id )sender
 {
-    [[ NSUserDefaults standardUserDefaults ]
-	    setObject: [ prefTextEditorPopUp titleOfSelectedItem ]
-	    forKey: @"ODBTextEditor" ];
+    NSMenuItem          *item = [ prefTextEditorPopUp selectedItem ];
+    NSString            *identifier = [ item representedObject ];
+    FuguEditorRecord    *editor = nil;
+
+    if ( identifier != nil ) {
+        editor = [ FuguEditorCatalog editorForBundleIdentifier: identifier ];
+    }
+    if ( editor != nil ) {
+        [ FuguEditorCatalog storePreferredEditor: editor ];
+        return;
+    }
+    if ( [ item title ] != nil ) {
+        [[ NSUserDefaults standardUserDefaults ] setObject: [ item title ] forKey: @"ODBTextEditor" ];
+    }
 }
 
 - ( IBAction )addFavorite:( id )sender

@@ -13,3 +13,7 @@ All implementation and verification happen on the local Mac with Xcode. The Linu
 ## Non-goals for the first step
 
 No Swift rewrites of controllers, no SSH library swap, no SwiftUI conversion, no deployment-target change.
+
+## Editor setting
+
+File Editing currently chooses from a fixed ODB editor list and defaults to BBEdit. A later change lets the user pick an installed editor, including modern editors, and caches that installed list. The migration above stays parked while that change is planned and built. `SFTPPrefs` stays Objective-C for this change.

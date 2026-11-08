@@ -4,7 +4,7 @@
  */
 
 #import "NSString(SSHAdditions).h"
-#import "NSString-UnknownEncoding.h"
+#import "Fugu-Swift.h"
 #include <CoreFoundation/CoreFoundation.h>
 #include <CoreServices/CoreServices.h>
 
@@ -410,7 +410,7 @@
         free( s );
     }
     
-    escapedPath = [ NSString stringWithBytesOfUnknownEncoding: esc
+    escapedPath = [ FuguStringEncoding stringWithBytes: esc
                                 length: ( unsigned int )strlen( esc ) ];
                                 
     return( escapedPath );

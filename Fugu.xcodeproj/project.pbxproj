@@ -27,24 +27,18 @@
 		09682FB807C5528A00210847 /* sshversion.h in Headers */ = {isa = PBXBuildFile; fileRef = 23A1B7410389BD23FED5EA79 /* sshversion.h */; };
 		09682FB907C5528A00210847 /* NSMutableDictionary(Fugu).h in Headers */ = {isa = PBXBuildFile; fileRef = 09C448BB03D0D37E00D5EA68 /* NSMutableDictionary(Fugu).h */; };
 		09682FBA07C5528A00210847 /* UMFileLauncher.h in Headers */ = {isa = PBXBuildFile; fileRef = 0923B08803E846EE00A8002B /* UMFileLauncher.h */; };
-		09682FBB07C5528A00210847 /* UMVersionCheck.h in Headers */ = {isa = PBXBuildFile; fileRef = 0991811803F0262300A8002B /* UMVersionCheck.h */; };
 		09682FBC07C5528A00210847 /* keychain.h in Headers */ = {isa = PBXBuildFile; fileRef = 0977864F0430BF2000BEE8BF /* keychain.h */; };
 		09682FBD07C5528A00210847 /* SFTPScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 09554B1D03CE87CA00D5E7D1 /* SFTPScrollView.h */; };
 		09682FBE07C5528A00210847 /* SFTPItemCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 095C52200442121400A8002B /* SFTPItemCell.h */; };
 		09682FBF07C5528A00210847 /* SFTPPrefTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = 09AE0F7204812A6300A8002B /* SFTPPrefTableView.h */; };
 		09682FC007C5528A00210847 /* ODBEditorSuite.h in Headers */ = {isa = PBXBuildFile; fileRef = 09E0A0F804C091C000D5EA79 /* ODBEditorSuite.h */; };
-		09682FC107C5528A00210847 /* NSString(FSRefAdditions).h in Headers */ = {isa = PBXBuildFile; fileRef = 09E0A0EE04C06A3100D5EA79 /* NSString(FSRefAdditions).h */; };
 		09682FC207C5528A00210847 /* NSWorkspace(LaunchServices).h in Headers */ = {isa = PBXBuildFile; fileRef = 0994319704C5AEDE0066CB97 /* NSWorkspace(LaunchServices).h */; };
 		09682FC307C5528A00210847 /* NSSet(ImageExtensions).h in Headers */ = {isa = PBXBuildFile; fileRef = 09D21DC604EC1C7C00D5EACC /* NSSet(ImageExtensions).h */; };
 		09682FC407C5528A00210847 /* SFTPImagePreviewPanel.h in Headers */ = {isa = PBXBuildFile; fileRef = 09D21DCA04EDA06700D5EACC /* SFTPImagePreviewPanel.h */; };
 		09682FC507C5528A00210847 /* SFTPImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 09BCC14004EECC1500D5EACC /* SFTPImageView.h */; };
-		09682FC707C5528A00210847 /* NSImage(IconForType).h in Headers */ = {isa = PBXBuildFile; fileRef = 09D38E9304F5AE1400000102 /* NSImage(IconForType).h */; };
-		09682FC807C5528A00210847 /* NSWorkspace(SystemVersionNumber).h in Headers */ = {isa = PBXBuildFile; fileRef = 095D2AE2051946B500E73D04 /* NSWorkspace(SystemVersionNumber).h */; };
 		09682FC907C5528A00210847 /* NSArray(CreateArgv).h in Headers */ = {isa = PBXBuildFile; fileRef = 09DA7588051B891000D5E7DF /* NSArray(CreateArgv).h */; };
 		09682FCA07C5528A00210847 /* NSMutableArray(Extensions).h in Headers */ = {isa = PBXBuildFile; fileRef = 0936A56005220F8600D5E7DF /* NSMutableArray(Extensions).h */; };
-		09682FCB07C5528A00210847 /* NSCalendarDate(ConvertToSeconds).h in Headers */ = {isa = PBXBuildFile; fileRef = 099BE67705222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).h */; };
 		09682FCC07C5528A00210847 /* NSAttributedString-Ellipsis.h in Headers */ = {isa = PBXBuildFile; fileRef = 0984FFE005D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.h */; };
-		09682FCD07C5528A00210847 /* NSString-UnknownEncoding.h in Headers */ = {isa = PBXBuildFile; fileRef = 09D2776A061A835D00EE17C7 /* NSString-UnknownEncoding.h */; };
 		09682FCE07C5528A00210847 /* UMTextField.h in Headers */ = {isa = PBXBuildFile; fileRef = 09682E8207C4F07300210847 /* UMTextField.h */; };
 		09682FCF07C5528A00210847 /* UMDragDropImageView.h in Headers */ = {isa = PBXBuildFile; fileRef = 09682EE507C5005400210847 /* UMDragDropImageView.h */; };
 		09682FD407C5528A00210847 /* COPYRIGHT.txt in Resources */ = {isa = PBXBuildFile; fileRef = F517810B03083F4A01A8002B /* COPYRIGHT.txt */; };
@@ -76,7 +70,6 @@
 		09682FF907C5528A00210847 /* trash.png in Resources */ = {isa = PBXBuildFile; fileRef = 093444890524CA3800D5E7DF /* trash.png */; };
 		09682FFA07C5528A00210847 /* remotetrash.png in Resources */ = {isa = PBXBuildFile; fileRef = 0934448B0524CAB600D5E7DF /* remotetrash.png */; };
 		09682FFB07C5528A00210847 /* info.png in Resources */ = {isa = PBXBuildFile; fileRef = 094AF260054772B6006D53C9 /* info.png */; };
-		09682FFD07C5528A00210847 /* ODBEditors.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0985D5CC074A9A2A00B8ED3B /* ODBEditors.plist */; };
 		09682FFF07C5528A00210847 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		0968300007C5528A00210847 /* SFTPMainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = F58418F301B4201501D5E771 /* SFTPMainWindow.m */; };
 		0968300107C5528A00210847 /* SFTPController.m in Sources */ = {isa = PBXBuildFile; fileRef = F589A63801B43A7301D5E771 /* SFTPController.m */; };
@@ -98,23 +91,17 @@
 		0968301107C5528A00210847 /* sshversion.c in Sources */ = {isa = PBXBuildFile; fileRef = 23A1B7420389BD23FED5EA79 /* sshversion.c */; };
 		0968301207C5528A00210847 /* NSMutableDictionary(Fugu).m in Sources */ = {isa = PBXBuildFile; fileRef = 09C448BC03D0D37E00D5EA68 /* NSMutableDictionary(Fugu).m */; };
 		0968301307C5528A00210847 /* UMFileLauncher.m in Sources */ = {isa = PBXBuildFile; fileRef = 0923B08903E846EE00A8002B /* UMFileLauncher.m */; };
-		0968301407C5528A00210847 /* UMVersionCheck.m in Sources */ = {isa = PBXBuildFile; fileRef = 0991811903F0262300A8002B /* UMVersionCheck.m */; };
 		0968301507C5528A00210847 /* keychain.c in Sources */ = {isa = PBXBuildFile; fileRef = 097786500430BF2000BEE8BF /* keychain.c */; };
 		0968301607C5528A00210847 /* SFTPScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09554B1E03CE87CA00D5E7D1 /* SFTPScrollView.m */; };
 		0968301707C5528A00210847 /* SFTPItemCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 095C52210442121400A8002B /* SFTPItemCell.m */; };
 		0968301807C5528A00210847 /* SFTPPrefTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09AE0F7304812A6300A8002B /* SFTPPrefTableView.m */; };
-		0968301907C5528A00210847 /* NSString(FSRefAdditions).m in Sources */ = {isa = PBXBuildFile; fileRef = 09E0A0EF04C06A3100D5EA79 /* NSString(FSRefAdditions).m */; };
 		0968301A07C5528A00210847 /* NSWorkspace(LaunchServices).m in Sources */ = {isa = PBXBuildFile; fileRef = 0994319804C5AEDE0066CB97 /* NSWorkspace(LaunchServices).m */; };
 		0968301B07C5528A00210847 /* NSSet(ImageExtensions).m in Sources */ = {isa = PBXBuildFile; fileRef = 09D21DC704EC1C7C00D5EACC /* NSSet(ImageExtensions).m */; };
 		0968301C07C5528A00210847 /* SFTPImagePreviewPanel.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D21DCB04EDA06700D5EACC /* SFTPImagePreviewPanel.m */; };
 		0968301D07C5528A00210847 /* SFTPImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09BCC14104EECC1500D5EACC /* SFTPImageView.m */; };
-		0968301F07C5528A00210847 /* NSImage(IconForType).m in Sources */ = {isa = PBXBuildFile; fileRef = 09D38E9404F5AE1400000102 /* NSImage(IconForType).m */; };
-		0968302007C5528A00210847 /* NSWorkspace(SystemVersionNumber).m in Sources */ = {isa = PBXBuildFile; fileRef = 095D2AE3051946B500E73D04 /* NSWorkspace(SystemVersionNumber).m */; };
 		0968302107C5528A00210847 /* NSArray(CreateArgv).m in Sources */ = {isa = PBXBuildFile; fileRef = 09DA7589051B891000D5E7DF /* NSArray(CreateArgv).m */; };
 		0968302207C5528A00210847 /* NSMutableArray(Extensions).m in Sources */ = {isa = PBXBuildFile; fileRef = 0936A56105220F8600D5E7DF /* NSMutableArray(Extensions).m */; };
-		0968302307C5528A00210847 /* NSCalendarDate(ConvertToSeconds).m in Sources */ = {isa = PBXBuildFile; fileRef = 099BE67805222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).m */; };
 		0968302407C5528A00210847 /* NSAttributedString-Ellipsis.m in Sources */ = {isa = PBXBuildFile; fileRef = 0984FFE105D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.m */; };
-		0968302507C5528A00210847 /* NSString-UnknownEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 09D2776B061A835D00EE17C7 /* NSString-UnknownEncoding.m */; };
 		0968302607C5528A00210847 /* UMTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 09682E8307C4F07300210847 /* UMTextField.m */; };
 		0968302707C5528A00210847 /* UMDragDropImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 09682EE607C5005400210847 /* UMDragDropImageView.m */; };
 		0968302907C5528A00210847 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -129,6 +116,14 @@
 		A1B1C1D12F96000100CE2B02 /* FuguSwiftBridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000100CE2B01 /* FuguSwiftBridge.swift */; };
 		A1B1C1D12F96000200CE2B02 /* FuguTemporaryDirectory.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000200CE2B01 /* FuguTemporaryDirectory.swift */; };
 		A1B1C1D12F96000200CE2B04 /* FuguKeychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000200CE2B03 /* FuguKeychain.swift */; };
+		A1B1C1D12F96000300CE2B02 /* RemoteEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000300CE2B01 /* RemoteEntry.swift */; };
+		A1B1C1D12F96000300CE2B04 /* FuguConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000300CE2B03 /* FuguConstants.swift */; };
+		A1B1C1D12F96000300CE2B06 /* FuguListingSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000300CE2B05 /* FuguListingSupport.swift */; };
+		A1B1C1D12F96000300CE2B08 /* FuguIcons.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000300CE2B07 /* FuguIcons.swift */; };
+		A1B1C1D12F96000400CE2B02 /* FuguSSHProcess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000400CE2B01 /* FuguSSHProcess.swift */; };
+		A1B1C1D12F96000400CE2B04 /* UMVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000400CE2B03 /* UMVersionCheck.swift */; };
+		A1B1C1D12F96000500CE2B02 /* FuguEditorCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000500CE2B01 /* FuguEditorCatalog.swift */; };
+		A1B1C1D12F96000500CE2B04 /* FuguEditorWatch.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1B1C1D12F96000500CE2B03 /* FuguEditorWatch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -169,8 +164,6 @@
 		09554B1E03CE87CA00D5E7D1 /* SFTPScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTPScrollView.m; sourceTree = "<group>"; };
 		095C52200442121400A8002B /* SFTPItemCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTPItemCell.h; sourceTree = "<group>"; };
 		095C52210442121400A8002B /* SFTPItemCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTPItemCell.m; sourceTree = "<group>"; };
-		095D2AE2051946B500E73D04 /* NSWorkspace(SystemVersionNumber).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace(SystemVersionNumber).h"; sourceTree = "<group>"; };
-		095D2AE3051946B500E73D04 /* NSWorkspace(SystemVersionNumber).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace(SystemVersionNumber).m"; sourceTree = "<group>"; };
 		09682E8207C4F07300210847 /* UMTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMTextField.h; sourceTree = "<group>"; };
 		09682E8307C4F07300210847 /* UMTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMTextField.m; sourceTree = "<group>"; };
 		09682EE507C5005400210847 /* UMDragDropImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMDragDropImageView.h; sourceTree = "<group>"; };
@@ -184,13 +177,8 @@
 		0984006B05DB103E00EEA2D5 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = /System/Library/Frameworks/CoreFoundation.framework; sourceTree = "<absolute>"; };
 		0984FFE005D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAttributedString-Ellipsis.h"; sourceTree = "<group>"; };
 		0984FFE105D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAttributedString-Ellipsis.m"; sourceTree = "<group>"; };
-		0985D5CC074A9A2A00B8ED3B /* ODBEditors.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ODBEditors.plist; sourceTree = "<group>"; };
-		0991811803F0262300A8002B /* UMVersionCheck.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UMVersionCheck.h; sourceTree = "<group>"; };
-		0991811903F0262300A8002B /* UMVersionCheck.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UMVersionCheck.m; sourceTree = "<group>"; };
 		0994319704C5AEDE0066CB97 /* NSWorkspace(LaunchServices).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSWorkspace(LaunchServices).h"; sourceTree = "<group>"; };
 		0994319804C5AEDE0066CB97 /* NSWorkspace(LaunchServices).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSWorkspace(LaunchServices).m"; sourceTree = "<group>"; };
-		099BE67705222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCalendarDate(ConvertToSeconds).h"; sourceTree = "<group>"; };
-		099BE67805222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCalendarDate(ConvertToSeconds).m"; sourceTree = "<group>"; };
 		09AE0F7204812A6300A8002B /* SFTPPrefTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTPPrefTableView.h; sourceTree = "<group>"; };
 		09AE0F7304812A6300A8002B /* SFTPPrefTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTPPrefTableView.m; sourceTree = "<group>"; };
 		09AE981B06F3781D005A54B4 /* aevent.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = aevent.c; sourceTree = "<group>"; };
@@ -204,15 +192,9 @@
 		09D21DC704EC1C7C00D5EACC /* NSSet(ImageExtensions).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSSet(ImageExtensions).m"; sourceTree = "<group>"; };
 		09D21DCA04EDA06700D5EACC /* SFTPImagePreviewPanel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SFTPImagePreviewPanel.h; sourceTree = "<group>"; };
 		09D21DCB04EDA06700D5EACC /* SFTPImagePreviewPanel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SFTPImagePreviewPanel.m; sourceTree = "<group>"; };
-		09D2776A061A835D00EE17C7 /* NSString-UnknownEncoding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString-UnknownEncoding.h"; sourceTree = "<group>"; };
-		09D2776B061A835D00EE17C7 /* NSString-UnknownEncoding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString-UnknownEncoding.m"; sourceTree = "<group>"; };
-		09D38E9304F5AE1400000102 /* NSImage(IconForType).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage(IconForType).h"; sourceTree = "<group>"; };
-		09D38E9404F5AE1400000102 /* NSImage(IconForType).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage(IconForType).m"; sourceTree = "<group>"; };
 		09D38E9D04F6A0A800000102 /* reload.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reload.png; sourceTree = "<group>"; };
 		09DA7588051B891000D5E7DF /* NSArray(CreateArgv).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray(CreateArgv).h"; sourceTree = "<group>"; };
 		09DA7589051B891000D5E7DF /* NSArray(CreateArgv).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray(CreateArgv).m"; sourceTree = "<group>"; };
-		09E0A0EE04C06A3100D5EA79 /* NSString(FSRefAdditions).h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString(FSRefAdditions).h"; sourceTree = "<group>"; };
-		09E0A0EF04C06A3100D5EA79 /* NSString(FSRefAdditions).m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString(FSRefAdditions).m"; sourceTree = "<group>"; };
 		09E0A0F304C06B1600D5EA79 /* CoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreServices.framework; path = /System/Library/Frameworks/CoreServices.framework; sourceTree = "<absolute>"; };
 		09E0A0F804C091C000D5EA79 /* ODBEditorSuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ODBEditorSuite.h; sourceTree = "<group>"; };
 		09E8A371042F6F8F009BCCF8 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = /System/Library/Frameworks/Security.framework; sourceTree = "<absolute>"; };
@@ -240,6 +222,14 @@
 		A1B1C1D12F96000100CE2B01 /* FuguSwiftBridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguSwiftBridge.swift; sourceTree = "<group>"; };
 		A1B1C1D12F96000200CE2B01 /* FuguTemporaryDirectory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguTemporaryDirectory.swift; sourceTree = "<group>"; };
 		A1B1C1D12F96000200CE2B03 /* FuguKeychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguKeychain.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000300CE2B01 /* RemoteEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteEntry.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000300CE2B03 /* FuguConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguConstants.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000300CE2B05 /* FuguListingSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguListingSupport.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000300CE2B07 /* FuguIcons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguIcons.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000400CE2B01 /* FuguSSHProcess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguSSHProcess.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000400CE2B03 /* UMVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UMVersionCheck.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000500CE2B01 /* FuguEditorCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguEditorCatalog.swift; sourceTree = "<group>"; };
+		A1B1C1D12F96000500CE2B03 /* FuguEditorWatch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuguEditorWatch.swift; sourceTree = "<group>"; };
 		A1B1C1D12F96000100CE2B03 /* Fugu-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fugu-Bridging-Header.h"; sourceTree = "<group>"; };
 		F517810B03083F4A01A8002B /* COPYRIGHT.txt */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = text; path = COPYRIGHT.txt; sourceTree = "<group>"; };
 		F517DFB00312A0A901A8002B /* NSString(SSHAdditions).m */ = {isa = PBXFileReference; fileEncoding = 30; lastKnownFileType = sourcecode.c.objc; path = "NSString(SSHAdditions).m"; sourceTree = "<group>"; };
@@ -319,10 +309,16 @@
 			children = (
 				0923B08803E846EE00A8002B /* UMFileLauncher.h */,
 				0923B08903E846EE00A8002B /* UMFileLauncher.m */,
-				0991811803F0262300A8002B /* UMVersionCheck.h */,
-				0991811903F0262300A8002B /* UMVersionCheck.m */,
 				A1B1C1D12F96000200CE2B01 /* FuguTemporaryDirectory.swift */,
 				A1B1C1D12F96000200CE2B03 /* FuguKeychain.swift */,
+				A1B1C1D12F96000300CE2B01 /* RemoteEntry.swift */,
+				A1B1C1D12F96000300CE2B03 /* FuguConstants.swift */,
+				A1B1C1D12F96000300CE2B05 /* FuguListingSupport.swift */,
+				A1B1C1D12F96000300CE2B07 /* FuguIcons.swift */,
+				A1B1C1D12F96000400CE2B01 /* FuguSSHProcess.swift */,
+				A1B1C1D12F96000400CE2B03 /* UMVersionCheck.swift */,
+				A1B1C1D12F96000500CE2B01 /* FuguEditorCatalog.swift */,
+				A1B1C1D12F96000500CE2B03 /* FuguEditorWatch.swift */,
 			);
 			name = "Misc Classes";
 			path = Core/Support;
@@ -405,7 +401,6 @@
 				1DD51AE92F95F79E00CD3273 /* Prefs.xib */,
 				1DD51AEC2F95F7AC00CD3273 /* MainMenu.xib */,
 				1DD51AEF2F95F7B300CD3273 /* SSHTunnel.xib */,
-				0985D5CC074A9A2A00B8ED3B /* ODBEditors.plist */,
 				F558B96301E3994C01D5E771 /* Images */,
 				238577660392BFBCFED5EA79 /* fugu.icns */,
 				1DD51AF22F95F7BC00CD3273 /* SCP.xib */,
@@ -439,26 +434,16 @@
 				F517DFB00312A0A901A8002B /* NSString(SSHAdditions).m */,
 				09C448BB03D0D37E00D5EA68 /* NSMutableDictionary(Fugu).h */,
 				09C448BC03D0D37E00D5EA68 /* NSMutableDictionary(Fugu).m */,
-				09E0A0EE04C06A3100D5EA79 /* NSString(FSRefAdditions).h */,
-				09E0A0EF04C06A3100D5EA79 /* NSString(FSRefAdditions).m */,
-				095D2AE2051946B500E73D04 /* NSWorkspace(SystemVersionNumber).h */,
-				095D2AE3051946B500E73D04 /* NSWorkspace(SystemVersionNumber).m */,
 				0994319704C5AEDE0066CB97 /* NSWorkspace(LaunchServices).h */,
 				0994319804C5AEDE0066CB97 /* NSWorkspace(LaunchServices).m */,
-				09D38E9304F5AE1400000102 /* NSImage(IconForType).h */,
-				09D38E9404F5AE1400000102 /* NSImage(IconForType).m */,
 				09D21DC604EC1C7C00D5EACC /* NSSet(ImageExtensions).h */,
 				09D21DC704EC1C7C00D5EACC /* NSSet(ImageExtensions).m */,
 				09DA7588051B891000D5E7DF /* NSArray(CreateArgv).h */,
 				09DA7589051B891000D5E7DF /* NSArray(CreateArgv).m */,
-				099BE67705222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).h */,
-				099BE67805222CDA0038D787 /* NSCalendarDate(ConvertToSeconds).m */,
 				0936A56005220F8600D5E7DF /* NSMutableArray(Extensions).h */,
 				0936A56105220F8600D5E7DF /* NSMutableArray(Extensions).m */,
 				0984FFE005D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.h */,
 				0984FFE105D9D8F900EEA2D5 /* NSAttributedString-Ellipsis.m */,
-				09D2776A061A835D00EE17C7 /* NSString-UnknownEncoding.h */,
-				09D2776B061A835D00EE17C7 /* NSString-UnknownEncoding.m */,
 			);
 			name = Categories;
 			path = Core/Categories;
@@ -575,24 +560,18 @@
 				09682FB807C5528A00210847 /* sshversion.h in Headers */,
 				09682FB907C5528A00210847 /* NSMutableDictionary(Fugu).h in Headers */,
 				09682FBA07C5528A00210847 /* UMFileLauncher.h in Headers */,
-				09682FBB07C5528A00210847 /* UMVersionCheck.h in Headers */,
 				09682FBC07C5528A00210847 /* keychain.h in Headers */,
 				09682FBD07C5528A00210847 /* SFTPScrollView.h in Headers */,
 				09682FBE07C5528A00210847 /* SFTPItemCell.h in Headers */,
 				09682FBF07C5528A00210847 /* SFTPPrefTableView.h in Headers */,
 				09682FC007C5528A00210847 /* ODBEditorSuite.h in Headers */,
-				09682FC107C5528A00210847 /* NSString(FSRefAdditions).h in Headers */,
 				09682FC207C5528A00210847 /* NSWorkspace(LaunchServices).h in Headers */,
 				09682FC307C5528A00210847 /* NSSet(ImageExtensions).h in Headers */,
 				09682FC407C5528A00210847 /* SFTPImagePreviewPanel.h in Headers */,
 				09682FC507C5528A00210847 /* SFTPImageView.h in Headers */,
-				09682FC707C5528A00210847 /* NSImage(IconForType).h in Headers */,
-				09682FC807C5528A00210847 /* NSWorkspace(SystemVersionNumber).h in Headers */,
 				09682FC907C5528A00210847 /* NSArray(CreateArgv).h in Headers */,
 				09682FCA07C5528A00210847 /* NSMutableArray(Extensions).h in Headers */,
-				09682FCB07C5528A00210847 /* NSCalendarDate(ConvertToSeconds).h in Headers */,
 				09682FCC07C5528A00210847 /* NSAttributedString-Ellipsis.h in Headers */,
-				09682FCD07C5528A00210847 /* NSString-UnknownEncoding.h in Headers */,
 				09682FCE07C5528A00210847 /* UMTextField.h in Headers */,
 				09682FCF07C5528A00210847 /* UMDragDropImageView.h in Headers */,
 			);
@@ -691,7 +670,6 @@
 				09682FF907C5528A00210847 /* trash.png in Resources */,
 				09682FFA07C5528A00210847 /* remotetrash.png in Resources */,
 				09682FFB07C5528A00210847 /* info.png in Resources */,
-				09682FFD07C5528A00210847 /* ODBEditors.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -705,6 +683,14 @@
 				A1B1C1D12F96000100CE2B02 /* FuguSwiftBridge.swift in Sources */,
 				A1B1C1D12F96000200CE2B02 /* FuguTemporaryDirectory.swift in Sources */,
 				A1B1C1D12F96000200CE2B04 /* FuguKeychain.swift in Sources */,
+				A1B1C1D12F96000300CE2B02 /* RemoteEntry.swift in Sources */,
+				A1B1C1D12F96000300CE2B04 /* FuguConstants.swift in Sources */,
+				A1B1C1D12F96000300CE2B06 /* FuguListingSupport.swift in Sources */,
+				A1B1C1D12F96000300CE2B08 /* FuguIcons.swift in Sources */,
+				A1B1C1D12F96000400CE2B02 /* FuguSSHProcess.swift in Sources */,
+				A1B1C1D12F96000400CE2B04 /* UMVersionCheck.swift in Sources */,
+				A1B1C1D12F96000500CE2B02 /* FuguEditorCatalog.swift in Sources */,
+				A1B1C1D12F96000500CE2B04 /* FuguEditorWatch.swift in Sources */,
 				09682FFF07C5528A00210847 /* main.m in Sources */,
 				0968300007C5528A00210847 /* SFTPMainWindow.m in Sources */,
 				0968300107C5528A00210847 /* SFTPController.m in Sources */,
@@ -726,23 +712,17 @@
 				0968301107C5528A00210847 /* sshversion.c in Sources */,
 				0968301207C5528A00210847 /* NSMutableDictionary(Fugu).m in Sources */,
 				0968301307C5528A00210847 /* UMFileLauncher.m in Sources */,
-				0968301407C5528A00210847 /* UMVersionCheck.m in Sources */,
 				0968301507C5528A00210847 /* keychain.c in Sources */,
 				0968301607C5528A00210847 /* SFTPScrollView.m in Sources */,
 				0968301707C5528A00210847 /* SFTPItemCell.m in Sources */,
 				0968301807C5528A00210847 /* SFTPPrefTableView.m in Sources */,
-				0968301907C5528A00210847 /* NSString(FSRefAdditions).m in Sources */,
 				0968301A07C5528A00210847 /* NSWorkspace(LaunchServices).m in Sources */,
 				0968301B07C5528A00210847 /* NSSet(ImageExtensions).m in Sources */,
 				0968301C07C5528A00210847 /* SFTPImagePreviewPanel.m in Sources */,
 				0968301D07C5528A00210847 /* SFTPImageView.m in Sources */,
-				0968301F07C5528A00210847 /* NSImage(IconForType).m in Sources */,
-				0968302007C5528A00210847 /* NSWorkspace(SystemVersionNumber).m in Sources */,
 				0968302107C5528A00210847 /* NSArray(CreateArgv).m in Sources */,
 				0968302207C5528A00210847 /* NSMutableArray(Extensions).m in Sources */,
-				0968302307C5528A00210847 /* NSCalendarDate(ConvertToSeconds).m in Sources */,
 				0968302407C5528A00210847 /* NSAttributedString-Ellipsis.m in Sources */,
-				0968302507C5528A00210847 /* NSString-UnknownEncoding.m in Sources */,
 				0968302607C5528A00210847 /* UMTextField.m in Sources */,
 				0968302707C5528A00210847 /* UMDragDropImageView.m in Sources */,
 			);

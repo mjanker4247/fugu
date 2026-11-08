@@ -5,13 +5,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-/* column minimum widths */
-#define DATE_COLUMN_WIDTH	100.0
-#define GROUP_COLUMN_WIDTH	70.0
-#define MODE_COLUMN_WIDTH	80.0
-#define OWNER_COLUMN_WIDTH	70.0
-#define SIZE_COLUMN_WIDTH	70.0
-
 @interface SFTPTableView : NSTableView
 {
 @private

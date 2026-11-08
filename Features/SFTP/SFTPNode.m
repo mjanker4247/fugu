@@ -4,9 +4,8 @@
  */
 
 #import "SFTPNode.h"
-#import "NSImage(IconForType).h"
 #import "NSString(SSHAdditions).h"
-#import "NSString(FSRefAdditions).h"
+#import "Fugu-Swift.h"
 
 #include <sys/types.h>
 #include <sys/param.h>
@@ -126,8 +125,8 @@ now( void )
     case S_IFREG:
         /* only check if a file's an alias if it has a size of 0 */
         if ( st.st_size == 0 ) {
-            if ( [ path isAliasFile ] ) {
-                if (( resolvedpath = [ path stringByResolvingAliasInPath ] ) != nil ) {
+            if ( [ FuguPath isAliasFile: path ] ) {
+                if (( resolvedpath = [ FuguPath stringByResolvingAliasInPath: path ] ) != nil ) {
                     isAlias = YES;
                     type = NSLocalizedString( @"alias", @"alias" );
                 }
@@ -135,11 +134,11 @@ now( void )
         }
         
         if ( ! isAlias ) {
-            if (( icon = [ NSImage iconForFile: path ] ) == nil ) {
+            if (( icon = [ FuguIcons iconForFile: path ] ) == nil ) {
                 if ( [ ext isEqualToString: @"" ] ) {
-                    icon = [ NSImage iconForType: @"'doc '" ];
+                    icon = [ FuguIcons iconForType: @"'doc '" ];
                 } else {
-                    icon = [ NSImage iconForType: ext ];
+                    icon = [ FuguIcons iconForType: ext ];
                 }
             }
             type = NSLocalizedString( @"file", @"file" );
@@ -148,33 +147,33 @@ now( void )
         break;
         
     case S_IFDIR:
-        if (( icon = [ NSImage iconForFile: path ] ) == nil ) {
+        if (( icon = [ FuguIcons iconForFile: path ] ) == nil ) {
             if ( [[ self bundleExtensions ] containsObject: ext ] ) {
-                icon = [ NSImage iconForType: ext ];
+                icon = [ FuguIcons iconForType: ext ];
             } else {
-                icon = [ NSImage iconForType: @"'fldr'" ];
+                icon = [ FuguIcons iconForType: @"'fldr'" ];
             }
         }
         type = NSLocalizedString( @"directory", @"directory" );
         break;
         
     case S_IFIFO:
-        icon = [ NSImage iconForType: @"'doc '" ];
+        icon = [ FuguIcons iconForType: @"'doc '" ];
         type = NSLocalizedString( @"named pipe", @"named pipe" );
         break;
         
     case S_IFCHR:
-        icon = [ NSImage iconForType: @"'doc '" ];
+        icon = [ FuguIcons iconForType: @"'doc '" ];
         type = NSLocalizedString( @"character special", @"character special" );
         break;
         
     case S_IFBLK:
-        icon = [ NSImage iconForType: @"'doc '" ];
+        icon = [ FuguIcons iconForType: @"'doc '" ];
         type = NSLocalizedString( @"block special", @"block special" );
         break;
     
     case S_IFSOCK:
-        icon = [ NSImage iconForType: @"'doc '" ];
+        icon = [ FuguIcons iconForType: @"'doc '" ];
         type = NSLocalizedString( @"socket", @"socket" );
         break;
     }
@@ -187,7 +186,7 @@ now( void )
         }
         
         if ( icon == nil ) {
-            icon = [ NSImage iconForType: @"'doc '" ];
+            icon = [ FuguIcons iconForType: @"'doc '" ];
         }
     }
     [ icon setSize: NSMakeSize( 16.0, 16.0 ) ];
@@ -246,7 +245,7 @@ now( void )
     NSString		*tpath = [ path copy ], *fullpath = nil;
     NSDictionary	*item = nil;
 
-    [ NSImage cacheIconsForPath: path contents: allItems ];
+    [ FuguIcons cacheIconsForPath: path contents: allItems ];
     
     for ( i = 0; i < [ allItems count ]; i++ ) {
         if ( ! showHidden ) {

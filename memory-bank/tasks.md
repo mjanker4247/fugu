@@ -1,8 +1,141 @@
-# Task: Fugu Objective-C to Swift migration
+# Task: Upgrade the project to Xcode 27
 
 ## Description
 
-Move Fugu from a flat Objective-C/C AppKit app to idiomatic Swift in a feature-based layout, without changing behavior. Each step compiles on its own. Development and every build stay on the local Mac that has Xcode. Step 1 is archived. Steps 2–6 are the remaining work.
+Make `Fugu.xcodeproj` a consistent Xcode 27 project on this Mac (Xcode 27.2, build 27B52, macOS 27.2 SDK). The project already opens and the Development build has succeeded here. `LastUpgradeCheck` is already `2720`. The remaining gap is old project shape and contradictory build settings, not a missing Xcode install.
+
+## Complexity
+
+Level: 3
+Type: Intermediate feature
+
+## Requirements
+
+- [ ] Project format, compiler selection, and deployment target are explicit and agree across the project and the Fugu target.
+- [ ] Development, Deployment, and Default all build with the Xcode 27.2 toolchain.
+- [ ] Obsolete settings that override that toolchain are removed: `CC = /usr/bin/gcc`, `CPLUSPLUS = /usr/bin/g++`, and `ZERO_LINK`.
+- [ ] `MACOSX_DEPLOYMENT_TARGET` is one chosen value. Today the project level is `11.5` and the target level is `$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)`, which the macOS 27.2 SDK resolves to `27.2`.
+- [ ] A Development `xcodebuild` succeeds after the change.
+- [ ] The Swift migration and the text-editor work stay as they are. This task does not rewrite controllers or switch `forkpty` to `Process`.
+
+## Facts from this tree (8 Nov 2026)
+
+- `objectVersion = 54`, `compatibilityVersion = "Xcode 12.0"`.
+- `LastUpgradeCheck = 2720`. `LastSwiftMigration = 2640`.
+- Project configs set `MACOSX_DEPLOYMENT_TARGET = 11.5` plus the Xcode 27 warning set (`ENABLE_USER_SCRIPT_SANDBOXING`, string catalogs, strict objc msgsend).
+- Target configs override deployment to `$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)` and pin `CC` / `CPLUSPLUS`. Development also sets `ZERO_LINK = YES`. Deployment sets `ZERO_LINK = NO`.
+- SDK `DefaultProperties` `MACOSX_DEPLOYMENT_TARGET` is `27.2`. Platform `MinimumSDKVersion` is `14.0`.
+- `SWIFT_VERSION = 6.0`. One target, `edu.umich.fugu`.
+
+## Creative phase required
+
+- [ ] Choose the deployment target: keep a floor the SDK still accepts (not below `14.0`), or adopt the SDK recommendation `27.2`.
+- [ ] Decide whether `objectVersion` / `compatibilityVersion` move forward, or stay at the Xcode 12 format while settings are cleaned.
+
+## Status
+
+- [x] VAN, 8 Nov 2026
+- [ ] PLAN
+- [ ] Creative decision for deployment target and project format
+- [ ] Implementation
+- [ ] Development build on this Mac
+
+## Parked: text editor setting
+
+The File Editing work below is implemented and its Development build succeeded. In-app checks are still open. It is not this task.
+
+# Task: Text editor setting
+
+## Description
+
+The File Editing preference offers a preferred text editor chosen from the editors installed on this Mac. The menu includes modern editors. The installed list is cached. A missing app does not appear. The Swift migration plan below stays parked and is not this build.
+
+## Complexity
+
+Level: 3
+Type: Intermediate feature
+
+## Requirements
+
+- [ ] The File Editing popup lists editors that are installed on this Mac. An app that is not installed does not appear.
+- [ ] The catalog includes the current ODB editors that are still installed, plus CotEditor, Nova, Sublime Text, Visual Studio Code, Cursor, Zed, MacVim, and TextEdit. `vi` and `emacs` stay when their binaries exist.
+- [ ] The user chooses one editor. The choice is restored the next time the pane opens and the next time a file is edited.
+- [ ] The installed list is written to `NSUserDefaults` on each visit to File Editing. If a scan returns nothing, the popup uses that cache.
+- [ ] When `ODBTextEditor` is unset, or names an editor that is not installed, the selection is the first installed editor in the priority order. TextEdit is the last fallback. The default is no longer BBEdit when BBEdit is absent.
+- [ ] A local file opens in the chosen app.
+- [ ] A remote file opened in an editor that speaks ODB still uploads through the existing modified-file and closed-file events.
+- [ ] Opening does not depend on a name match in `Resources/ODBEditors.plist`.
+
+## Technology Stack
+
+- Framework: AppKit. The existing `NSPopUpButton` stays. No SwiftUI.
+- Lookup: `NSWorkspace` `URLForApplicationWithBundleIdentifier:`, already used by `NSWorkspace(LaunchServices)`.
+- Launch: the existing `openFileURL:withApplicationURL:odbParams:completionHandler:`.
+- Storage: `NSUserDefaults`. No new file and no new package.
+- Language: a small Swift catalog in `Core/Support`, called from the existing Objective-C prefs and controller. `SFTPPrefs` stays Objective-C.
+- Build: `xcodebuild -project Fugu.xcodeproj -scheme Fugu -configuration Development build` on this Mac.
+
+## Technology Validation
+
+- [x] Stack is the existing Fugu app. No project initialization.
+- [x] Dependencies are AppKit and the system Launch Services lookup. Nothing to install.
+- [x] Deployment target stays macOS 11.5. `URLForApplicationWithBundleIdentifier:` is available.
+- [x] The Development build already succeeded on this tree on 8 Nov 2026. No separate hello-world target.
+- [ ] The implementation build is still required in `/build`.
+
+## Components
+
+- `Features/SFTP/SFTPPrefs.m` `showFilesPrefs:` fills `prefTextEditorPopUp` from `ODBEditors.plist` and still adds a row when the app is missing. `setODBTextEditor:` stores only the menu title in `ODBTextEditor`.
+- `Features/SFTP/SFTPController.m` `openLocalFileInEditor:` opens through `NSWorkspace` and does not send ODB parameters. `ODBEditFile:` returns without opening when the name is missing from the plist. Launch style 1 runs `vi` or `emacs`. Other entries send the ODB open event so a remote save uploads.
+- `Resources/ODBEditors.plist` is the only catalog. BBEdit Lite and CSSEdit store the bundle id under the misspelled key `OBDEditorBundleID`, so those ids are never read.
+- `Core/Categories/NSWorkspace(LaunchServices).m` already resolves a bundle id, then a name.
+- New: `Core/Support/FuguEditorCatalog.swift`. It owns the known editors, the installed filter, and the defaults cache. Both call sites use it.
+
+## Implementation Plan
+
+`/build` waits on the creative decision below.
+
+1. [x] Add `FuguEditorCatalog` with one record per known editor: display name, bundle id or CLI path, launch style, and whether it speaks ODB.
+2. [x] `installedEditors` keeps a GUI editor only when `URLForApplicationWithBundleIdentifier:` returns a URL, and a CLI editor only when the binary exists.
+3. [x] On File Editing, rescan, write `FuguInstalledEditors` and `FuguInstalledEditorsCachedAt`, and fill the existing popup from that scan. Use the cache only when the scan is empty.
+4. [x] On selection, store `ODBTextEditor` and `FuguPreferredEditorBundleID`. Restore by bundle id first, then by name.
+5. [x] Point `openLocalFileInEditor:` and `ODBEditFile:` at the catalog. Keep the ODB Apple event and the CLI launch for records that already use them.
+6. [x] Apply the creative decision for a remote file opened in an editor that does not speak ODB. `FuguEditorWatch` watches the temp directory for 500 ms.
+7. [x] Stop reading `ODBEditors.plist`. It is removed from the target and deleted.
+8. [x] Development `xcodebuild` succeeded on 8 Nov 2026.
+9. [ ] On this Mac: the popup lists only installed editors, the choice survives relaunch, a local file opens in the chosen app, a remote edit with an ODB editor still uploads, and a non-ODB save uploads once after the debounce.
+
+## Creative Phases Required
+
+- [x] Remote save for an editor that does not speak ODB. Decision: watch the temp directory and upload when the file settles. ODB and CLI editors keep their current path and do not get a watch. See `memory-bank/creative/creative-editor-launch.md`.
+
+## Dependencies
+
+- This Mac, Xcode, and the editors actually installed here.
+- The existing ODB handlers in `SFTPController` and `UMFileLauncher` for CLI editors.
+- The parked migration. Do not rewrite `SFTPPrefs`, move the prompt loops, or switch `forkpty` to `Process` in this task.
+
+## Challenges
+
+- Visual Studio Code, Cursor, Sublime Text, and Zed do not send the ODB modified-file event. Choosing one of them for a remote edit can drop the upload if the launch path is only `NSWorkspace`.
+- Cursor's bundle id must be confirmed on this Mac with `URLForApplicationWithBundleIdentifier:`. Do not invent a second id if the lookup fails.
+- A saved name of BBEdit must keep working for an existing defaults database. The new bundle-id key is an addition.
+- Two apps can share a display name. Restore uses the bundle id.
+
+## Status
+
+- [x] VAN, 8 Nov 2026
+- [x] Planning complete, 8 Nov 2026
+- [x] Creative phase for the remote-save path, 8 Nov 2026
+- [x] Implementation compiled, 8 Nov 2026. Development build succeeded. The in-app editor checks are still open.
+
+## Parked migration plan
+
+The sections below are the Level 4 Swift migration. They are not the next build.
+
+## Description
+
+Move Fugu from a flat Objective-C/C AppKit app to idiomatic Swift in a feature-based layout, without changing behavior. Each step compiles on its own. Development and every build stay on the local Mac that has Xcode. Step 1 is archived. Steps 2 and 3 are implemented. Step 4 has started. The migration is not complete.
 
 ## Complexity
 
@@ -178,22 +311,24 @@ Checks:
 
 ### 3. `migrate/step-03-models-and-constants`
 
-Impact: low-medium.
+Impact: low-medium. Implemented 8 Nov 2026 on `migrate/step-03-models-and-constants`.
 
-- [ ] Move toolbar and column `#define`s into Swift enums exposed to Objective-C where the nib or Objective-C still reads them.
-- [ ] Add a remote-entry type for `sftp` listing lines. Keep an `@objc` dictionary bridge while `SFTPController` is Objective-C.
-- [ ] Migrate date, icon, encoding, alias, and OS-version categories.
-- [ ] Delete a `.h`/`.m` pair only after the Mac build no longer references it.
+- [x] Toolbar and preference-toolbar identifiers, and the column widths, are `FuguToolbarIdentifier`, `FuguPreferenceToolbarIdentifier`, and `FuguColumnWidth`. The nib strings are unchanged.
+- [x] `RemoteEntry` bridges a listing dictionary both ways. `SFTPTServer` still returns `NSMutableDictionary`. Dictionary readers were not deleted.
+- [x] Date, encoding, alias, icon cache, and the Gestalt-packed OS version now live in `FuguDate`, `FuguStringEncoding`, `FuguPath`, `FuguIcons`, and `FuguSystemVersion`.
+- [x] Deleted `NSCalendarDate(ConvertToSeconds)`, `NSString-UnknownEncoding`, `NSString(FSRefAdditions)`, `NSImage(IconForType)`, and `NSWorkspace(SystemVersionNumber)` after the Development build no longer referenced them.
+- [x] Development `xcodebuild` succeeded. A separate `swiftc` run checked the dictionary round trip, `Jan 5 2022` versus `Jan 5 14:23 2022`, the Gestalt formula, and UTF-8 `"hello"`.
+- [ ] App smoke is still open: listing sort, local icon cache, and an alias of size 0. SSH connect, list, upload, and download were already open.
 
 ### 4. `migrate/step-04-services-and-networking`
 
-Impact: medium. Blocked on the process-engine creative decision.
+Impact: medium. Second slice implemented 8 Nov 2026 on `migrate/step-04-services-and-networking`. The prompt decisions stay in Objective-C. `Process` is not used.
 
-- [ ] Move `SFTPTServer`, `SCPTransfer`, and `SSHTunnelAuth` to Swift.
-- [ ] Drive `sftp`, `scp`, and `ssh` with `Process` (or keep the current `fork` path behind a Swift type until parity is proven).
+- [ ] Move `SFTPTServer`, `SCPTransfer`, and `SSHTunnelAuth` to Swift. Not started. `forkpty`, `fgets`, and `wait` now go through `FuguSSHProcess`.
+- [x] `Core/Support/FuguSSHProcess.swift` calls `forkpty`, `fgets`, and `waitpid(-1, status, 0)`, which is the same as `wait`. SFTP still passes the 24 by 512 window. SCP and the tunnel still pass a null window size, and they still compare the fork return to the existing pid instead of storing it. `execve`, `select`, and the prompt checks are unchanged. `Process` waits until a Mac session matches today's prompts.
 - [ ] Expose completion-handler methods for any Objective-C caller that remains.
-- [ ] Move `UMVersionCheck` to `URLSession` and `PropertyListDecoder`.
-- [ ] Mac: connect, cancel, resume a listing, upload, download, SCP, and a local forward.
+- [x] `UMVersionCheck` is Swift. It uses `URLSession` and `PropertyListDecoder`. The http version URL, the alert copy, and main-queue presentation stay. `retrieveVersionDictionary` still returns nil. The `.h` and `.m` are removed. The class was already on `NSURLSession` before this move.
+- [ ] Mac: connect, cancel, resume a listing, upload, download, SCP, and a local forward. Not run. The version-check sheet was not opened.
 
 ### 5. `migrate/step-05-ui-and-viewcontrollers`
 

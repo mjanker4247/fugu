@@ -4,6 +4,7 @@
  */
 
 #import "SFTPTableView.h"
+#import "Fugu-Swift.h"
 
 @implementation SFTPTableView
 
@@ -389,15 +390,15 @@ WidthForColumnWithIdentifier( NSString *identifier )
     float		width = 50.0; /* arbitrary non-zero width */
     
     if ( [ identifier isEqualToString: @"datecolumn" ] ) {
-        width = DATE_COLUMN_WIDTH;
+        width = [ FuguColumnWidth date ];
     } else if ( [ identifier isEqualToString: @"groupcolumn" ] ) {
-        width = GROUP_COLUMN_WIDTH;
+        width = [ FuguColumnWidth group ];
     } else if ( [ identifier isEqualToString: @"ownercolumn" ] ) {
-        width = OWNER_COLUMN_WIDTH;
+        width = [ FuguColumnWidth owner ];
     } else if ( [ identifier isEqualToString: @"permcolumn" ] ) {
-        width = MODE_COLUMN_WIDTH;
+        width = [ FuguColumnWidth mode ];
     } else if ( [ identifier isEqualToString: @"sizecolumn" ] ) {
-        width = SIZE_COLUMN_WIDTH;
+        width = [ FuguColumnWidth size ];
     }
     
     return( width );

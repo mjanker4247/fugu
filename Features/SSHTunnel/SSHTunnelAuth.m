@@ -6,6 +6,7 @@
 #import "SSHTunnelAuth.h"
 #import "SSHTunnel.h"
 #import "NSString(SSHAdditions).h"
+#import "Fugu-Swift.h"
 
 #include <errno.h>
 #include <fcntl.h>
@@ -84,7 +85,7 @@ int		mfd = 0;
     execargs[ 5 ] = "-v";
     execargs[ 6 ] = NULL;
 
-    if ( sshpid == forkpty( &mfd, ttyname, NULL, NULL )) {
+    if ( sshpid == [ FuguSSHProcess forkWithMaster: &mfd ttyName: ttyname ] ) {
         if ( fcntl( mfd, F_SETFL, O_NONBLOCK ) < 0 ) {	/* prevent master from blocking */
         }
         
@@ -107,7 +108,7 @@ int		mfd = 0;
             }
             
             if ( FD_ISSET( mfd, &readmask )) {
-                if ( fgets( buf, MAXPATHLEN, mfp ) == NULL ) break;
+                if ( [ FuguSSHProcess readLine: buf size: MAXPATHLEN fromStream: mfp ] == NO ) break;
 
                 if (( strstr( buf, "Password:" ) != NULL
                         || strstr( buf, "password:" ) != NULL
@@ -130,7 +131,7 @@ int		mfd = 0;
                         threestrikes = 0;	/* if pubkey auth fails, password prompt will appear */
                     } else if ( strncmp( buf, "The auth", strlen( "The auth" )) == 0 ) {
                         unknownmsg = strdup( buf );
-                        fgets( buf, MAXPATHLEN, mfp );
+                        [ FuguSSHProcess readLine: buf size: MAXPATHLEN fromStream: mfp ];
                         NSString *_query = [ NSString stringWithFormat: @"%s%s", unknownmsg, buf ];
                         dispatch_async( dispatch_get_main_queue(), ^{
                             [ controller getContinueQueryWithString: _query ];
@@ -176,7 +177,7 @@ int		mfd = 0;
             });
         }
 
-        wait( &status );
+        [ FuguSSHProcess waitWithStatus: &status ];
         
         NSLog( @"exited with %d", WEXITSTATUS( status ));
     } else if ( sshpid < 0 ) {

@@ -11,18 +11,13 @@
 #import "SFTPItemCell.h"
 #import "SCPController.h"
 #import "SSHTunnel.h"
-#import "UMVersionCheck.h"
 #import "UMFileLauncher.h"
 
 #import "NSAttributedString-Ellipsis.h"
-#import "NSCalendarDate(ConvertToSeconds).h"
 #import "Fugu-Swift.h"
-#import "NSImage(IconForType).h"
 #import "NSMutableArray(Extensions).h"
 #import "NSSet(ImageExtensions).h"
 #import "NSString(SSHAdditions).h"
-#import "NSString(FSRefAdditions).h"
-#import "NSString-UnknownEncoding.h"
 #import "NSWorkspace(LaunchServices).h"
 
 #include <ApplicationServices/ApplicationServices.h>
@@ -91,9 +86,9 @@ datecmp( id ob1, id ob2, void *context )
   NSComparisonResult	result = NSOrderedSame;
   off_t		d1, d2;
   
-  d1 = [ NSDate secondsFromFormattedDateString:
+  d1 = [ FuguDate secondsFromFormattedDateString:
         [ ob1 objectForKey: @"date" ]];
-  d2 = [ NSDate secondsFromFormattedDateString:
+  d2 = [ FuguDate secondsFromFormattedDateString:
         [ ob2 objectForKey: @"date" ]];
   
   if ( d1 < d2 ) {
@@ -320,7 +315,7 @@ NSComparisonResult
   NSToolbarItem *sftptbarItem = [[ NSToolbarItem alloc ]
                                   initWithItemIdentifier: itemIdent ];
   
-  if ( [ itemIdent isEqualToString: SFTPToolbarLocalHomeIdentifier ] ) {
+  if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier localHome ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Local Home", @"SFTPToolbar",
                                 @"Local Home" ) ];
@@ -333,7 +328,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"home.png" ]];
     [ sftptbarItem setAction: @selector( cdLocalHome: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarNewDirIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier newDirectory ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"New Folder", @"SFTPToolbar",
                                 @"New Folder" ) ];
@@ -346,7 +341,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"newfolder.png" ]];
     [ sftptbarItem setAction: @selector( createNewDirectory: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarDeleteIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier delete ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Delete", @"SFTPToolbar",
                                 @"Delete" ) ];
@@ -360,7 +355,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"trash.png" ]];
     [ sftptbarItem setAction: @selector( delete: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarConnectIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier connect ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Disconnect", @"SFTPToolbar",
                                 @"Disconnect" ) ];
@@ -373,7 +368,7 @@ NSComparisonResult
     [ sftptbarItem setAction: @selector( disconnect: ) ];
     [ sftptbarItem setImage: [ NSImage imageNamed: @"disconnect.png" ]];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarInfoIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier info ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Info", @"SFTPToolbar",
                                 @"Info" ) ];
@@ -386,7 +381,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"info.png" ]];
     [ sftptbarItem setAction: @selector( getInfo: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarRemoteHomeIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier remoteHome ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Remote Home", @"SFTPToolbar",
                                 @"Remote Home" ) ];
@@ -399,7 +394,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"remotehome.png" ]];
     [ sftptbarItem setAction: @selector( cdRemoteHome: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarRefreshIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier refresh ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Reload", @"SFTPToolbar",
                                 @"Reload" ) ];
@@ -412,7 +407,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"reload.png" ]];
     [ sftptbarItem setAction: @selector( refreshBrowsers: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarUploadIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier upload ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Upload", @"SFTPToolbar",
                                 @"Upload" ) ];
@@ -425,7 +420,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"upload.png" ]];
     [ sftptbarItem setAction: @selector( uploadButtonClick: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarDownloadIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier download ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Download", @"SFTPToolbar",
                                 @"Download" ) ];
@@ -438,7 +433,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"download.png" ]];
     [ sftptbarItem setAction: @selector( downloadButtonClick: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarGotoIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier goTo ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Go To...", @"SFTPToolbar",
                                 @"Go To..." ) ];
@@ -451,7 +446,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"goto.png" ]];
     [ sftptbarItem setAction: @selector( getGotoDirPanel: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarLocalHistoryIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier localHistory ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"History", @"SFTPToolbar",
                                 @"History" ) ];
@@ -464,7 +459,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"history.png" ]];
     [ sftptbarItem setAction: @selector( showLocalHistoryMenu: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarRemoteHistoryIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier remoteHistory ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"History", @"SFTPToolbar",
                                 @"History" ) ];
@@ -477,7 +472,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"remotehistory.png" ]];
     [ sftptbarItem setAction: @selector( showRemoteHistoryMenu: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarRemoteItemPreviewIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier preview ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Preview", @"SFTPToolbar",
                                 @"Preview" ) ];
@@ -490,7 +485,7 @@ NSComparisonResult
     [ sftptbarItem setImage: [ NSImage imageNamed: @"preview.png" ]];
     [ sftptbarItem setAction: @selector( previewItem: ) ];
     [ sftptbarItem setTarget: self ];
-  } else if ( [ itemIdent isEqualToString: SFTPToolbarEditDocumentIdentifier ] ) {
+  } else if ( [ itemIdent isEqualToString: [ FuguToolbarIdentifier edit ] ] ) {
     [ sftptbarItem setLabel:
      NSLocalizedStringFromTable( @"Edit", @"SFTPToolbar",
                                 @"Edit" ) ];
@@ -513,10 +508,10 @@ NSComparisonResult
 #pragma clang diagnostic ignored "-Wdeprecated-implementations"
 - ( BOOL )validateToolbarItem: ( NSToolbarItem * )tItem
 {
-  if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarConnectIdentifier ]
+  if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier connect ] ]
       && ! connected ) {
     return( NO );
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarDeleteIdentifier ] ) {
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier delete ] ] ) {
     if ( ! connected && ! [[ mainWindow firstResponder ] isEqual: localBrowser ] ) {
       [ tItem setImage: [ NSImage imageNamed: @"trash.png" ]];
       return( NO );
@@ -534,23 +529,23 @@ NSComparisonResult
       [ tItem setImage: nil ];
       [ tItem setImage: [ NSImage imageNamed: @"remotetrash.png" ]];
     }
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarRemoteHomeIdentifier ]
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier remoteHome ] ]
              && !connected ) {
     return( NO );
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarUploadIdentifier ]
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier upload ] ]
              && !connected ) {
     return( NO );
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarDownloadIdentifier ]
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier download ] ]
              && !connected ) {
     return( NO );
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarRemoteHistoryIdentifier ]
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier remoteHistory ] ]
              && !connected ) {
     return( NO );
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarRemoteItemPreviewIdentifier ] ) {
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier preview ] ] ) {
     if ( ! [[ mainWindow firstResponder ] isKindOfClass: [ SFTPTableView class ]] ) {
       return( NO );
     }
-  } else if ( [[ tItem itemIdentifier ] isEqualToString: SFTPToolbarEditDocumentIdentifier ] ) {
+  } else if ( [[ tItem itemIdentifier ] isEqualToString: [ FuguToolbarIdentifier edit ] ] ) {
     if ( [[ mainWindow firstResponder ] isEqual: localBrowser ] ) {
       id			items = ( dotflag ? localDirContents : dotlessLDir );
       
@@ -582,21 +577,21 @@ NSComparisonResult
 - ( NSArray * )toolbarDefaultItemIdentifiers: ( NSToolbar * )toolbar
 {
   NSArray	*tmp = [ NSArray arrayWithObjects:
-                  SFTPToolbarLocalHomeIdentifier,
-                  SFTPToolbarLocalHistoryIdentifier,
+                  [ FuguToolbarIdentifier localHome ],
+                  [ FuguToolbarIdentifier localHistory ],
                   NSToolbarSeparatorItemIdentifier,
                   NSToolbarFlexibleSpaceItemIdentifier,
-                  SFTPToolbarGotoIdentifier,
-                  SFTPToolbarRefreshIdentifier,
-                  SFTPToolbarInfoIdentifier,
-                  SFTPToolbarEditDocumentIdentifier,
-                  SFTPToolbarNewDirIdentifier,
-                  SFTPToolbarDeleteIdentifier,
-                  SFTPToolbarConnectIdentifier,
+                  [ FuguToolbarIdentifier goTo ],
+                  [ FuguToolbarIdentifier refresh ],
+                  [ FuguToolbarIdentifier info ],
+                  [ FuguToolbarIdentifier edit ],
+                  [ FuguToolbarIdentifier newDirectory ],
+                  [ FuguToolbarIdentifier delete ],
+                  [ FuguToolbarIdentifier connect ],
                   NSToolbarFlexibleSpaceItemIdentifier,
                   NSToolbarSeparatorItemIdentifier,
-                  SFTPToolbarRemoteHomeIdentifier,
-                  SFTPToolbarRemoteHistoryIdentifier, nil ];
+                  [ FuguToolbarIdentifier remoteHome ],
+                  [ FuguToolbarIdentifier remoteHistory ], nil ];
   
   return( tmp );
 }
@@ -604,22 +599,22 @@ NSComparisonResult
 - ( NSArray * )toolbarAllowedItemIdentifiers: ( NSToolbar * )toolbar
 {
   NSArray	*tmp = [ NSArray arrayWithObjects:
-                  SFTPToolbarLocalHomeIdentifier,
-                  SFTPToolbarDeleteIdentifier,
+                  [ FuguToolbarIdentifier localHome ],
+                  [ FuguToolbarIdentifier delete ],
                   NSToolbarSeparatorItemIdentifier,
                   NSToolbarFlexibleSpaceItemIdentifier,
-                  SFTPToolbarRefreshIdentifier,
-                  SFTPToolbarNewDirIdentifier,
-                  SFTPToolbarConnectIdentifier,
-                  SFTPToolbarInfoIdentifier,
-                  SFTPToolbarDownloadIdentifier,
-                  SFTPToolbarUploadIdentifier,
-                  SFTPToolbarGotoIdentifier,
-                  SFTPToolbarRemoteHomeIdentifier,
-                  SFTPToolbarLocalHistoryIdentifier,
-                  SFTPToolbarRemoteHistoryIdentifier,
-                  SFTPToolbarRemoteItemPreviewIdentifier,
-                  SFTPToolbarEditDocumentIdentifier, nil ];
+                  [ FuguToolbarIdentifier refresh ],
+                  [ FuguToolbarIdentifier newDirectory ],
+                  [ FuguToolbarIdentifier connect ],
+                  [ FuguToolbarIdentifier info ],
+                  [ FuguToolbarIdentifier download ],
+                  [ FuguToolbarIdentifier upload ],
+                  [ FuguToolbarIdentifier goTo ],
+                  [ FuguToolbarIdentifier remoteHome ],
+                  [ FuguToolbarIdentifier localHistory ],
+                  [ FuguToolbarIdentifier remoteHistory ],
+                  [ FuguToolbarIdentifier preview ],
+                  [ FuguToolbarIdentifier edit ], nil ];
 
   return( tmp );
 }
@@ -754,10 +749,10 @@ NSComparisonResult
     columnArray = [ NSArray arrayWithObjects:
                    [ NSDictionary dictionaryWithObjectsAndKeys:
                     @"sizecolumn", @"identifier",
-                    [ NSNumber numberWithFloat: SIZE_COLUMN_WIDTH ], @"width", nil ],
+                    [ NSNumber numberWithFloat: [ FuguColumnWidth size ] ], @"width", nil ],
                    [ NSDictionary dictionaryWithObjectsAndKeys:
                     @"datecolumn", @"identifier",
-                    [ NSNumber numberWithFloat: DATE_COLUMN_WIDTH ], @"width", nil ], nil ];
+                    [ NSNumber numberWithFloat: [ FuguColumnWidth date ] ], @"width", nil ], nil ];
     [[ NSUserDefaults standardUserDefaults ] setObject: columnArray
                                                 forKey: @"VisibleColumns" ];
   }
@@ -916,9 +911,9 @@ NSComparisonResult
     NSString	*title = ColumnTitleFromIdentifier( identifier );
     
     [ localBrowser addTableColumnWithIdentifier: identifier
-                                    columnTitle: title width: GROUP_COLUMN_WIDTH ];
+                                    columnTitle: title width: [ FuguColumnWidth group ] ];
     [ remoteBrowser addTableColumnWithIdentifier: identifier
-                                     columnTitle: title width: GROUP_COLUMN_WIDTH ];
+                                     columnTitle: title width: [ FuguColumnWidth group ] ];
     [ localBrowser moveColumn: ( [ localBrowser numberOfColumns ] - 1 )
                      toColumn: 1 ];
     [ remoteBrowser moveColumn: ( [ remoteBrowser numberOfColumns ] - 1 )
@@ -943,9 +938,9 @@ NSComparisonResult
     NSString	*title = ColumnTitleFromIdentifier( identifier );
     
     [ localBrowser addTableColumnWithIdentifier: identifier
-                                    columnTitle: title width: DATE_COLUMN_WIDTH ];
+                                    columnTitle: title width: [ FuguColumnWidth date ] ];
     [ remoteBrowser addTableColumnWithIdentifier: identifier
-                                     columnTitle: title width: DATE_COLUMN_WIDTH ];
+                                     columnTitle: title width: [ FuguColumnWidth date ] ];
     [ localBrowser moveColumn: ( [ localBrowser numberOfColumns ] - 1 )
                      toColumn: 1 ];
     [ remoteBrowser moveColumn: ( [ remoteBrowser numberOfColumns ] - 1 )
@@ -970,9 +965,9 @@ NSComparisonResult
     NSString	*title = ColumnTitleFromIdentifier( identifier );
     
     [ localBrowser addTableColumnWithIdentifier: identifier
-                                    columnTitle: title width: MODE_COLUMN_WIDTH ];
+                                    columnTitle: title width: [ FuguColumnWidth mode ] ];
     [ remoteBrowser addTableColumnWithIdentifier: identifier
-                                     columnTitle: title width: MODE_COLUMN_WIDTH ];
+                                     columnTitle: title width: [ FuguColumnWidth mode ] ];
     [ localBrowser moveColumn: ( [ localBrowser numberOfColumns ] - 1 )
                      toColumn: 1 ];
     [ remoteBrowser moveColumn: ( [ remoteBrowser numberOfColumns ] - 1 )
@@ -997,9 +992,9 @@ NSComparisonResult
     NSString	*title = ColumnTitleFromIdentifier( identifier );
     
     [ localBrowser addTableColumnWithIdentifier: identifier
-                                    columnTitle: title width: OWNER_COLUMN_WIDTH ];
+                                    columnTitle: title width: [ FuguColumnWidth owner ] ];
     [ remoteBrowser addTableColumnWithIdentifier: identifier
-                                     columnTitle: title width: OWNER_COLUMN_WIDTH ];
+                                     columnTitle: title width: [ FuguColumnWidth owner ] ];
     [ localBrowser moveColumn: ( [ localBrowser numberOfColumns ] - 1 )
                      toColumn: 1 ];
     [ remoteBrowser moveColumn: ( [ remoteBrowser numberOfColumns ] - 1 )
@@ -1024,9 +1019,9 @@ NSComparisonResult
     NSString	*title = ColumnTitleFromIdentifier( identifier );
     
     [ localBrowser addTableColumnWithIdentifier: identifier
-                                    columnTitle: title width: SIZE_COLUMN_WIDTH ];
+                                    columnTitle: title width: [ FuguColumnWidth size ] ];
     [ remoteBrowser addTableColumnWithIdentifier: identifier
-                                     columnTitle: title width: SIZE_COLUMN_WIDTH ];
+                                     columnTitle: title width: [ FuguColumnWidth size ] ];
     [ localBrowser moveColumn: ( [ localBrowser numberOfColumns ] - 1 )
                      toColumn: 1 ];
     [ remoteBrowser moveColumn: ( [ remoteBrowser numberOfColumns ] - 1 )
@@ -1406,6 +1401,7 @@ WRITE_ERR:
     }
     switch ( rc ) {
       case NSAlertFirstButtonReturn:
+        [ FuguEditorWatch stopAll ];
         [ editedDocuments removeAllObjects ];
         break;
       case NSAlertSecondButtonReturn:
@@ -1480,6 +1476,7 @@ WRITE_ERR:
     return;
   }
   
+  [ tServer commandWillBeSent ];
   [ self writeCommand: cdcmd ];
   while ( ! [ tServer atSftpPrompt ] ) ;
   [ self writeCommand: lsform ];
@@ -1779,6 +1776,7 @@ WRITE_ERR:
       NSLog( @"cd \"%s\": too long", name );
       return;
     }
+    [ tServer commandWillBeSent ];
     [ self writeCommand: cmdline ];
     
     /* wait till we're at the prompt before continuing */
@@ -1958,7 +1956,7 @@ WRITE_ERR:
   if ( timer == nil ) {
     [ downloadTimeField setStringValue: @"00:00:00" ];
     dltime = 0;
-    timer = [ NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
+    timer = [ NSTimer scheduledTimerWithTimeInterval: 1.0 target: self
                                             selector: @selector( dlUpdate ) userInfo: nil
                                              repeats: YES ];
   }
@@ -1973,20 +1971,27 @@ WRITE_ERR:
                                 transferRate: ( NSString * )rate
                                          ETA: ( NSString * )eta
 {
-  double		pc_done = value;
-  
-  [ downloadProgBar stopAnimation: nil ];
-  [ downloadProgBar setIndeterminate: NO ];
-  [ downloadProgBar setMinValue: 0.0 ];
-  [ downloadProgBar setMaxValue: 100.0 ];
-  [ downloadProgBar setDoubleValue: pc_done ];
-  [ downloadProgInfo setStringValue: [ NSString stringWithFormat: @"%@\n%@\n%@", amount, rate, eta ]];
-  [ downloadProgPercentDone setStringValue: [ NSString stringWithFormat: @"%d%%", ( int )value ]];
+  if ( value >= 0 ) {
+    [ downloadProgBar stopAnimation: nil ];
+    [ downloadProgBar setIndeterminate: NO ];
+    [ downloadProgBar setMinValue: 0.0 ];
+    [ downloadProgBar setMaxValue: 100.0 ];
+    [ downloadProgBar setDoubleValue: value ];
+    [ downloadProgBar displayIfNeeded ];
+    [ downloadProgPercentDone setStringValue: [ NSString stringWithFormat: @"%d%%", ( int )value ]];
+  }
+  if ( [ rate length ] > 0 || [ eta length ] > 0 ) {
+    [ downloadProgInfo setStringValue: [ NSString stringWithFormat: @"%@\n%@\n%@",
+                                        amount ?: @"",
+                                        [ rate length ] ? rate : @"",
+                                        [ eta length ] ? eta : @"" ]];
+    [ downloadProgInfo displayIfNeeded ];
+  }
 }
 
 - ( void )dlUpdate
 {
-  dltime += 5.0;
+  dltime += 1.0;
   [ downloadTimeField setStringValue: [ NSString clockStringFromInteger: dltime ]];
 }
 
@@ -2240,6 +2245,7 @@ WRITE_ERR:
 {
   if ( !connected ) return;
   
+  [ tServer commandWillBeSent ];
   [ self writeCommand: ( char * )[[ NSString
                                     stringWithFormat: @"mkdir \"%@\"",
                                     [ newDirNameField stringValue ]] UTF8String ]];
@@ -2541,6 +2547,7 @@ CHMOD_ERROR: {
   
   if ( ! connected ) return;
   
+  [ tServer commandWillBeSent ];
   [ self writeCommand: ( char * )[ dircmd UTF8String ]];
   [ self dismissGotoDirPanel: nil ];
   while( ![ tServer atSftpPrompt ] ) ;
@@ -2558,6 +2565,7 @@ CHMOD_ERROR: {
 {
   if ( !connected ) return;
   
+  [ tServer commandWillBeSent ];
   [ self writeCommand:
    ( char * )[[ NSString stringWithFormat: @"cd %@", remoteHome ] UTF8String ]];
   
@@ -2578,6 +2586,7 @@ CHMOD_ERROR: {
 {
   if ( !connected ) return;
   
+  [ tServer commandWillBeSent ];
   [ self writeCommand: "cd .." ];
   
   /* wait till we're at the prompt before continuing */
@@ -2599,6 +2608,7 @@ CHMOD_ERROR: {
   NSString		*dircmd;
   
   dircmd = [ NSString stringWithFormat: @"cd \"%@\"", [ sender title ]];
+  [ tServer commandWillBeSent ];
   [ self writeCommand: ( char * )[ dircmd UTF8String ]];
   while( ![ tServer atSftpPrompt ] ) ;
   [ self getListing ];
@@ -2651,6 +2661,7 @@ CHMOD_ERROR: {
   index = [ rPathPopUp indexOfSelectedItem ];
   
   if ( [ component isEqualToString: @"/" ] ) {
+    [ tServer commandWillBeSent ];
     [ self writeCommand: "cd /" ];
     while( ! [ tServer atSftpPrompt ] ) ;
     [ self getListing ];
@@ -2672,6 +2683,7 @@ CHMOD_ERROR: {
   }
   
   dircmd = [ NSString stringWithFormat: @"cd \"%@\"", path ];
+  [ tServer commandWillBeSent ];
   [ self writeCommand: ( char * )[ dircmd UTF8String ]];
   while( ![ tServer atSftpPrompt ] ) ;
   [ self getListing ];
@@ -2714,6 +2726,7 @@ CHMOD_ERROR: {
     if ( [[[ contents objectAtIndex: row ] objectForKey: @"type" ]
           isEqualToString: NSLocalizedString( @"directory", @"directory" ) ] ) {
       snprintf( cmd, MAXPATHLEN, "cd \"%s\"", [ path UTF8String ] );
+      [ tServer commandWillBeSent ];
       [ self writeCommand: cmd ];
       while ( ! [ tServer atSftpPrompt ] ) ;
       [ self getListing ];
@@ -2884,7 +2897,7 @@ CHMOD_ERROR: {
   [ uploadTimeField setStringValue: @"00:00:00" ];
   
   ultime = 0;
-  timer = [ NSTimer scheduledTimerWithTimeInterval: 5.0 target: self
+  timer = [ NSTimer scheduledTimerWithTimeInterval: 1.0 target: self
                                           selector: @selector( ulUpdate ) userInfo: nil
                                            repeats: YES ];
   
@@ -2898,7 +2911,7 @@ CHMOD_ERROR: {
 
 - ( void )ulUpdate
 {
-  ultime += 5.0;
+  ultime += 1.0;
   [ uploadTimeField setStringValue: [ NSString clockStringFromInteger: ultime ]];
 }
 
@@ -2913,7 +2926,7 @@ CHMOD_ERROR: {
     [ uploadProgItemsLeft setStringValue: @"" ];
     [ uploadProgItemsLeft setIntegerValue: (NSInteger)[ uploadQueue count ]];
     
-    if ( ssh_version < 3.6 ) {
+    if ( ssh_version > 0 && ssh_version < 3.6 ) {
       [ uploadProgBar incrementBy: 1.0 ];
       [ uploadProgBar displayIfNeeded ];
     }
@@ -2929,7 +2942,7 @@ CHMOD_ERROR: {
     [ uploadProgItemsLeft setStringValue: @"" ];
     [ uploadProgItemsLeft setIntegerValue: (NSInteger)[ uploadQueue count ]];
     
-    if ( ssh_version < 3.6 ) {
+    if ( ssh_version > 0 && ssh_version < 3.6 ) {
       [ uploadProgBar setIndeterminate: YES ];
       [ uploadProgBar startAnimation: nil ];
       [ uploadProgBar displayIfNeeded ];
@@ -2974,8 +2987,16 @@ CHMOD_ERROR: {
   [ uploadProgBar setIndeterminate: NO ];
   [ uploadProgBar setMinValue: 0.0 ];
   [ uploadProgBar setMaxValue: 100.0 ];
-  [ uploadProgBar setDoubleValue: pc_done ];
-  [ uploadProgInfo setStringValue: [ NSString stringWithFormat: @"%@ %@ %@", amount, rate, eta ]];
+  if ( value >= 0 ) {
+    [ uploadProgBar setDoubleValue: pc_done ];
+    [ uploadProgBar displayIfNeeded ];
+  }
+  if ( [ rate length ] > 0 || [ eta length ] > 0 ) {
+    [ uploadProgInfo setStringValue: [ NSString stringWithFormat: @"%@  %@",
+                                      [ rate length ] ? rate : @"",
+                                      [ eta length ] ? eta : @"" ]];
+    [ uploadProgInfo displayIfNeeded ];
+  }
 }
 
 - ( IBAction )showLogPanel: ( id )sender
@@ -2999,6 +3020,9 @@ CHMOD_ERROR: {
 
 - ( void )addToLog: ( NSString * )text
 {
+  if ( text == nil ) {
+    return;
+  }
   [[ logField textStorage ] appendAttributedString: [[ NSAttributedString alloc ] initWithString: text ]];
 }
 
@@ -3576,35 +3600,30 @@ CHMOD_ERROR: {
   NSInteger     row = [ localBrowser selectedRow ];
   NSString      *filepath = [[ ( dotflag ? localDirContents : dotlessLDir )
                                objectAtIndex: row ] objectForKey: @"name" ];
-  NSString      *editor = [[ NSUserDefaults standardUserDefaults ] objectForKey: @"ODBTextEditor" ];
+  FuguEditorRecord *editor = [ FuguEditorCatalog preferredEditor ];
 
-  if ( editor == nil ) editor = @"BBEdit";
-
-  NSBundle *bundle = [ NSBundle bundleForClass: [ self class ]];
-  NSDictionary *plist = [ NSDictionary dictionaryWithContentsOfFile:
-                          [ bundle pathForResource: @"ODBEditors" ofType: @"plist" ]];
-  NSString *bundleID = nil;
-  for ( NSDictionary *info in [ plist objectForKey: @"ODBEditors" ] ) {
-    if ( [[ info objectForKey: @"ODBEditorName" ] isEqualToString: editor ] ) {
-      bundleID = [ info objectForKey: @"ODBEditorBundleID" ];
-      break;
-    }
-  }
-
-  NSURL *appURL = [[ NSWorkspace sharedWorkspace ] findApplicationNamed: editor bundleID: bundleID ];
-  if ( !appURL ) {
+  if ( editor == nil || [ editor.path length ] == 0 ) {
     NSAlert *alert = [[ NSAlert alloc ] init ];
     [ alert setMessageText: NSLocalizedString( @"Error", @"Error" ) ];
     [ alert setInformativeText: [ NSString stringWithFormat:
         NSLocalizedString( @"Couldn't find %@ to launch %@.", @"Couldn't find %@ to launch %@." ),
-        editor, [ filepath lastPathComponent ]]];
+        @"an editor", [ filepath lastPathComponent ]]];
     [ alert addButtonWithTitle: NSLocalizedString( @"OK", @"OK" ) ];
     [ alert runModal ];
     return;
   }
 
+  if ( editor.launchStyle == 1 ) {
+    UMFileLauncher *launch = [[ UMFileLauncher alloc ] init ];
+    if ( ![ launch externalEditFile: filepath withCLIEditor: editor.path
+                        contextInfo: ( void * )filepath ] ) {
+      NSLog( @"FAILED" );
+    }
+    return;
+  }
+
   [[ NSWorkspace sharedWorkspace ] openFileURL: [ NSURL fileURLWithPath: filepath ]
-                             withApplicationURL: appURL
+                             withApplicationURL: [ NSURL fileURLWithPath: editor.path ]
                                       odbParams: nil
                              completionHandler: nil ];
 }
@@ -3639,7 +3658,7 @@ CHMOD_ERROR: {
     return;
   }
   
-  objcFilepath = [ NSString stringWithBytesOfUnknownEncoding: filepath
+  objcFilepath = [ FuguStringEncoding stringWithBytes: filepath
                                                       length: ( unsigned int )strlen( filepath ) ];
   
   [ self addToEditedDocuments: tmppath
@@ -3653,33 +3672,25 @@ CHMOD_ERROR: {
 
 - ( void )ODBEditFile: ( NSString * )filepath remotePath: ( NSString * )remotePath
 {
-  int                 i;
-  NSString            *appname = nil, *bundleID = nil;
-  NSBundle            *bundle = [ NSBundle bundleForClass: [ self class ]];
-  NSDictionary        *dict = [ NSDictionary dictionaryWithContentsOfFile:
-                               [ bundle pathForResource: @"ODBEditors" ofType: @"plist" ]];
-  NSDictionary        *odbEditorInfo = nil;
+  FuguEditorRecord    *editor = [ FuguEditorCatalog preferredEditor ];
+  NSString            *appname = nil;
+  NSURL               *appURL = nil;
 
-  if (( appname = [[ NSUserDefaults standardUserDefaults ]
-                   objectForKey: @"ODBTextEditor" ] ) == nil ) {
-    appname = @"BBEdit";
+  if ( editor == nil || [ editor.path length ] == 0 ) {
+    NSAlert *alert = [[ NSAlert alloc ] init ];
+    [ alert setMessageText: NSLocalizedString( @"Error", @"Error" ) ];
+    [ alert setInformativeText: [ NSString stringWithFormat:
+        NSLocalizedString( @"Couldn't find %@ to launch %@.", @"Couldn't find %@ to launch %@." ),
+        @"an editor", [ filepath lastPathComponent ]]];
+    [ alert addButtonWithTitle: NSLocalizedString( @"OK", @"OK" ) ];
+    [ alert runModal ];
+    return;
   }
-
-  /* find the entry for the given editor */
-  for ( i = 0; i < [[ dict objectForKey: @"ODBEditors" ] count ]; i++ ) {
-    if ( [[[[ dict objectForKey: @"ODBEditors" ] objectAtIndex: i ]
-           objectForKey: @"ODBEditorName" ] isEqualToString: appname ] ) {
-      odbEditorInfo = [[ dict objectForKey: @"ODBEditors" ] objectAtIndex: i ];
-      bundleID = [ odbEditorInfo objectForKey: @"ODBEditorBundleID" ];
-      break;
-    }
-  }
-  if ( !odbEditorInfo ) return;
+  appname = editor.name;
 
   /* check to see if the editor is run on the CLI */
-  if ( [[ odbEditorInfo objectForKey: @"ODBEditorLaunchStyle" ] intValue ] == 1 ) {
+  if ( editor.launchStyle == 1 ) {
     UMFileLauncher *launch = [[ UMFileLauncher alloc ] init ];
-    NSString *editorPath = [ odbEditorInfo objectForKey: @"ODBEditorPath" ];
 
     [[ NSAppleEventManager sharedAppleEventManager ] setEventHandler: self
                                                          andSelector: @selector( handleODBFileClosedEvent:andReplyWithEvent: )
@@ -3688,23 +3699,32 @@ CHMOD_ERROR: {
                                                          andSelector: @selector( handleODBFileModifiedEvent:andReplyWithEvent: )
                                                        forEventClass: kODBEditorSuite andEventID: kAEModifiedFile ];
 
-    if ( ![ launch externalEditFile: filepath withCLIEditor: editorPath
+    if ( ![ launch externalEditFile: filepath withCLIEditor: editor.path
                         contextInfo: ( void * )remotePath ] ) {
       NSLog( @"FAILED" );
     }
     return;
   }
 
-  /* Find the editor application */
-  NSURL *appURL = [[ NSWorkspace sharedWorkspace ] findApplicationNamed: appname bundleID: bundleID ];
-  if ( !appURL ) {
-    NSAlert *alert = [[ NSAlert alloc ] init ];
-    [ alert setMessageText: NSLocalizedString( @"Error", @"Error" ) ];
-    [ alert setInformativeText: [ NSString stringWithFormat:
-        NSLocalizedString( @"Couldn't find %@ to launch %@.", @"Couldn't find %@ to launch %@." ),
-        appname, [ filepath lastPathComponent ]]];
-    [ alert addButtonWithTitle: NSLocalizedString( @"OK", @"OK" ) ];
-    [ alert runModal ];
+  appURL = [ NSURL fileURLWithPath: editor.path ];
+  if ( !editor.supportsODB ) {
+    [[ NSWorkspace sharedWorkspace ] openFileURL: [ NSURL fileURLWithPath: filepath ]
+                               withApplicationURL: appURL
+                                        odbParams: nil
+                                completionHandler: ^( NSError *err ) {
+      if ( err != nil ) {
+        dispatch_async( dispatch_get_main_queue(), ^{
+          NSAlert *alert = [[ NSAlert alloc ] init ];
+          [ alert setMessageText: NSLocalizedString( @"Error", @"Error" ) ];
+          [ alert setInformativeText: [ NSString stringWithFormat:
+              @"Failed to open %@ with %@.", [ filepath lastPathComponent ], appname ]];
+          [ alert addButtonWithTitle: NSLocalizedString( @"OK", @"OK" ) ];
+          [ alert runModal ];
+        });
+        return;
+      }
+      [ FuguEditorWatch startWithLocalPath: filepath remotePath: remotePath target: self ];
+    }];
     return;
   }
 
@@ -3811,6 +3831,18 @@ CHMOD_ERROR: {
   filename = [[ NSURL URLWithString: [[ NSString alloc ] initWithData: [ fssDesc data ]
                                                             encoding: NSUTF8StringEncoding ]] path ];
   NSLog( @"filename: %@", filename );
+}
+
+- ( void )uploadSettledEditAtLocalPath: ( NSString * )localPath remotePath: ( NSString * )remotePath
+{
+  if ( localPath == nil || remotePath == nil ) {
+    return;
+  }
+  [ uploadQueue addObject: [ NSDictionary dictionaryWithObjectsAndKeys:
+                            [ NSNumber numberWithInt: 0 ], @"isdir",
+                            localPath, @"fullpath",
+                            remotePath, @"pathfrombase", nil ]];
+  [ self writeCommand: " " ];
 }
 
 - ( void )handleODBFileClosedEvent: ( NSAppleEventDescriptor * )inEvent
@@ -4002,7 +4034,7 @@ CHMOD_ERROR: {
    [ NSString stringWithFormat: @"%@/%@", remoteDirPath,
     [ rAttribDict objectForKey: @"name" ]]];
   
-  [ rIcon setImage: [ NSImage iconForType:
+  [ rIcon setImage: [ FuguIcons iconForType:
                      [[ rAttribDict objectForKey: @"name" ] pathExtension ]]];
   
   [ rOwnerField setStringValue: [ rAttribDict objectForKey: @"owner" ]];
@@ -4497,6 +4529,7 @@ INVALID_CONNECTION_SETTINGS:
     NSString		*localpath = [ dict objectForKey: @"localpath" ];
     
     if ( [ localpath isEqualToString: docpath ] ) {
+      [ FuguEditorWatch stopForLocalPath: localpath ];
       if ( unlink( [ localpath UTF8String ] ) < 0 ) {
         if ( errno != ENOENT ) {
           {
@@ -4506,6 +4539,9 @@ INVALID_CONNECTION_SETTINGS:
             [ alert addButtonWithTitle: NSLocalizedString( @"OK", @"OK" ) ];
             [ alert runModal ];
           }
+          [ FuguEditorWatch startWithLocalPath: localpath
+                                    remotePath: [ dict objectForKey: @"remotepath" ]
+                                        target: self ];
           return;
         }
       }
@@ -5001,7 +5037,7 @@ objectValueForTableColumn: ( NSTableColumn * )aTableColumn
           if ( [ ext isEqualToString: @"" ] ) {
             image = fileImage;
           } else {
-            image = [ NSImage iconForType: ext ];
+            image = [ FuguIcons iconForType: ext ];
             [ image setSize: NSMakeSize( 16.0, 16.0 ) ];
           }
           break;
@@ -5282,6 +5318,8 @@ objectValueForTableColumn: ( NSTableColumn * )aTableColumn
 - ( void )applicationWillTerminate: ( NSNotification * )aNotification
 {
   int			i;
+
+  [ FuguEditorWatch stopAll ];
   NSArray		*array;
   NSMutableArray	*columnArray = nil;
   

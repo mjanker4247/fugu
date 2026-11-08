@@ -2,6 +2,11 @@
 
 ## Done
 
+- VAN for the Xcode 27 project upgrade, 8 Nov 2026. Level 3. Host is already Xcode 27.2 / macOS 27.2 SDK. `LastUpgradeCheck` is `2720`. Open gaps are project format (`objectVersion` 54, Xcode 12 compatibility), `CC = /usr/bin/gcc`, `ZERO_LINK`, and a deployment target split (`11.5` at project level, recommended `27.2` at the target). PLAN is next. No `project.pbxproj` edit in VAN.
+- Text editor setting planned on 8 Nov 2026. Level 3. That plan is parked under the Xcode 27 task in `memory-bank/tasks.md`.
+- Text editor creative decision, 8 Nov 2026: a non-ODB editor opens the remote temp file and a directory watch uploads it after the file settles. ODB and CLI editors keep their current path. See `memory-bank/creative/creative-editor-launch.md`.
+- Text editor implementation compiled on 8 Nov 2026. Development build succeeded. `FuguEditorCatalog` and `FuguEditorWatch` are in the app. `ODBEditors.plist` is removed. The File Editing popup, a local edit, and a remote save were not run in the app.
+
 - VAN audit and Level 4 determination.
 - PLAN and CREATIVE decisions for layout, nullability, the Swift probe, listings, the process engine, screens, and `@main`.
 - Mac baseline and post-Step-1 Development builds succeeded (Xcode 27.2, Darwin).
@@ -9,13 +14,17 @@
 - Step 1 reflection: `memory-bank/reflection/reflection-step-01.md`.
 - Step 2 plan confirmed on 6 Nov 2026. No new creative phase. Steps 3–6 unchanged.
 - Step 2 code is on `migrate/step-02-spm-and-native-replacements`. Development build succeeded. Preview, password, and quit checks were not run.
+- Step 3 code is on `migrate/step-03-models-and-constants`. Development build succeeded on 8 Nov 2026. `RemoteEntry` round trip, date order, Gestalt packing, and a UTF-8 decode passed in a `swiftc` harness. Listing, icon, and alias smoke in the app were not run.
+- Step 4's first slice is on `migrate/step-04-services-and-networking`. `FuguSSHProcess` owns the three `forkpty` calls. `UMVersionCheck` is Swift `URLSession` and `PropertyListDecoder`. Development build succeeded on 8 Nov 2026.
+- Step 4's second slice, 8 Nov 2026: the same type reads each engine line with `fgets` and reaps the child with `waitpid(-1, status, 0)`. Prompt checks and `select` stay in Objective-C. `Process` was not used. Development build succeeded. Connect, cancel, upload, download, SCP, and tunnel were not run.
 
 ## Not done
 
-- Commit of the unstaged project wiring. `c3bdfcc` has the moves and the Swift probe. Group paths, module settings, and nullability are still local. The Step 2 branch was cut from that commit, so the same gap is on this branch.
 - Step 1 SSH smoke: connect, list, upload, download. Preferences, SCP, and the tunnel sheet already opened.
 - Step 2 manual checks: preview temp directory, password save and fill, quit cleanup of `/private/tmp/Fugu`.
-- Steps 3–6. The Step 2 code is written and the Development build succeeded. It is not closed.
+- Step 3 app smoke: listing sort, icon cache, zero-size alias.
+- The rest of Step 4: the prompt decisions still live in the three Objective-C loops, completion handlers are not added, and a live session is required before any `Process` switch. Steps 5 and 6 are not started.
+- Step 3 and Step 4 are local. They are not committed.
 
 ## Verification
 
@@ -30,4 +39,4 @@ menus → Fugu Preferences: General, Secure Copy File, Create SSH Tunnel
 archive → memory-bank/archive/archive-step-01.md
 ```
 
-Steps 2–6 were not entered.
+Steps 2 and 3 are implemented locally. Step 4 has the spawn, line read, reap, and the version check. The prompt decisions are still Objective-C. Steps 5 and 6 were not entered.
