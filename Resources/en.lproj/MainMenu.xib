@@ -36,7 +36,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <splitView wantsLayer="YES" fixedFrame="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1223" customClass="SFTPSplitView">
+                    <splitView wantsLayer="YES" fixedFrame="YES" dividerStyle="thin" vertical="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1223" customClass="SFTPSplitView" customModule="Fugu" customModuleProvider="target">
                         <rect key="frame" x="20" y="42" width="799" height="542"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -1961,7 +1961,7 @@ Gw
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="888" customClass="SFTPScrollView">
+                <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="888" customClass="SFTPScrollView" customModule="Fugu" customModuleProvider="target">
                     <rect key="frame" x="-1" y="0.0" width="263" height="306"/>
                     <clipView key="contentView" id="c3P-S5-hI8">
                         <rect key="frame" x="1" y="1" width="261" height="304"/>
@@ -2151,7 +2151,7 @@ Gw
                         <action selector="cdFromLPathPopUp:" target="209" id="993"/>
                     </connections>
                 </popUpButton>
-                <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="899" customClass="SFTPScrollView">
+                <scrollView horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" findBarPosition="aboveHorizontalRuler" translatesAutoresizingMaskIntoConstraints="NO" id="899" customClass="SFTPScrollView" customModule="Fugu" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="22" width="216" height="293"/>
                     <clipView key="contentView" id="gZ5-Lt-59u">
                         <rect key="frame" x="1" y="1" width="214" height="291"/>

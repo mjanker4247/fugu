@@ -1,48 +1,12 @@
-# Task: Upgrade the project to Xcode 27
+# Archived task
 
-## Description
+The Xcode 27 project upgrade is complete and archived on 8 Nov 2026.
 
-Make `Fugu.xcodeproj` a consistent Xcode 27 project on this Mac (Xcode 27.2, build 27B52, macOS 27.2 SDK). The project already opens and the Development build has succeeded here. `LastUpgradeCheck` is already `2720`. The remaining gap is old project shape and contradictory build settings, not a missing Xcode install.
+- **Archive**: `memory-bank/archive/archive-xcode27.md`
+- **Status**: COMPLETED
+- Reflection, creative decision, and the three configuration builds are in that archive.
 
-## Complexity
-
-Level: 3
-Type: Intermediate feature
-
-## Requirements
-
-- [ ] Project format, compiler selection, and deployment target are explicit and agree across the project and the Fugu target.
-- [ ] Development, Deployment, and Default all build with the Xcode 27.2 toolchain.
-- [ ] Obsolete settings that override that toolchain are removed: `CC = /usr/bin/gcc`, `CPLUSPLUS = /usr/bin/g++`, and `ZERO_LINK`.
-- [ ] `MACOSX_DEPLOYMENT_TARGET` is one chosen value. Today the project level is `11.5` and the target level is `$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)`, which the macOS 27.2 SDK resolves to `27.2`.
-- [ ] A Development `xcodebuild` succeeds after the change.
-- [ ] The Swift migration and the text-editor work stay as they are. This task does not rewrite controllers or switch `forkpty` to `Process`.
-
-## Facts from this tree (8 Nov 2026)
-
-- `objectVersion = 54`, `compatibilityVersion = "Xcode 12.0"`.
-- `LastUpgradeCheck = 2720`. `LastSwiftMigration = 2640`.
-- Project configs set `MACOSX_DEPLOYMENT_TARGET = 11.5` plus the Xcode 27 warning set (`ENABLE_USER_SCRIPT_SANDBOXING`, string catalogs, strict objc msgsend).
-- Target configs override deployment to `$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)` and pin `CC` / `CPLUSPLUS`. Development also sets `ZERO_LINK = YES`. Deployment sets `ZERO_LINK = NO`.
-- SDK `DefaultProperties` `MACOSX_DEPLOYMENT_TARGET` is `27.2`. Platform `MinimumSDKVersion` is `14.0`.
-- `SWIFT_VERSION = 6.0`. One target, `edu.umich.fugu`.
-
-## Creative phase required
-
-- [ ] Choose the deployment target: keep a floor the SDK still accepts (not below `14.0`), or adopt the SDK recommendation `27.2`.
-- [ ] Decide whether `objectVersion` / `compatibilityVersion` move forward, or stay at the Xcode 12 format while settings are cleaned.
-
-## Status
-
-- [x] VAN, 8 Nov 2026
-- [ ] PLAN
-- [ ] Creative decision for deployment target and project format
-- [ ] Implementation
-- [ ] Development build on this Mac
-
-## Parked: text editor setting
-
-The File Editing work below is implemented and its Development build succeeded. In-app checks are still open. It is not this task.
+The text editor setting below was parked during that upgrade. Its in-app checks are still open. The Swift migration under it is still parked.
 
 # Task: Text editor setting
 
@@ -334,7 +298,7 @@ Impact: medium. Second slice implemented 8 Nov 2026 on `migrate/step-04-services
 
 Impact: medium-high. One screen per sub-branch, each built on the Mac.
 
-- [ ] `migrate/step-05a-browser-views` — table, split, scroll, cell, image preview.
+- [ ] `migrate/step-05a-browser-views` — table, split, scroll, cell, image preview. Split view and scroll view are Swift on this branch. Table, cell, and image preview are still Objective-C.
 - [ ] `migrate/step-05b-preferences` — `SFTPPrefs` and `Prefs.xib`.
 - [ ] `migrate/step-05c-scp` — `SCP.xib`.
 - [ ] `migrate/step-05d-tunnel` — `SSHTunnel.xib`.

@@ -1,6 +1,6 @@
 # Product Context
 
-Fugu is a dual-pane file transfer utility for macOS 11.5 and later.
+Fugu is a dual-pane file transfer utility for macOS 14.0 and later.
 
 User-visible surfaces that must keep working:
 

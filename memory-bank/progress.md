@@ -2,7 +2,13 @@
 
 ## Done
 
-- VAN for the Xcode 27 project upgrade, 8 Nov 2026. Level 3. Host is already Xcode 27.2 / macOS 27.2 SDK. `LastUpgradeCheck` is `2720`. Open gaps are project format (`objectVersion` 54, Xcode 12 compatibility), `CC = /usr/bin/gcc`, `ZERO_LINK`, and a deployment target split (`11.5` at project level, recommended `27.2` at the target). PLAN is next. No `project.pbxproj` edit in VAN.
+- VAN and PLAN for the Xcode 27 project upgrade, 8 Nov 2026. Level 3. Disk facts, corrected during planning: `LastUpgradeCheck` is `2640`, not `2720`. All six configurations set deployment to `12.0`. `RECOMMENDED_MACOSX_DEPLOYMENT_TARGET` is `14.0`. `objectVersion` stays 54.
+- Baseline Development build on Xcode 27.2 succeeded on 8 Nov 2026. The log says explicit modules are enabled but the compiler was not recognized, because `CC` is `/usr/bin/gcc`.
+- Creative decision, 8 Nov 2026: deployment floor is `14.0`, not `12.0` and not `27.2`. See `memory-bank/creative/creative-xcode27-deployment.md`.
+- Build, 8 Nov 2026. File: `/Users/marcojanker/development/fugu/Fugu.xcodeproj/project.pbxproj`. `LastUpgradeCheck` 2640 to 2720. Six `MACOSX_DEPLOYMENT_TARGET` values 12.0 to 14.0. Removed `CC`, `CPLUSPLUS`, and `ZERO_LINK` from the Fugu target. No source edit.
+- Proof, with `CC` unset: Development `** BUILD SUCCEEDED **` (10.7s), Deployment `** BUILD SUCCEEDED **` (10.6s), Default `** BUILD SUCCEEDED **` (4.7s). Unrecognized-compiler notes: 0. A shell `CC=/usr/bin/gcc` still prints that note. `-showBuildSettings` reports `MACOSX_DEPLOYMENT_TARGET = 14.0`.
+- Reflection, 8 Nov 2026: `memory-bank/reflection/reflection-xcode27.md`. The `14.0` floor compiled with no source change. The remaining explicit-modules note comes from the shell `CC`, not from the project. Archive is next.
+- Archived 8 Nov 2026: `memory-bank/archive/archive-xcode27.md`. The Xcode 27 task is closed. `memory-bank/tasks.md` keeps the parked text-editor task and the Swift migration.
 - Text editor setting planned on 8 Nov 2026. Level 3. That plan is parked under the Xcode 27 task in `memory-bank/tasks.md`.
 - Text editor creative decision, 8 Nov 2026: a non-ODB editor opens the remote temp file and a directory watch uploads it after the file settles. ODB and CLI editors keep their current path. See `memory-bank/creative/creative-editor-launch.md`.
 - Text editor implementation compiled on 8 Nov 2026. Development build succeeded. `FuguEditorCatalog` and `FuguEditorWatch` are in the app. `ODBEditors.plist` is removed. The File Editing popup, a local edit, and a remote save were not run in the app.
